@@ -12,3 +12,7 @@ We are making a smart and intelligent security system based of deep learning and
 4. Html
 5. CSS
 
+## Library and Framework
+* Numpy
+* Face_detection
+* Spring
