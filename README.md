@@ -5,9 +5,9 @@ We are making a smart and intelligent security system based of deep learning and
 
 ## Objective
 
-## Tools
+## Language and Tools
 1. Python 3.8
-2. Sqlite 3
+2. MySql
 3. Java
 4. Html
 5. CSS
@@ -15,4 +15,5 @@ We are making a smart and intelligent security system based of deep learning and
 ## Library and Framework
 * Numpy
 * Face_detection
+* Dlib
 * Spring
