@@ -17,10 +17,10 @@ class LoginSystem:
         self.ent_password = StringVar()
 
         # ==============  All Images ==============
-        self.bg_icon = ImageTk.PhotoImage(file="images/bg.jpg")
-        self.user_icon = ImageTk.PhotoImage(file="images/icons8-user-male-26.png")
-        self.pass_icon = ImageTk.PhotoImage(file="images/icons8-forgot-password-26.png")
-        self.placeholder_icon = ImageTk.PhotoImage(file="images/placeholder.png")
+        self.bg_icon = ImageTk.PhotoImage(file="images/meterial/bg.jpg")
+        self.user_icon = ImageTk.PhotoImage(file="images/meterial/icons8-user-male-26.png")
+        self.pass_icon = ImageTk.PhotoImage(file="images/meterial/icons8-forgot-password-26.png")
+        self.placeholder_icon = ImageTk.PhotoImage(file="images/meterial/placeholder.png")
         bg_lbl = Label(self.root, image=self.bg_icon).pack()
         title = Label(self.root, text="Login System", font=("times new roman", 30, 'bold'), relief=GROOVE)
         title.place(x=0, y=0, relwidth=1)
