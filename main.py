@@ -1,3 +1,7 @@
+# Library imported
+import object_model
+import login
+import emp_db_helper as em_dbh
 # This is a sample Python script.
 
 # Press Shift+F10 to execute it or replace it with your code.
@@ -13,6 +17,9 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-import login
+
 login()
+
+
+em_dbh.insert()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

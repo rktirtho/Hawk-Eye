@@ -1,8 +1,9 @@
 import sqlite3
 import datetime
+import object_model
 
 
-def insert():
+def insert(employee):
     conn = sqlite3.connect('hawk_eye')
     cur = conn.cursor()
     cur.execute("insert into employee (name,username, email,password,last_excess,creation_time) values (:name, :username, :email, :password, :last_excess, :creation_time)",

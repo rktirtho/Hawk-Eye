@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e06294b3-442e-4ea5-9ec0-37327a6d723e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +32,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="JupyterTrust" id="f26bfb12-00c6-4b02-b939-b269fe0b4046" />
   <component name="ProjectId" id="1jNZYRQIxiloZfLG4oxA2GoKYUR" />
   <component name="ProjectViewState">
@@ -23,16 +44,39 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/images/meterial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/images/meterial" />
       <recent name="$PROJECT_DIR$/venv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.emp_db_helper">
+    <configuration name="emp_db_helper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hawk-Eye" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/emp_db_helper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hawk-Eye" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,6 +123,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.emp_db_helper" />
         <item itemvalue="Python.login" />
       </list>
     </recent_temporary>
@@ -92,33 +137,49 @@
       <option name="presentableId" value="Default" />
       <updated>1603646556864</updated>
       <workItem from="1603646562191" duration="1408000" />
+      <workItem from="1603689947097" duration="4234000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1248" height="172" key="GridCell.Tab.0.bottom" timestamp="1603648478533">
+    <state width="1248" height="172" key="GridCell.Tab.0.bottom" timestamp="1603723671139">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="172" key="GridCell.Tab.0.bottom/72.29.1294.739@72.29.1294.739" timestamp="1603648478533" />
-    <state width="1248" height="172" key="GridCell.Tab.0.center" timestamp="1603648478532">
+    <state width="1248" height="172" key="GridCell.Tab.0.bottom/72.29.1294.739@72.29.1294.739" timestamp="1603723671139" />
+    <state width="1248" height="172" key="GridCell.Tab.0.center" timestamp="1603723671137">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="172" key="GridCell.Tab.0.center/72.29.1294.739@72.29.1294.739" timestamp="1603648478532" />
-    <state width="1248" height="172" key="GridCell.Tab.0.left" timestamp="1603648478531">
+    <state width="1248" height="172" key="GridCell.Tab.0.center/72.29.1294.739@72.29.1294.739" timestamp="1603723671137" />
+    <state width="1248" height="172" key="GridCell.Tab.0.left" timestamp="1603723671134">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="172" key="GridCell.Tab.0.left/72.29.1294.739@72.29.1294.739" timestamp="1603648478531" />
-    <state width="1248" height="172" key="GridCell.Tab.0.right" timestamp="1603648478532">
+    <state width="1248" height="172" key="GridCell.Tab.0.left/72.29.1294.739@72.29.1294.739" timestamp="1603723671134" />
+    <state width="1248" height="172" key="GridCell.Tab.0.right" timestamp="1603723671138">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="172" key="GridCell.Tab.0.right/72.29.1294.739@72.29.1294.739" timestamp="1603648478532" />
+    <state width="1248" height="172" key="GridCell.Tab.0.right/72.29.1294.739@72.29.1294.739" timestamp="1603723671138" />
     <state x="208" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1603648044664">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
     <state x="208" y="31" width="1022" height="737" key="SettingsEditor/72.29.1294.739@72.29.1294.739" timestamp="1603648044664" />
+    <state x="410" y="137" width="618" height="522" key="find.popup" timestamp="1603693996301">
+      <screen x="72" y="29" width="1294" height="739" />
+    </state>
+    <state x="410" y="137" width="618" height="522" key="find.popup/72.29.1294.739@72.29.1294.739" timestamp="1603693996301" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -132,7 +193,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Hawk_Eye$main.coverage" NAME="main Coverage Results" MODIFIED="1603648423915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$main.coverage" NAME="main Coverage Results" MODIFIED="1603690685813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Hawk_Eye$login.coverage" NAME="login Coverage Results" MODIFIED="1603648244110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$emp_db_helper.coverage" NAME="emp_db_helper Coverage Results" MODIFIED="1603694453334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
