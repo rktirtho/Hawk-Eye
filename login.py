@@ -40,18 +40,19 @@ class LoginSystem:
         btn_login = Button(login_frame, text="Login", bg='green', fg='white', pady=5, width=20, command=self.login).grid(row=3, column=1, pady=10)
 
     def login(self):
-        print(self.ent_username.get())
-        print(self.ent_password.get())
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             messagebox.showerror("Error", "All field required.")
         else:
-            sql_select_query = """select * from users"""
-            conn = sqlite3.connect("test.sqlite")
+            sql_select_query = """select username from employee where username=? and password=?"""
+            conn = sqlite3.connect("hawk_eye")
             cur = conn.cursor()
-            cur.execute(sql_select_query)
+            cur.execute(sql_select_query, (self.ent_username.get(),self.ent_password.get(),))
             records = cur.fetchall()
-            for r in records:
-                print(r)
+            if len(records) > 0:
+                print("login success")
+            else:
+                print("Denied")
+
             cur.close()
         # print(self.username)
 
