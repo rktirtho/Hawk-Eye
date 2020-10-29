@@ -27,6 +27,15 @@ def update():
     cur.execute('UPDATE employee set username=?, password=? where employee id=?')
 
 
+def login(username, password):
+    sql_select_query = """select username from employee where username=? and password=?"""
+    conn = sqlite3.connect("hawk_eye")
+    cur = conn.cursor()
+    cur.execute(sql_select_query, (username, password,))
+    records = cur.fetchall()
+    return records
+
+
 def get_all():
     conn = sqlite3.connect('hawk_eye')
     cur = conn.cursor()
