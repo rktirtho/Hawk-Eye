@@ -21,6 +21,12 @@ def insert(employee):
     conn.close()
 
 
+def update():
+    conn = sqlite3.connect('hawk_eye')
+    cur = conn.cursor()
+    cur.execute('UPDATE employee set username=?, password=? where employee id=?')
+
+
 def get_all():
     conn = sqlite3.connect('hawk_eye')
     cur = conn.cursor()
