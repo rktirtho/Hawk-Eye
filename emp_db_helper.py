@@ -33,6 +33,7 @@ def login(username, password):
     cur = conn.cursor()
     cur.execute(sql_select_query, (username, password,))
     records = cur.fetchall()
+    conn.close()
     return records
 
 

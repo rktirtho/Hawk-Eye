@@ -50,7 +50,6 @@ class LoginSystem:
             else:
                 print("Denied")
 
-            cur.close()
         # print(self.username)
 
 
