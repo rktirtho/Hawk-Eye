@@ -4,28 +4,30 @@
 # Actually this UI handle all kinds of Data
 from tkinter import *
 
-menu = ["Text1", "rtjke"]
 
 root = Tk()
+def click(self):
+    root.title()
 root.minsize(900,500)
+root.title("Dashboard")
 # Felt Menu sidebar
-panel_1 = PanedWindow(bg="gray")
-panel_1.pack(fill=BOTH, expand=1)
+menu_panel = PanedWindow(bg="gray")
+menu_panel.pack(fill=BOTH, expand=1)
 # Menu panel content
-left_label = Frame(panel_1)
-panel_1.add(left_label)
+left_label = Frame(menu_panel)
+menu_panel.add(left_label)
 # Add Person
-btn_add_per = Button(left_label, text="Add New Person")
-btn_add_per.pack()
+btn_add_per = Button(left_label, text="Add New Person", command=click)
+btn_add_per.pack(pady=10, padx=20)
 
 btn_add_per2 = Button(left_label, text="Add New Person")
 btn_add_per2.pack()
 
 
-panel_2= PanedWindow(panel_1, orient=HORIZONTAL)
-panel_1.add(panel_2)
+content_panel= PanedWindow(menu_panel, orient=HORIZONTAL)
+menu_panel.add(content_panel)
 
-top = Label(panel_2,text="Top Panner")
-panel_2.add(top)
+top = Label(content_panel, text="Top Panner")
+content_panel.add(top)
 
 root.mainloop()
