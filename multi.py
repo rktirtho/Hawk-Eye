@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 
-LARGEFONT = ("Verdana", 35)
+LARGEFONT = ("Verdana", 30)
+MEDIAMFONT = ("Verdana", 20)
+SMALLFONT =("Verdana", 16)
 
 
 class tkinterApp(tk.Tk):
@@ -13,10 +15,12 @@ class tkinterApp(tk.Tk):
 
         # creating a container
         container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand=True)
+        container.place(in_=self, anchor="c", relx=.5, rely=.5)
 
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
+        # container.pack(side="top", fill="both", expand=True)
+        #
+        # container.grid_rowconfigure(0, weight=1)
+        # container.grid_columnconfigure(0, weight=1)
 
         # initializing frames to an empty array
         self.frames = {}
@@ -42,34 +46,39 @@ class tkinterApp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+
     # first window frame startpage
 
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+                # label of frame Layout 2
+        label = ttk.Label(self, text="Login", font=MEDIAMFONT)
 
-        # label of frame Layout 2
-        label = ttk.Label(self, text="Startpage", font=LARGEFONT)
+        label.grid(row=0, column=1, columnspan=2, pady=10)
+        # ===== User name Section ======
+        lb_user = ttk.Label(self, text="Username").grid(row=1, column=0)
+        ent_user = ttk.Entry(self).grid(row=1, column=1)
 
-        # putting the grid in its place by using
-        # grid
-        label.grid(row=0, column=4, padx=10, pady=10)
+        # ===== Password Section ======
+        lb_pass = ttk.Label(self, text="Password").grid(row=2, column=0)
+        ent_pass = ttk.Entry(self).grid(row=2, column=1, pady=10)
 
-        button1 = ttk.Button(self, text="Page 1",
+        button1 = ttk.Button(self, text="Register",
                              command=lambda: controller.show_frame(Page1))
 
         # putting the button in its place by
         # using grid
-        button1.grid(row=1, column=1, padx=10, pady=10)
+        button1.grid(row=3, column=0, padx=10, pady=10)
 
         ## button to show frame 2 with text layout2
-        button2 = ttk.Button(self, text="Page 2",
+        button2 = ttk.Button(self, text="Login",
                              command=lambda: controller.show_frame(Page2))
 
         # putting the button in its place by
         # using grid
-        button2.grid(row=2, column=1, padx=10, pady=10)
+        button2.grid(row=3, column=1, padx=10, pady=10)
 
     # second window frame page1
 
@@ -78,7 +87,7 @@ class Page1(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text="Page 1", font=LARGEFONT)
+        label = ttk.Label(self, text="Page 1", font=LARGEFONT,justify='center')
         label.grid(row=0, column=4, padx=10, pady=10)
 
         # button to show frame 2 with text
@@ -130,4 +139,7 @@ class Page2(tk.Frame):
 
 
 app = tkinterApp()
+app.title("Login")
+app.minsize(800,500)
+app.maxsize(800,500)
 app.mainloop()
