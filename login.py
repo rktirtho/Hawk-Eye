@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk
 import sqlite3
+import
 import emp_db_helper
 
 
@@ -37,7 +38,7 @@ class LoginSystem:
         password_label = Label(login_frame, image=self.pass_icon, text= "Password", compound=LEFT, font=("times new roman", 20, "bold"), bg='white').grid(row=2, column=0, padx=20, pady=10)
         ent_password = Entry(login_frame, textvariable=self.ent_password, bd=5, relief=GROOVE).grid(row=2, column=1, padx=10)
 
-        btn_register = Button(login_frame, text="Register", bg='red', fg='white', pady=5, width=10).grid(row=3, column=0, pady=10)
+        btn_register = Button(login_frame, text="Register",command=lambda: controller.show_frame(Page1), bg='red', fg='white', pady=5, width=10).grid(row=3, column=0, pady=10)
         btn_login = Button(login_frame, text="Login", bg='green', fg='white', pady=5, width=20, command=self.login).grid(row=3, column=1, pady=10)
 
     def login(self):
@@ -51,6 +52,12 @@ class LoginSystem:
                 print("Denied")
 
         # print(self.username)
+
+    def register
+
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
 
 root = Tk()
