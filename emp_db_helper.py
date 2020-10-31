@@ -45,6 +45,6 @@ def get_all():
         print(item)
 
 
-insert()
-get_all()
+# insert()
+# get_all()
 print(datetime.datetime.now())

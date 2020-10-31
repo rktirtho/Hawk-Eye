@@ -17,10 +17,10 @@ class Register:
         self.conf_password = StringVar()
 
         # ==============  All Images ==============
-        self.bg_icon = ImageTk.PhotoImage(file="images/bg.jpg")
+        self.bg_icon = ImageTk.PhotoImage(file="images/meterial/bg.jpg")
         # self.user_icon = ImageTk.PhotoImage(file="")
         # self.pass_icon = ImageTk.PhotoImage(file="")
-        self.placeholder_icon = ImageTk.PhotoImage(file="images/placeholder.png")
+        self.placeholder_icon = ImageTk.PhotoImage(file="images/meterial/placeholder.png")
         bg_lbl = Label(self.root, image=self.bg_icon).pack()
         title = Label(self.root, text="Registration", font=("times new roman", self.h1, 'bold'), bg='yellow', fg='red', bd=10, relief=GROOVE)
         title.place(x=0, y=0, relwidth=1)
