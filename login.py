@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk
 import sqlite3
-import emp_db_helper
+import dbh_emp
 
 
 
@@ -44,7 +44,7 @@ class LoginSystem:
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             messagebox.showerror("Error", "All field required.")
         else:
-            records = emp_db_helper.login(self.ent_username.get(), self.ent_password.get())
+            records = dbh_emp.login(self.ent_username.get(), self.ent_password.get())
             if len(records) > 0:
                 print("login success")
             else:

@@ -64,8 +64,8 @@
       <recent name="$PROJECT_DIR$/venv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.emp_db_helper">
-    <configuration name="emp_db_helper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.dbh_emp">
+    <configuration name="dbh_emp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hawk-Eye" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -78,7 +78,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/emp_db_helper.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dbh_emp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -199,7 +199,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.emp_db_helper" />
+        <item itemvalue="Python.dbh_emp" />
         <item itemvalue="Python.multi" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.login" />

@@ -1,7 +1,7 @@
 # Library imported
 import object_model
 import login, register
-import emp_db_helper as em_dbh
+import dbh_emp as em_dbh
 # This is a sample Python script.
 
 # Press Shift+F10 to execute it or replace it with your code.
