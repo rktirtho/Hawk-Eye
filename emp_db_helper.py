@@ -6,12 +6,13 @@ import object_model
 def insert(employee):
     conn = sqlite3.connect('hawk_eye')
     cur = conn.cursor()
-    cur.execute("insert into employee (name,username, email,password,last_excess,creation_time) values (:name, :username, :email, :password, :last_excess, :creation_time)",
+    cur.execute("insert into employee (emp_id, name,username, email,password,last_excess,creation_time) values (:emp_id, :name, :username, :email, :password, :last_excess, :creation_time)",
                 {
-                    'name': 'Shima Akter',
-                    'username': 'shima123',
-                    'email': 'shima@gmail.com',
-                    'password': 'qwert',
+                    'emp_id': employee.get_id(),
+                    'name': employee.get_name(),
+                    'username': employee.get_username(),
+                    'email': employee.get_email(),
+                    'password': employee.get_password(),
                     'last_excess': str(datetime.datetime.now()),
                     'creation_time': str(datetime.datetime.now())
 
@@ -46,5 +47,5 @@ def get_all():
 
 
 # insert()
-# get_all()
+get_all()
 print(datetime.datetime.now())

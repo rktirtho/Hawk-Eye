@@ -5,6 +5,7 @@ from PIL import ImageTk
 from tkinter import messagebox
 import sqlite3
 import emp_db_helper
+from object_model import *
 
 
 LARGEFONT = ("Verdana", 30)
@@ -74,7 +75,7 @@ class StartPage(tk.Frame):
 
         # ===== Password Section ======
         lb_pass = ttk.Label(self, text="Password").grid(row=2, column=0)
-        ent_pass = ttk.Entry(self,textvariable=self.ent_password).grid(row=2, column=1, pady=10)
+        ent_pass = ttk.Entry(self,show="*",textvariable=self.ent_password).grid(row=2, column=1, pady=10)
 
         button1 = Button(self, bg='red', fg='white', text="Register",width=20, command=lambda: controller.show_frame(Register, "Register"))
 
@@ -128,21 +129,26 @@ class StartPage(tk.Frame):
 
 class Register(tk.Frame):
     def __init__(self, parent, controller):
+        self.emp_id= StringVar()
+        self.controller =  controller
+        self.username = StringVar()
+        self.password = StringVar()
+        self.conf_pass = StringVar()
         tk.Frame.__init__(self, parent)
         label = ttk.Label(self, text="Registration", font=MEDIAMFONT)
         label.grid(row=0, column=0, columnspan=2, pady=20)
 
         lb_em_id = ttk.Label(self, text="Employee Id").grid(row=1, column=0, padx=20, pady=10,sticky=W)
-        ent_id = ttk.Entry(self, ).grid(row=1, column=1, padx=10)
+        ent_id = ttk.Entry(self,  textvariable=self.emp_id,).grid(row=1, column=1, padx=10)
         user_name_label = ttk.Label(self, text="Username").grid(row=2, column=0, padx=20, pady=10,sticky=W)
-        ent_username = ttk.Entry(self, ).grid(row=2, column=1, padx=10)
+        ent_username = ttk.Entry(self,  textvariable=self.username).grid(row=2, column=1, padx=10)
 
         # ====================== password Field ===============
         lb_pass = ttk.Label(self, text="Password", anchor="e").grid(row=3, column=0, padx=20, pady=10,sticky=W)
-        ent_pass = ttk.Entry(self, ).grid(row=3, column=1, padx=10)
+        ent_pass = ttk.Entry(self, show='*', textvariable=self.password).grid(row=3, column=1, padx=10)
         # ======================= Confirm Password Field===================
-        lb_conf_pass = ttk.Label(self, text="Confirm Password").grid(row=4, column=0, padx=20, pady=10,sticky=W)
-        ent_conf_pass = ttk.Entry(self, ).grid(row=4, column=1, padx=10)
+        lb_conf_pass = ttk.Label(self,  text="Confirm Password").grid(row=4, column=0, padx=20, pady=10,sticky=W)
+        ent_conf_pass = ttk.Entry(self, show='*', textvariable=self.conf_pass).grid(row=4, column=1, padx=10)
         # ========================= Button Section =======================
 
         # button to show frame 2 with text
@@ -152,15 +158,40 @@ class Register(tk.Frame):
 
         # putting the button in its place by
         # using grid
-        button1.grid(row=10, column=0)
+        button1.grid(row=10, column=0, pady=10, padx=10)
 
         # button to show frame 3 with text
         # layout3
-        button2 = ttk.Button(self, text="Registration",width=20)
+        button2 = ttk.Button(self, command=self.registration, text="Registration",width=20)
 
         # putting the button in its place by
         # using grid
         button2.grid(row=10, column=1)
+
+    def registration(self):
+        emp_id = self.emp_id.get()
+        username = self.username.get()
+        password = self.password.get()
+        conf_pass = self.conf_pass.get()
+
+        emp = Employee(int(emp_id),"Ashik", username,"test@test.app", password)
+
+        if emp_id=="" or username == "" or password == "" or conf_pass == "":
+            messagebox.showerror("Error", "All Field Required")
+        elif password != conf_pass:
+            messagebox.showerror("Error", "Password should match")
+        else:
+            self.emp_id.set("")
+            self.username.set("")
+            self.password.set("")
+            self.conf_pass.set("")
+            emp_db_helper.insert(emp)
+            messagebox.showinfo("Done")
+            self.controller.show_frame(StartPage, "Login")
+
+
+
+
 
     # Driver Code
 

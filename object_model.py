@@ -1,10 +1,17 @@
+import datetime
 class Employee:
-    def __init__(self, name, username, email, password, last_access):
+    def __init__(self, id, name, username, email, password):
+        self.id = id
         self.name = name
         self.username = username
         self.email = email
         self.password = password
-        self.last_access_time = last_access
+        self.last_access_time = datetime.datetime.now()
+    def get_id(self):
+        return self.id
+
+    def set_id(self, id):
+        self.id = id
 
     def get_name(self):
         return self.name
