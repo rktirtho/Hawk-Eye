@@ -23,7 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e06294b3-442e-4ea5-9ec0-37327a6d723e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dbh_person_reg.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbh_person_reg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hawk_eye" beforeDir="false" afterPath="$PROJECT_DIR$/hawk_eye" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +66,29 @@
       <recent name="$PROJECT_DIR$/venv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.dbh_emp">
+  <component name="RunManager" selected="Python.dashboard">
+    <configuration name="dashboard" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hawk-Eye" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dashboard.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="dbh_emp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hawk-Eye" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -86,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dbh_person_reg" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hawk-Eye" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -99,7 +124,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/login.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dbh_person_reg.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -152,28 +177,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="register" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Hawk-Eye" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/register.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hawk-Eye" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -198,11 +201,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.dbh_emp" />
+        <item itemvalue="Python.dashboard" />
         <item itemvalue="Python.multi" />
+        <item itemvalue="Python.dbh_person_reg" />
+        <item itemvalue="Python.dbh_emp" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.login" />
-        <item itemvalue="Python.register" />
       </list>
     </recent_temporary>
   </component>
@@ -219,7 +222,8 @@
       <workItem from="1603903684335" duration="2094000" />
       <workItem from="1603990147429" duration="2765000" />
       <workItem from="1604034495331" duration="6240000" />
-      <workItem from="1604118636811" duration="18072000" />
+      <workItem from="1604118636811" duration="22288000" />
+      <workItem from="1604287562050" duration="2504000" />
     </task>
     <servers />
   </component>
@@ -239,38 +243,38 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1248" height="134" key="GridCell.Tab.0.bottom" timestamp="1604239411990">
+    <state width="1248" height="112" key="GridCell.Tab.0.bottom" timestamp="1604290059892">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="134" key="GridCell.Tab.0.bottom/72.29.1294.739@72.29.1294.739" timestamp="1604239411990" />
-    <state width="1248" height="134" key="GridCell.Tab.0.center" timestamp="1604239411988">
+    <state width="1248" height="112" key="GridCell.Tab.0.bottom/72.29.1294.739@72.29.1294.739" timestamp="1604290059892" />
+    <state width="1248" height="112" key="GridCell.Tab.0.center" timestamp="1604290059892">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="134" key="GridCell.Tab.0.center/72.29.1294.739@72.29.1294.739" timestamp="1604239411988" />
-    <state width="1248" height="134" key="GridCell.Tab.0.left" timestamp="1604239411987">
+    <state width="1248" height="112" key="GridCell.Tab.0.center/72.29.1294.739@72.29.1294.739" timestamp="1604290059892" />
+    <state width="1248" height="112" key="GridCell.Tab.0.left" timestamp="1604290059891">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="134" key="GridCell.Tab.0.left/72.29.1294.739@72.29.1294.739" timestamp="1604239411987" />
-    <state width="1248" height="134" key="GridCell.Tab.0.right" timestamp="1604239411989">
+    <state width="1248" height="112" key="GridCell.Tab.0.left/72.29.1294.739@72.29.1294.739" timestamp="1604290059891" />
+    <state width="1248" height="112" key="GridCell.Tab.0.right" timestamp="1604290059892">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="134" key="GridCell.Tab.0.right/72.29.1294.739@72.29.1294.739" timestamp="1604239411989" />
-    <state width="1248" height="214" key="GridCell.Tab.1.bottom" timestamp="1604239357725">
+    <state width="1248" height="112" key="GridCell.Tab.0.right/72.29.1294.739@72.29.1294.739" timestamp="1604290059892" />
+    <state width="1248" height="214" key="GridCell.Tab.1.bottom" timestamp="1604285561628">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="214" key="GridCell.Tab.1.bottom/72.29.1294.739@72.29.1294.739" timestamp="1604239357725" />
-    <state width="1248" height="214" key="GridCell.Tab.1.center" timestamp="1604239357724">
+    <state width="1248" height="214" key="GridCell.Tab.1.bottom/72.29.1294.739@72.29.1294.739" timestamp="1604285561628" />
+    <state width="1248" height="214" key="GridCell.Tab.1.center" timestamp="1604285561628">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="214" key="GridCell.Tab.1.center/72.29.1294.739@72.29.1294.739" timestamp="1604239357724" />
-    <state width="1248" height="214" key="GridCell.Tab.1.left" timestamp="1604239357724">
+    <state width="1248" height="214" key="GridCell.Tab.1.center/72.29.1294.739@72.29.1294.739" timestamp="1604285561628" />
+    <state width="1248" height="214" key="GridCell.Tab.1.left" timestamp="1604285561628">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="214" key="GridCell.Tab.1.left/72.29.1294.739@72.29.1294.739" timestamp="1604239357724" />
-    <state width="1248" height="214" key="GridCell.Tab.1.right" timestamp="1604239357724">
+    <state width="1248" height="214" key="GridCell.Tab.1.left/72.29.1294.739@72.29.1294.739" timestamp="1604285561628" />
+    <state width="1248" height="214" key="GridCell.Tab.1.right" timestamp="1604285561628">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
-    <state width="1248" height="214" key="GridCell.Tab.1.right/72.29.1294.739@72.29.1294.739" timestamp="1604239357724" />
+    <state width="1248" height="214" key="GridCell.Tab.1.right/72.29.1294.739@72.29.1294.739" timestamp="1604285561628" />
     <state x="208" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1604132140275">
       <screen x="72" y="29" width="1294" height="739" />
     </state>
@@ -289,7 +293,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>12</line>
+          <line>13</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -297,9 +301,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Hawk_Eye$test.coverage" NAME="test Coverage Results" MODIFIED="1604221359909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Hawk_Eye$main.coverage" NAME="main Coverage Results" MODIFIED="1603690685813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Hawk_Eye$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1604119812128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Hawk_Eye$multi.coverage" NAME="multi Coverage Results" MODIFIED="1604239360448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$main.coverage" NAME="main Coverage Results" MODIFIED="1604249551809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$dbh_person_reg.coverage" NAME="dbh_person_reg Coverage Results" MODIFIED="1604287657766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$dashboard.coverage" NAME="dashboard Coverage Results" MODIFIED="1604290059882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Hawk_Eye$multi.coverage" NAME="multi Coverage Results" MODIFIED="1604288879816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Hawk_Eye$login.coverage" NAME="login Coverage Results" MODIFIED="1604133512178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Hawk_Eye$register.coverage" NAME="register Coverage Results" MODIFIED="1604132495353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Hawk_Eye$object_model.coverage" NAME="object_model Coverage Results" MODIFIED="1603903989664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
