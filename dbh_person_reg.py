@@ -1,6 +1,10 @@
+from cl_Person import Person
+
+
 class PersonDBHelper:
 
-    def insert(self):
+    def insert(self, person):
+
         print("inserted")
 
     def update(self):
