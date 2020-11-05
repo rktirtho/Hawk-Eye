@@ -4,6 +4,9 @@ from tkinter import *
 from PIL import ImageTk
 from tkinter import messagebox
 import sqlite3
+import mysql.connector
+
+
 import dbh_emp
 from object_model import *
 

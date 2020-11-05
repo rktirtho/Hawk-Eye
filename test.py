@@ -1,56 +1,76 @@
-try:
-    import Tkinter as tk
-except:
-    import tkinter as tk
+import tkinter as Tk
+
+def disappear():
+    but.grid_forget()
+
+root = Tk.Tk()
+
+canvas = Tk.Canvas(root, bg = 'black', width = 500, height = 500)
+canvas.grid(row = 0, column = 0)
+
+frame = Tk.Frame(bg = 'red')
+canvas.create_window(0, 0, window = frame, anchor = Tk.NW)
+
+but = Tk.Button(frame, text = 'Disappear', command = disappear)
+but.grid(row = 0, column = 0)
+
+root.mainloop()
 
 
-class SampleApp(tk.Tk):
-    def __init__(self):
-        tk.Tk.__init__(self)
-        self._frame = None
-        self.switch_frame(StartPage)
 
-    def switch_frame(self, frame_class):
-        new_frame = frame_class(self)
-        if self._frame is not None:
-            self._frame.destroy()
-        self._frame = new_frame
-        self._frame.pack()
-
-
-class StartPage(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Label(self, text="Start page", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        tk.Button(self, text="Go to page one",
-                  command=lambda: master.switch_frame(PageOne)).pack()
-        tk.Button(self, text="Go to page two",
-                  command=lambda: master.switch_frame(PageTwo)).pack()
-
-
-class PageOne(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Frame.configure(self, bg='blue')
-        tk.Label(self, text="Page one", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        tk.Button(self, text="Go back to start page",
-                  command=lambda: master.switch_frame(StartPage)).pack()
-
-
-class PageTwo(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Frame.configure(self, bg='red')
-        tk.Label(self, text="Page two", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        getButton(self, master)
-
-def getButton(self,master):
-    tk.Button(self, text="Go back to start page",
-              command=lambda: master.switch_frame(StartPage)).pack()
-
-if __name__ == "__main__":
-    app = SampleApp()
-    app.mainloop()
+# try:
+#     import Tkinter as tk
+# except:
+#     import tkinter as tk
+#
+#
+# class SampleApp(tk.Tk):
+#     def __init__(self):
+#         tk.Tk.__init__(self)
+#         self._frame = None
+#         self.switch_frame(StartPage)
+#
+#     def switch_frame(self, frame_class):
+#         new_frame = frame_class(self)
+#         if self._frame is not None:
+#             self._frame.destroy()
+#         self._frame = new_frame
+#         self._frame.pack()
+#
+#
+# class StartPage(tk.Frame):
+#     def __init__(self, master):
+#         tk.Frame.__init__(self, master)
+#         tk.Label(self, text="Start page", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
+#         tk.Button(self, text="Go to page one",
+#                   command=lambda: master.switch_frame(PageOne)).pack()
+#         tk.Button(self, text="Go to page two",
+#                   command=lambda: master.switch_frame(PageTwo)).pack()
+#
+#
+# class PageOne(tk.Frame):
+#     def __init__(self, master):
+#         tk.Frame.__init__(self, master)
+#         tk.Frame.configure(self, bg='blue')
+#         tk.Label(self, text="Page one", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
+#         tk.Button(self, text="Go back to start page",
+#                   command=lambda: master.switch_frame(StartPage)).pack()
+#
+#
+# class PageTwo(tk.Frame):
+#     def __init__(self, master):
+#         tk.Frame.__init__(self, master)
+#         tk.Frame.configure(self, bg='red')
+#         tk.Label(self, text="Page two", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
+#         getButton(self, master)
+#
+# def getButton(self,master):
+#     tk.Button(self, text="Go back to start page",
+#               command=lambda: master.switch_frame(StartPage)).pack()
+#
+# if __name__ == "__main__":
+#     app = SampleApp()
+#     app.mainloop()
 
 # import PIL
 # from PIL import Image,ImageTk
