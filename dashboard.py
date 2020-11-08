@@ -19,9 +19,13 @@ def show_all():
     click("All Person")
 
     contend.pack_forget()
+def clearAll():
+    for widget in contend.winfo_children():
+        widget.destroy()
 
 def add_emp_frame():
     # content_panel.remove(contend)
+    clearAll()
 
     click("Add Employee")
     title = Label(contend, text="Add Person", font=MEDIAMFONT)
