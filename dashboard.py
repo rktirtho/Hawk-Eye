@@ -50,6 +50,46 @@ def add_emp_frame():
     Button(contend, text="Save").pack()
     # content_panel.add(contend)
 
+
+def unauth_acc_wid():
+    clearAll()
+    click("Unauthorized Access")
+    title = Label(contend, text="Unauthorized Access", font=MEDIAMFONT)
+    title.pack(pady=20)
+
+
+def auth_acc_wid():
+    clearAll()
+    click("Authorized Access")
+    title = Label(contend, text="Authorized Access", font=MEDIAMFONT)
+    title.pack(pady=20)
+
+
+def all_emp_wid():
+    clearAll()
+    click("All Employee")
+    title = Label(contend, text="All Employee", font=MEDIAMFONT)
+    title.grid(column=1, row=0, pady=20)
+    persons = ["Himel", "Tomal", "jamal", "Habib", "Walid", "Kabir", "Mahir", "Ruma", "Zeen"]
+    r=1;
+    c=0
+    for person in persons:
+
+        Label(contend, text=person).grid(row=r, column=c, padx=10, pady=10);
+        c=c+1
+        if c==3:
+            r+=1
+            c=0
+
+
+
+def unknown_person_wid():
+    clearAll()
+    click("Unknown Person")
+    title = Label(contend, text="Unknown Person", font=MEDIAMFONT)
+    title.pack(pady=20)
+
+
 root.minsize(900,500)
 root.title("Dashboard")
 # Felt Menu sidebar
@@ -62,21 +102,22 @@ menu_panel.add(left_label)
 btn_add_per = Button(left_label, text="Add New Person", width=20, command=add_emp_frame)
 btn_add_per.pack(pady=5, padx=5)
 
-btn_Unauth_acc = Button(left_label, text="Unauthorized Access", width=20)
+btn_Unauth_acc = Button(left_label, text="Unauthorized Access", command=unauth_acc_wid, width=20)
 btn_Unauth_acc.pack(pady=5, padx=5)
 
-btn_auth_acc = Button(left_label, text="Authorized Access", width=20)
+btn_auth_acc = Button(left_label, text="Authorized Access", command=auth_acc_wid, width=20)
 btn_auth_acc.pack(pady=5, padx=5)
 
-btn_all_emp = Button(left_label, text="All Employee", command=show_all, width=20)
+btn_all_emp = Button(left_label, text="All Employee", command=all_emp_wid, width=20)
 btn_all_emp.pack(pady=5, padx=5)
 
-btn_unknown_per = Button(left_label, text="Unknown Person", width=20)
+btn_unknown_per = Button(left_label, text="Unknown Person",command=unknown_person_wid,  width=20)
 btn_unknown_per.pack(pady=5, padx=5)
 
 
 
 content_panel= PanedWindow(menu_panel, orient=HORIZONTAL)
+
 menu_panel.add(content_panel)
 
 contend = Frame(content_panel,)
