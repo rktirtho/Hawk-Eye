@@ -26,3 +26,5 @@ Monitoring a big area is not easy task. CCTV management system are able to store
 * Face_detection
 * Dlib
 * tkinter
+
+## Related Research Papers
