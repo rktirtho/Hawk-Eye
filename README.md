@@ -17,7 +17,7 @@ Monitoring a big area is not easy task. CCTV management system are able to store
 4. Extensive Markup Language (XML)
 
 ## Library and Framework
-* Spring
+* Spring Boot
 * ORM
 * Android Native Library
 * Jersy
