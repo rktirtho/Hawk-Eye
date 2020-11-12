@@ -3,11 +3,12 @@ from tkinter import ttk
 from tkinter import *
 from PIL import ImageTk
 from tkinter import messagebox
+import dashboard
 import sqlite3
-import mysql.connector
 
 
-import dbh_emp
+
+# import dbh_emp
 from object_model import *
 
 

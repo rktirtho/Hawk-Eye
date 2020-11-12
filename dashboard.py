@@ -68,19 +68,18 @@ def auth_acc_wid():
 def all_emp_wid():
     clearAll()
     click("All Employee")
-    title = Label(contend, text="All Employee", font=MEDIAMFONT)
+    title = Label(contend, text="All Registered Person", font=MEDIAMFONT)
     title.grid(column=1, row=0, pady=20)
     persons = ["Himel", "Tomal", "jamal", "Habib", "Walid", "Kabir", "Mahir", "Ruma", "Zeen"]
     r=1;
     c=0
     for person in persons:
 
-        Label(contend, text=person).grid(row=r, column=c, padx=10, pady=10);
-        c=c+1
-        if c==3:
-            r+=1
-            c=0
-
+        Label(contend, text=person).grid(row=r, column=c, padx=10, pady=10)
+        c += 1
+        if c == 4:
+            r += 1
+            c = 0
 
 
 def unknown_person_wid():
@@ -111,9 +110,8 @@ btn_auth_acc.pack(pady=5, padx=5)
 btn_all_emp = Button(left_label, text="All Employee", command=all_emp_wid, width=20)
 btn_all_emp.pack(pady=5, padx=5)
 
-btn_unknown_per = Button(left_label, text="Unknown Person",command=unknown_person_wid,  width=20)
+btn_unknown_per = Button(left_label, text="Unknown Person", command=unknown_person_wid,  width=20)
 btn_unknown_per.pack(pady=5, padx=5)
-
 
 
 content_panel= PanedWindow(menu_panel, orient=HORIZONTAL)

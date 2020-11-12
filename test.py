@@ -1,20 +1,102 @@
-import tkinter as Tk
+import urllib.request, urllib.parse, urllib.error
+import requests
+import json
+import ssl
 
-def disappear():
-    but.grid_forget()
+api_key = False
+# If you have a Google Places API key, enter it here
+# api_key = 'AIzaSy___IDByT70'
+# https://developers.google.com/maps/documentation/geocoding/intro
 
-root = Tk.Tk()
+class Security:
+    def __init__(self, id, name, email, username, password,org_id,last_excess, join_date):
+        self.id = id;
+        self.name = name
+        self.email =  email
+        self.username=username
+        self.password =  password
+        self.last_access = last_excess
+        self.org_id =  org_id
+        self.join_date = join_date
 
-canvas = Tk.Canvas(root, bg = 'black', width = 500, height = 500)
-canvas.grid(row = 0, column = 0)
+    def get_id(self):
+        return self.id
 
-frame = Tk.Frame(bg = 'red')
-canvas.create_window(0, 0, window = frame, anchor = Tk.NW)
+    def set_id(self, id):
+        self.id = id;
 
-but = Tk.Button(frame, text = 'Disappear', command = disappear)
-but.grid(row = 0, column = 0)
+    def get_name(self):
+        return self.name
 
-root.mainloop()
+    def set_id(self, name):
+        self.name = name;
+
+    def get_email(self):
+        return self.email
+
+    def set_email(self, email):
+        self.email = email;
+
+    def get_username(self):
+        return self.username
+
+    def set_id(self, username):
+        self.username = username;
+
+    def get_password(self):
+        return self.password
+
+    def set_password(self, password):
+        self.password = password;
+
+    def get_org_id(self):
+        return self.org_id
+
+    def set_org_id(self, org_id):
+        self.org_id = org_id;
+
+    def get_last_excess(self):
+        return self.last_access
+
+    def set_last_excess(self, time):
+        self.last_access = time;
+
+    def get_join_date(self):
+        return self.join_date
+
+    def set_join_date(self, date):
+        self.join_date = date;
+
+
+
+try:
+    utr = requests.get('http://127.0.0.1:8080/api/organizations')
+    api = json.loads(utr.content)
+    for date in api:
+        print(api)
+        print("")
+    # print(api)
+except Exception as e:
+    print("Loading Failed...")
+
+
+# import tkinter as Tk
+#
+# def disappear():
+#     but.grid_forget()
+#
+# root = Tk.Tk()
+#
+# canvas = Tk.Canvas(root, bg = 'black', width = 500, height = 500)
+# canvas.grid(row = 0, column = 0)
+#
+# frame = Tk.Frame(bg = 'red')
+# canvas.create_window(0, 0, window = frame, anchor = Tk.NW)
+#
+# but = Tk.Button(frame, text = 'Disappear', command = disappear)
+# but.grid(row = 0, column = 0)
+#
+# root.mainloop()
 
 
 
