@@ -3,10 +3,13 @@
 # Alter successfully login user will come to there.
 # Actually this UI handle all kinds of Data
 from tkinter import *
+import json
+import requests
 
 LARGEFONT = ("Verdana", 30)
-MEDIAMFONT = ("Verdana", 20)
 SMALLFONT = ("Verdana", 16)
+MEDIAMFONT = ("Verdana", 20)
+MEDIAMFONT_BOLD = ("Verdana", 16, 'bold')
 
 
 root = Tk()
@@ -63,6 +66,40 @@ def auth_acc_wid():
     click("Authorized Access")
     title = Label(contend, text="Authorized Access", font=MEDIAMFONT)
     title.pack(pady=20)
+    try:
+        utr = requests.get('http://127.0.0.1:8080/api/organizations')
+        api = json.loads(utr.content)
+        for date in api:
+            Label(contend, text=date['name']).pack()
+        # print(api)
+    except Exception as e:
+        print("Loading Failed...")
+
+
+def org_wid():
+    clearAll()
+    click("Authorized Access")
+    title = Label(contend, text="All Organization", font=MEDIAMFONT)
+    title.grid(row=0, column=0, columnspan=4, pady=20)
+    try:
+        utr = requests.get('http://127.0.0.1:8080/api/organizations')
+        api = json.loads(utr.content)
+        i=2
+        c=0
+
+        Label(contend, text="Name", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=0, pady=10)
+        Label(contend, text='Woner', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=1)
+        Label(contend, text='Address', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=2)
+        for date in api:
+            Label(contend, text=date['name'], padx=20).grid(row=i,column=0, pady=10)
+            Label(contend, text=date['woner'],padx=20).grid(row=i,column=1)
+            Label(contend, text=date['address'],padx=20).grid(row=i,column=2)
+            i+=1
+
+
+        # print(api)
+    except Exception as e:
+        print("Loading Failed...")
 
 
 def all_emp_wid():
@@ -106,6 +143,9 @@ btn_Unauth_acc.pack(pady=5, padx=5)
 
 btn_auth_acc = Button(left_label, text="Authorized Access", command=auth_acc_wid, width=20)
 btn_auth_acc.pack(pady=5, padx=5)
+
+btn_all_emp = Button(left_label, text="Organizations", command=org_wid, width=20)
+btn_all_emp.pack(pady=5, padx=5)
 
 btn_all_emp = Button(left_label, text="All Employee", command=all_emp_wid, width=20)
 btn_all_emp.pack(pady=5, padx=5)

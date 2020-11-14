@@ -2,84 +2,116 @@ import urllib.request, urllib.parse, urllib.error
 import requests
 import json
 import ssl
+from tkinter import *
 
 api_key = False
 # If you have a Google Places API key, enter it here
 # api_key = 'AIzaSy___IDByT70'
 # https://developers.google.com/maps/documentation/geocoding/intro
 
-class Security:
-    def __init__(self, id, name, email, username, password,org_id,last_excess, join_date):
-        self.id = id;
-        self.name = name
-        self.email =  email
-        self.username=username
-        self.password =  password
-        self.last_access = last_excess
-        self.org_id =  org_id
-        self.join_date = join_date
+# class Security:
+#     def __init__(self, id, name, email, username, password,org_id,last_excess, join_date):
+#         self.id = id;
+#         self.name = name
+#         self.email =  email
+#         self.username=username
+#         self.password =  password
+#         self.last_access = last_excess
+#         self.org_id =  org_id
+#         self.join_date = join_date
+#
+#     def get_id(self):
+#         return self.id
+#
+#     def set_id(self, id):
+#         self.id = id;
+#
+#     def get_name(self):
+#         return self.name
+#
+#     def set_id(self, name):
+#         self.name = name;
+#
+#     def get_email(self):
+#         return self.email
+#
+#     def set_email(self, email):
+#         self.email = email;
+#
+#     def get_username(self):
+#         return self.username
+#
+#     def set_id(self, username):
+#         self.username = username;
+#
+#     def get_password(self):
+#         return self.password
+#
+#     def set_password(self, password):
+#         self.password = password;
+#
+#     def get_org_id(self):
+#         return self.org_id
+#
+#     def set_org_id(self, org_id):
+#         self.org_id = org_id;
+#
+#     def get_last_excess(self):
+#         return self.last_access
+#
+#     def set_last_excess(self, time):
+#         self.last_access = time;
+#
+#     def get_join_date(self):
+#         return self.join_date
+#
+#     def set_join_date(self, date):
+#         self.join_date = date;
+#
+#
+#
+# try:
+#     utr = requests.get('http://127.0.0.1:8080/api/organizations')
+#     api = json.loads(utr.content)
+#     for data in api:
+#         print(data['name'])
+#         print("")
+#     # print(api)
+# except Exception as e:
+#     print("Loading Failed...")
+class Test:
+    def __init__(self):
+        self.root = Tk()
+        self.root.resizable(width=0, height=0)
+        self.root.title("some application")
 
-    def get_id(self):
-        return self.id
+        # menu left
+        self.menu_left = Frame(self.root, width=150, bg="#ababab")
+        self.menu_left.grid(row=0, column=0, rowspan=2, sticky="ns")
 
-    def set_id(self, id):
-        self.id = id;
+        self.menu_left_upper = Frame(self.menu_left, width=150, height=150, bg="red")
+        self.menu_left_upper.grid(row=0, column=0)
 
-    def get_name(self):
-        return self.name
+        # this label breaks the design
+        #self.test = tk.Label(self.menu_left_upper, text="test")
+        #self.test.pack()
 
-    def set_id(self, name):
-        self.name = name;
+        self.menu_left_lower = Frame(self.menu_left, width=150, bg="blue")
+        self.menu_left_lower.grid(row=1, column=0)
 
-    def get_email(self):
-        return self.email
+        # right area
+        self.some_title_frame = Frame(self.root, bg="#dfdfdf")
+        self.some_title_frame.grid(row=0, column=1, sticky="we")
 
-    def set_email(self, email):
-        self.email = email;
+        self.some_title = Label(self.some_title_frame, text="some title", bg="#dfdfdf")
+        self.some_title.pack()
 
-    def get_username(self):
-        return self.username
+        self.canvas_area = Canvas(self.root, width=500, height=400, background="#ffffff")
+        self.canvas_area.grid(row=1, column=1)
 
-    def set_id(self, username):
-        self.username = username;
+        self.root.mainloop()
 
-    def get_password(self):
-        return self.password
-
-    def set_password(self, password):
-        self.password = password;
-
-    def get_org_id(self):
-        return self.org_id
-
-    def set_org_id(self, org_id):
-        self.org_id = org_id;
-
-    def get_last_excess(self):
-        return self.last_access
-
-    def set_last_excess(self, time):
-        self.last_access = time;
-
-    def get_join_date(self):
-        return self.join_date
-
-    def set_join_date(self, date):
-        self.join_date = date;
-
-
-
-try:
-    utr = requests.get('http://127.0.0.1:8080/api/organizations')
-    api = json.loads(utr.content)
-    for date in api:
-        print(api)
-        print("")
-    # print(api)
-except Exception as e:
-    print("Loading Failed...")
-
-
+Test()
 # import tkinter as Tk
 #
 # def disappear():
