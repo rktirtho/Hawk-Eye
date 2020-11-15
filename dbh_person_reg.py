@@ -1,46 +1,37 @@
-from cl_Person import Person
-import sqlite3
-import datetime
+import mysql.connector
+
+class AuthorizedDbHelper:
+    def __init__(self):
+        self.conn = mysql.connector.connect(
+            user='root',
+            password='12345678',
+            host='127.0.0.1',
+            database='hawk_eye'
+        )
+
+        self.cur = self.conn.cursor()
 
 
-class PersonDBHelper:
+    def find_all(self):
+        auths = list()
+        self.cur.execute("select * from permitted")
+        for data in self.cur:
+            auths.append(data)
 
-    def insert(person):
-        conn = sqlite3.connect('hawk_eye')
-        cur = conn.cursor()
-        cur.execute('INSERT INTO reg_person(emp_id, name, org_id, regester_time) values (:emp_id, :name, :org_id, :regester_time)',
-                    {
-                        'emp_id' : person.get_id(),
-                        'name' : person.get_name(),
-                        'org_id' : person.get_org_id(),
-                        'regester_time' : datetime.datetime.now()
-                    })
-        conn.commit()
-        conn.close()
+        return auths
 
-        print("inserted")
-
-    def update(self):
-        print("inserted")
-
-    def getAll(self):
-        conn = sqlite3.connect('hawk_eye')
-        cur = conn.cursor()
-        cur.execute("select * from reg_person")
-        regs = cur.fetchall()
-        for p in regs:
-            print(p)
-        conn.close()
-
-    def getOne(self):
-        print("inserted")
-
-    def getById(self, id):
-        print(id)
-
-    def getByTime(self, time):
-        print(time)
+    def find_one(self, id):
+        self.cur.execute("select * from permitted")
+        for data in self.cur:
+            print(data)
 
 
-myP = Person(951, "Rejaul Karim", "AA-01")
-PersonDBHelper.getAll(self=None);
+dbh= AuthorizedDbHelper()
+li = dbh.find_all()
+print(li)
+# dbh.find_one(2)
+for t in li:
+    if 'Rejaul Karim' in t[1]:
+        print("Found", t[2])
+    else:
+        print('Not Found')
