@@ -25,6 +25,10 @@ class AuthorizedDbHelper:
         for data in self.cur:
             print(data)
 
+    # def find_all_details(self):
+    #     auths = list()
+    #     self.cur.execute("select permitted.name, permitted.org_id, permitted.image_id, organizations.name inner join q")
+    #
 
 dbh= AuthorizedDbHelper()
 li = dbh.find_all()
