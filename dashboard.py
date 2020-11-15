@@ -5,6 +5,9 @@
 from tkinter import *
 import json
 import requests
+from dbh_organization import OrganizationDbHelper
+from dbh_emp import EmployeeDBHelper
+
 
 LARGEFONT = ("Verdana", 30)
 SMALLFONT = ("Verdana", 16)
@@ -81,25 +84,26 @@ def org_wid():
     click("Authorized Access")
     title = Label(contend, text="All Organization", font=MEDIAMFONT)
     title.grid(row=0, column=0, columnspan=4, pady=20)
-    try:
-        utr = requests.get('http://127.0.0.1:8080/api/organizations')
-        api = json.loads(utr.content)
-        i=2
-        c=0
+    org = OrganizationDbHelper()
+    orgs = org.find_all()
+    i=2
+    c=0
+    print(orgs[1])
+    Label(contend, text="#Id", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=0, pady=10)
+    Label(contend, text="Name", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=1, pady=10)
+    Label(contend, text='Woner', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=2)
+    Label(contend, text='Address', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=3)
+    Label(contend, text='Registration', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=4)
 
-        Label(contend, text="Name", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=0, pady=10)
-        Label(contend, text='Woner', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=1)
-        Label(contend, text='Address', padx=20,font=MEDIAMFONT_BOLD).grid(row=1, column=2)
-        for date in api:
-            Label(contend, text=date['name'], padx=20).grid(row=i,column=0, pady=10)
-            Label(contend, text=date['woner'],padx=20).grid(row=i,column=1)
-            Label(contend, text=date['address'],padx=20).grid(row=i,column=2)
-            i+=1
+    for org in orgs:
+        Label(contend, text=org.get_id(), padx=20).grid(row=i,column=0, pady=10)
+        Label(contend, text=org.get_name(), padx=20).grid(row=i,column=1, pady=10)
+        Label(contend, text=org.get_woner(),padx=20).grid(row=i,column=2)
+        Label(contend, text=org.get_address(),padx=20).grid(row=i,column=3)
+        Label(contend, text=org.get_reg_time(),padx=20).grid(row=i,column=4)
+        i+=1
 
 
-        # print(api)
-    except Exception as e:
-        print("Loading Failed...")
 
 
 def all_emp_wid():
@@ -107,16 +111,25 @@ def all_emp_wid():
     click("All Employee")
     title = Label(contend, text="All Registered Person", font=MEDIAMFONT)
     title.grid(column=1, row=0, pady=20)
-    persons = ["Himel", "Tomal", "jamal", "Habib", "Walid", "Kabir", "Mahir", "Ruma", "Zeen"]
-    r=1;
+    emp_helper = EmployeeDBHelper()
+    persons = emp_helper.find_all()
+    i=2;
     c=0
-    for person in persons:
+    Label(contend, text="#Id", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=0, pady=10)
+    Label(contend, text="Name", padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=1, pady=10)
+    Label(contend, text='Email', padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=2)
+    Label(contend, text='Address', padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=3)
+    Label(contend, text='Join Data', padx=20, font=MEDIAMFONT_BOLD).grid(row=1, column=4)
 
-        Label(contend, text=person).grid(row=r, column=c, padx=10, pady=10)
-        c += 1
-        if c == 4:
-            r += 1
-            c = 0
+    for person in persons:
+        Label(contend, text=person.get_id(), padx=20).grid(row=i, column=0, pady=10)
+        Label(contend, text=person.get_name(), padx=20).grid(row=i, column=1, pady=10)
+        Label(contend, text=person.get_email(), padx=20).grid(row=i, column=2)
+        Label(contend, text=person.get_join_date(), padx=20).grid(row=i, column=3)
+        # Label(contend, text=person.last_excess(), padx=20).grid(row=i, column=4)
+        i += 1
+
+
 
 
 def unknown_person_wid():

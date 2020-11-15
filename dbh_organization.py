@@ -11,9 +11,6 @@ class OrganizationDbHelper:
         )
         self.cur = self.conn.cursor()
 
-
-
-
     def find_all(self):
         my_list = list()
         self.cur.execute("select * from organizations")

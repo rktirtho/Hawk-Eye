@@ -1,6 +1,8 @@
 import mysql.connector
 
+
 class AuthorizedDbHelper:
+
     def __init__(self):
         self.conn = mysql.connector.connect(
             user='root',
@@ -8,9 +10,7 @@ class AuthorizedDbHelper:
             host='127.0.0.1',
             database='hawk_eye'
         )
-
         self.cur = self.conn.cursor()
-
 
     def find_all(self):
         auths = list()
