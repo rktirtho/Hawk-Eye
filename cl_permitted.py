@@ -30,11 +30,11 @@ class Permitted:
     def set_org_id(self, org_id):
         self.org_id = org_id
 
-    # def get_(self):
-    #     return self.
-    #
-    # def set_(self, ):
-    #     self. =
+    def get_image(self):
+        return self.image
+
+    def set_image(self, image):
+        self.image = image
     #
     # def get_(self):
     #     return self.

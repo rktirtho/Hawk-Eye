@@ -1,5 +1,5 @@
 import mysql.connector
-
+from cl_permitted import Permitted
 
 class AuthorizedDbHelper:
 
@@ -17,25 +17,30 @@ class AuthorizedDbHelper:
         self.cur.execute("select * from permitted")
         for data in self.cur:
             auths.append(data)
-
         return auths
 
     def find_one(self, id):
         self.cur.execute("select * from permitted")
+        query = "select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id and permitted.id = 1 "
+
         for data in self.cur:
             print(data)
 
-    # def find_all_details(self):
-    #     auths = list()
-    #     self.cur.execute("select permitted.name, permitted.org_id, permitted.image_id, organizations.name inner join q")
-    #
+    def find_all_details(self):
 
-dbh= AuthorizedDbHelper()
-li = dbh.find_all()
-print(li)
-# dbh.find_one(2)
-for t in li:
-    if 'Rejaul Karim' in t[1]:
-        print("Found", t[2])
-    else:
-        print('Not Found')
+        auths = list()
+        query = "select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id"
+        self.cur.execute(query)
+        for data in self.cur:
+            per = Permitted(data[1], data[3], data[4], data[2],data[0])
+            auths.append(per)
+        return auths
+
+
+# dbh= AuthorizedDbHelper()
+# li = dbh.find_all_details()
+# # print(li)
+# # dbh.find_one(2)
+#
+# for t in li:
+#     print(t.get_name())

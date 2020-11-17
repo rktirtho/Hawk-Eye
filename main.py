@@ -34,7 +34,7 @@ myList = os.listdir(path)
 
 print(myList)
 auth_db_helper =  AuthorizedDbHelper()
-auth_users = auth_db_helper.find_all()
+auth_users = auth_db_helper.find_all_details()
 
 for cl in myList:
     curImg = cv2.imread(f'{path}/{cl}')
@@ -80,13 +80,13 @@ while True:
             cv2.rectangle(img, (x1,y1),(x2,y2), (0,255,0), 2)
 
             for data in auth_users:
-                if name in data[3]:
-                    info = org_db_helper.find_one(data[0])
+                if name in data.get_image():
+                    # info = org_db_helper.find_one(data[0])
                     cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, data[1] , (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255, 255, 255), 2)
+                    cv2.putText(img, data.get_name() , (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255, 255, 255), 2)
 
-                    cv2.rectangle(img, (x1, y2 + 20), (x2, y2), (34, 255, 0), cv2.FILLED)
-                    cv2.putText(img, info[1], ((x1 +x2)//2, y2 + 18), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
+                    cv2.rectangle(img, (x1, y2 + 25), (x2, y2), (34, 255, 0), cv2.FILLED)
+                    cv2.putText(img, data.get_organization(), (x1 +6, y2 + 18), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
 
 
             # for au in auth_users:
