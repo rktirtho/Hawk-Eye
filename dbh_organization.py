@@ -1,6 +1,7 @@
 import mysql.connector
 from cl_organization import Organization
 
+
 class OrganizationDbHelper:
     def __init__(self):
         self.conn = mysql.connector.connect(
