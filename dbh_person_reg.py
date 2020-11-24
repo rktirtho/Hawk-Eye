@@ -12,6 +12,12 @@ class AuthorizedDbHelper:
         )
         self.cur = self.conn.cursor()
 
+    def save(self, permitted):
+        cur = self.conn.cursor()
+        query = "insert into permitted(id, name, org_id, image_id) values (%s, %s, %s, %s)"
+        cur.execute(query, (permitted.get_id(), permitted.get_name(), permitted.get_org_id(), permitted.get_image()))
+        self.conn.commit()
+
     def find_all(self):
         auths = list()
         self.cur.execute("select * from permitted")
@@ -38,6 +44,8 @@ class AuthorizedDbHelper:
 
 
 # dbh= AuthorizedDbHelper()
+# per = Permitted("Zisan Khan", 'jisan', "", 4, 346)
+# dbh.save(per)
 # li = dbh.find_all_details()
 # # print(li)
 # # dbh.find_one(2)
