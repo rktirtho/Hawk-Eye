@@ -1,7 +1,7 @@
 
 
 class Employee:
-    def __init__(self, name, username, email, password, org_id, join_date, id=None, last_excess=None):
+    def __init__(self, name, username, email, password, org_id, join_date=None, id=None, last_excess=None):
         self.id = id
         self.name = name
         self.username = username

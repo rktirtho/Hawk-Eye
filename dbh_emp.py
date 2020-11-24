@@ -22,8 +22,9 @@ class EmployeeDBHelper:
     def save(self, employee):
         """ This function is for insert a security officer into database. parameter is employee type."""
         cur = self.conn.cursor()
-        query = "insert into security_officer (id, name, username, email, password, org_id)"
-        cur.execute(query)
+        query = "insert into security_officer (id, name, username, email, password, org_id) values (%s, %s, %s, %s, %s, %s)"
+        cur.execute(query, (employee.get_id(), employee.get_name(), employee.get_username(), employee.get_email(), employee.get_password(), employee.get_org_id()))
+        self.conn.commit()
 
     def update_account(self, id, username, password):
         cur = self.conn.cursor()
@@ -41,3 +42,7 @@ class EmployeeDBHelper:
             my_list.append(emp)
         return my_list
 
+
+test = EmployeeDBHelper()
+em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
+test.save(em)
