@@ -42,7 +42,17 @@ class EmployeeDBHelper:
             my_list.append(emp)
         return my_list
 
+    def login(self, username, password):
+        self.cur.execute("select username from security_officer where username=%s and binary password=%s",(username,password))
+
+        if self.cur.fetchone() is not None:
+            return True
+        else:
+            return False
+
+
+
 
 test = EmployeeDBHelper()
 em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
-test.save(em)
+print(test.login("shrahaMan", 'Qwert'))

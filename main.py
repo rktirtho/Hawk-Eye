@@ -71,6 +71,7 @@ while True:
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
         print(faceDis)
         matchIndex = np.argmin(faceDis)
+        # bfeee99df268942206391ade4160ed2f2804fd06
 
         if maches[matchIndex]:
             name = classNames[matchIndex]
