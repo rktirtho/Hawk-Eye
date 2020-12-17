@@ -18,12 +18,25 @@ class Monitoring():
         conn = self.get_conn()
         cur = conn.cursor()
         query = "insert into monitoning ( person_id, area, isPermitted) values (%s, %s, %s)"
-        cur.execute(query, (1, "Hall Room", True))
+        cur.execute(query, (1, "Level 5", True))
         conn.commit()
         conn.close()
+
+    def get_all(self):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from monitoning")
+        data = cur.fetchall()
+        conn.close()
+        return data
 
 
 
 
 mon = Monitoring()
-mon.add();
+mon.add()
+all = mon.get_all()
+
+for i in all:
+    print(i)
+
