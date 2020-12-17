@@ -12,6 +12,7 @@ class EmployeeDBHelper:
             host='127.0.0.1',
             database='hawk_eye'
         )
+
         self.cur = self.conn.cursor()
 
     # def connection(self):

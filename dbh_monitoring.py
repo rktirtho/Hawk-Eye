@@ -1,0 +1,29 @@
+import mysql
+from mysql.connector import (connection)
+
+class Monitoring():
+    def __init__(self):
+        print("Object Created")
+
+    def get_conn(self):
+        self.conn = mysql.connector.connect(
+            user='root',
+            password='12345678',
+            host='127.0.0.1',
+            database='hawk_eye'
+        )
+        return self.conn
+
+    def add(self):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        query = "insert into monitoning ( person_id, area, isPermitted) values (%s, %s, %s)"
+        cur.execute(query, (1, "Hall Room", True))
+        conn.commit()
+        conn.close()
+
+
+
+
+mon = Monitoring()
+mon.add();
