@@ -62,6 +62,9 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+def monitor():
+    print("monitoring functon call")
+
 
 encodeListKnown = findEncodings(images)
 print('Encoding complete. Number of Register face:',len(encodeListKnown))
