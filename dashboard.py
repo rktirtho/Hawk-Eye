@@ -154,8 +154,6 @@ def all_emp_wid():
         i += 1
 
 
-
-
 def unknown_person_wid():
     clearAll()
     click("Unknown Person")

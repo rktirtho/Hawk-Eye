@@ -3,8 +3,7 @@ from tkinter import ttk
 from tkinter import *
 from PIL import ImageTk
 from tkinter import messagebox
-import dashboard
-import sqlite3
+from dbh_emp import EmployeeDBHelper
 
 
 
@@ -67,7 +66,9 @@ class tkinterApp(tk.Tk):
 
 
 class StartPage(tk.Frame):
+
     def __init__(self, parent, controller):
+        self.emp_db_helper = EmployeeDBHelper()
         self.ent_username = StringVar()
         self.ent_password = StringVar()
         tk.Frame.__init__(self, parent)
@@ -94,13 +95,14 @@ class StartPage(tk.Frame):
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             messagebox.showerror("Error", "All field required.")
         else:
-            records = dbh_emp.login(self.ent_username.get(), self.ent_password.get())
-            if len(records) > 0:
-                print("login success")
-                messagebox.showinfo("Login Success", "Your Login is has success")
+            record = self.emp_db_helper.login(self.ent_username.get(), self.ent_password.get())
+            if record:
+                self.next_page()
             else:
-                print("Denied")
-                messagebox.showerror("Login in Failed", "Username or password mismatch. Try Again.")
+                messagebox.showerror("Login Failed.", "Invalid username or password.")
+
+    def next_page(self):
+        print("nextPage called")
 
 
 # class Page1(tk.Frame):

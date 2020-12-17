@@ -5,6 +5,7 @@ import os
 import cv2
 import face_recognition
 import numpy as np
+import pyttsx3
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 
@@ -53,6 +54,15 @@ def findEncodings(images):
     return encodeList
 
 
+def speak(text):
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')  # getting details of current voice
+    # engine.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
+    engine.setProperty('voice', voices[16].id)  # changing index, changes voices. 1 for female
+    engine.say(text)
+    engine.runAndWait()
+
+
 encodeListKnown = findEncodings(images)
 print('Encoding complete. Number of Register face:',len(encodeListKnown))
 
@@ -78,16 +88,18 @@ while True:
             print(name)
             y1, x2,y2,x1 = faceLoc
             y1, x2, y2, x1 = y1*4, x2*4,y2*4,x1*4
-            cv2.rectangle(img, (x1,y1),(x2,y2), (0,255,0), 2)
+            # cv2.rectangle(img, (x1,y1),(x2,y2), (0,255,0), 2)
 
             for data in auth_users:
                 if name in data.get_image():
-                    # info = org_db_helper.find_one(data[0])
-                    cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, data.get_name() , (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255, 255, 255), 2)
 
-                    cv2.rectangle(img, (x1, y2 + 25), (x2, y2), (34, 255, 0), cv2.FILLED)
-                    cv2.putText(img, data.get_organization(), (x1 +6, y2 + 18), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
+                    # info = org_db_helper.find_one(data[0])
+                    # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), (0, 255, 0), cv2.FILLED)
+                    # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), cv2.FILLED)
+                    cv2.putText(img, data.get_name() , (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
+
+                    # cv2.rectangle(img, (x1, y2 + 25), (x2, y2),  cv2.FILLED)
+                    cv2.putText(img, data.get_organization(), (x1 +6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 1)
 
 
             # for au in auth_users:
@@ -105,6 +117,7 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0,0,255), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0,0,255), cv2.FILLED)
             cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            speak("Unknown Person Detected")
 
 
     cv2.imshow('Webcam', img)

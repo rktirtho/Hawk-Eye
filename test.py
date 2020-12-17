@@ -1,10 +1,17 @@
-import urllib.request, urllib.parse, urllib.error
-import requests
-import json
-import ssl
-from tkinter import *
-
-api_key = False
+# import urllib.request, urllib.parse, urllib.error
+# import requests
+# import json
+# import ssl
+# from tkinter import *
+import pyttsx3
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')       #getting details of current voice
+# engine.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
+engine.setProperty('voice', voices[16].id)   #changing index, changes voices. 1 for female
+engine.say("Unauthorized access detected")
+engine.runAndWait()
+# engine.runAndWait()
+# api_key = False
 # If you have a Google Places API key, enter it here
 # api_key = 'AIzaSy___IDByT70'
 # https://developers.google.com/maps/documentation/geocoding/intro
@@ -79,39 +86,39 @@ api_key = False
 #     # print(api)
 # except Exception as e:
 #     print("Loading Failed...")
-class Test:
-    def __init__(self):
-        self.root = Tk()
-        self.root.resizable(width=0, height=0)
-        self.root.title("some application")
-
-        # menu left
-        self.menu_left = Frame(self.root, width=150, bg="#ababab")
-        self.menu_left.grid(row=0, column=0, rowspan=2, sticky="ns")
-
-        self.menu_left_upper = Frame(self.menu_left, width=150, height=150, bg="red")
-        self.menu_left_upper.grid(row=0, column=0)
-
-        # this label breaks the design
-        #self.test = tk.Label(self.menu_left_upper, text="test")
-        #self.test.pack()
-
-        self.menu_left_lower = Frame(self.menu_left, width=150, bg="blue")
-        self.menu_left_lower.grid(row=1, column=0)
-
-        # right area
-        self.some_title_frame = Frame(self.root, bg="#dfdfdf")
-        self.some_title_frame.grid(row=0, column=1, sticky="we")
-
-        self.some_title = Label(self.some_title_frame, text="some title", bg="#dfdfdf")
-        self.some_title.pack()
-
-        self.canvas_area = Canvas(self.root, width=500, height=400, background="#ffffff")
-        self.canvas_area.grid(row=1, column=1)
-
-        self.root.mainloop()
-
-Test()
+# class Test:
+#     def __init__(self):
+#         self.root = Tk()
+#         self.root.resizable(width=0, height=0)
+#         self.root.title("some application")
+#
+#         # menu left
+#         self.menu_left = Frame(self.root, width=150, bg="#ababab")
+#         self.menu_left.grid(row=0, column=0, rowspan=2, sticky="ns")
+#
+#         self.menu_left_upper = Frame(self.menu_left, width=150, height=150, bg="red")
+#         self.menu_left_upper.grid(row=0, column=0)
+#
+#         # this label breaks the design
+#         #self.test = tk.Label(self.menu_left_upper, text="test")
+#         #self.test.pack()
+#
+#         self.menu_left_lower = Frame(self.menu_left, width=150, bg="blue")
+#         self.menu_left_lower.grid(row=1, column=0)
+#
+#         # right area
+#         self.some_title_frame = Frame(self.root, bg="#dfdfdf")
+#         self.some_title_frame.grid(row=0, column=1, sticky="we")
+#
+#         self.some_title = Label(self.some_title_frame, text="some title", bg="#dfdfdf")
+#         self.some_title.pack()
+#
+#         self.canvas_area = Canvas(self.root, width=500, height=400, background="#ffffff")
+#         self.canvas_area.grid(row=1, column=1)
+#
+#         self.root.mainloop()
+#
+# Test()
 # import tkinter as Tk
 #
 # def disappear():
