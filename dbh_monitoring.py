@@ -17,7 +17,7 @@ class Monitoring():
     def add(self, person_id, area, isPermitted):
         conn = self.get_conn()
         cur = conn.cursor()
-        query = "insert into monitoning ( person_id, area, isPermitted) values (%s, %s, %s)"
+        query = "insert into monitoring ( person_id, area, isPermitted) values (%s, %s, %s)"
         cur.execute(query, (person_id, area, isPermitted))
         conn.commit()
         conn.close()
@@ -25,7 +25,7 @@ class Monitoring():
     def get_all(self):
         conn = self.get_conn()
         cur = conn.cursor()
-        cur.execute("select * from monitoning")
+        cur.execute("select * from monitoring")
         data = cur.fetchall()
         conn.close()
         return data
@@ -33,7 +33,7 @@ class Monitoring():
     def get_one(self, id):
         conn = self.get_conn()
         cur = conn.cursor()
-        cur.execute("select * from monitoning where id=%s", (id,))
+        cur.execute("select * from monitoring where id=%s", (id,))
         data = cur.fetchone()
         conn.close()
         return data
