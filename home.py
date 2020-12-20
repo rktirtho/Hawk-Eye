@@ -77,25 +77,7 @@ class StartPage(tk.Frame):
         self.ent_password = StringVar()
         self.controller = controller
         tk.Frame.__init__(self, parent)
-        # label of frame Layout 2
-        label = ttk.Label(self, text="Login", font=MEDIAMFONT).grid(row=0, column=0, columnspan=2, pady=20)
-        # ===== User name Section ======
-        lb_user = ttk.Label(self, text="Username").grid(row=1, column=0)
-        ent_user = ttk.Entry(self,textvariable=self.ent_username).grid(row=1, column=1)
 
-        # ===== Password Section ======
-        lb_pass = ttk.Label(self, text="Password").grid(row=2, column=0)
-        ent_pass = ttk.Entry(self, show="*", textvariable=self.ent_password).grid(row=2, column=1, pady=10)
-
-        button1 = Button(self, bg='red', fg='white', text="Register",width=20, command=lambda: controller.show_frame(Register, "Register"))
-
-        # putting the button in its place by
-        # using grid
-        button1.grid(row=3, column=0, padx=10, pady=10)
-
-        button2 = Button(self, bg='green', fg='white', width=20,text="Login", command=self.login).grid(row=3, column=1, padx=10, pady=10)
-
-    # second window frame page1
     def login(self):
         if self.ent_username.get() == "" or self.ent_password.get() == "":
             messagebox.showerror("Error", "All field required.")
