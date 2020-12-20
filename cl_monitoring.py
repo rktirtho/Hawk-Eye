@@ -1,6 +1,6 @@
 
 class Monitoring:
-    def __init__(self, id, person_id, area,is_permitted,  time):
+    def __init__(self, id, person_id, area, is_permitted,  time):
         self.id = id
         self.person_id = person_id
         self.area = area
@@ -33,6 +33,7 @@ class Monitoring:
 
     def get_time(self):
         return self.time
+
     def set_time(self, time):
         self.time = time
 

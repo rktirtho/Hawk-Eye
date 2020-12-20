@@ -1,11 +1,13 @@
 import mysql
 from mysql.connector import (connection)
+from cl_monitoring import Monitoring
 
-class Monitoring():
+class MonitoringDbHelper:
     def __init__(self):
         print("Object Created")
 
     def get_conn(self):
+
         self.conn = mysql.connector.connect(
             user='root',
             password='12345678',
@@ -23,12 +25,17 @@ class Monitoring():
         conn.close()
 
     def get_all(self):
+        monitors = list()
         conn = self.get_conn()
         cur = conn.cursor()
         cur.execute("select * from monitoring")
         data = cur.fetchall()
+        print(data)
+        for i in data:
+            mon = Monitoring(i[0], i[1],i[3],i[4],i[2])
+            monitors.append(mon)
         conn.close()
-        return data
+        return monitors
 
     def get_one(self, id):
         conn = self.get_conn()
@@ -41,9 +48,13 @@ class Monitoring():
 
 
 
-mon = Monitoring()
+m = MonitoringDbHelper()
 
-all = mon.get_one(2)
+all = m.get_all()
 
-print(all)
+print(all[1].get_id())
+print(all[1].get_person_id())
+print(all[1].get_area())
+print(all[1].is_permit())
+print(all[1].get_time())
 
