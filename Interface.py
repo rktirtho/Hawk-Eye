@@ -14,6 +14,7 @@ class FirstPage(tk.Frame):
 
         tk.Frame.__init__(self, parent)
 
+
         load = Image.open("images/meterial/bg.jpg")
         photo = ImageTk.PhotoImage(load)
         bg = tk.Label(self, image=photo)
@@ -92,6 +93,12 @@ class FirstPage(tk.Frame):
 class SecondPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        def our_command():
+            pass
+
+
+
         Label = tk.Label(self, text="Second Page")
         Label.place(x=230, y=230)
         Button = tk.Button(self, text="Next", command=lambda: controller.show_frame(ThirdPage))
@@ -134,6 +141,17 @@ class Application(tk.Tk):
 
     def show_frame(self, page):
         frame = self.frames[page]
+
+        if page == SecondPage:
+            self.title("Dashboard")
+
+            my_menu = tk.Menu(self)
+            self.config(menu=my_menu)
+            file_menu = tk.Menu(my_menu)
+            my_menu.add_cascade(label="File", menu=file_menu)
+            file_menu.add_command(label="New...")
+            file_menu.add_command(label="Exit...")
+
         frame.tkraise()
 
 
