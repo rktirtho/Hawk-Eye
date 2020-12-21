@@ -47,26 +47,37 @@ class FirstPage(tk.Frame):
         def register():
             window = tk.Tk()
             window.title("Register")
-            window.config(bg="deep sky blue")
-            l1= tk.Label(window, text="Username", font=("Arial", 15), bg="deep sky blue")
+            window.config(bg="black")
+            l1= tk.Label(window, text="Employee Id", font=("Arial", 15), bg="black", fg="white")
             l1.place(x=10, y=10)
             t1 = tk.Entry(window, width=30)
             t1.place(x=200, y=10)
 
-            l2 = tk.Label(window, text="Password", font=("Arial", 15), bg="deep sky blue")
+            l2 = tk.Label(window, text="Email", font=("Arial", 15), bg="black", fg="white")
             l2.place(x=10, y=60)
             t2 = tk.Entry(window, width=30)
             t2.place(x=200, y=60)
 
-            l3 = tk.Label(window, text="Confirm Password", font=("Arial", 15), bg="deep sky blue")
+            l3 = tk.Label(window, text="Username", font=("Arial", 15),bg="black", fg="white")
             l3.place(x=10, y=110)
             t3 = tk.Entry(window, width=30)
             t3.place(x=200, y=110)
 
+            l4 = tk.Label(window, text="Password", font=("Arial", 15),bg="black", fg="white")
+            l4.place(x=10, y=160)
+            t4 = tk.Entry(window, width=30)
+            t4.place(x=200, y=160)
+
+            l5 = tk.Label(window, text="Confirm Password", font=("Arial", 15), bg="black", fg="white")
+            l5.place(x=10, y=210)
+            t5 = tk.Entry(window, width=30)
+            t5.place(x=200, y=210)
+
             def check():
-                if t1.get() != "" or t2.get() != "" or t3.get() !="":
-                    if t2.get() == t3.get():
+                if t1.get() != "" or t2.get() != "" or t3.get() != "" or t4.get() != "" or t5.get() !="":
+                    if t4.get() == t5.get():
                         messagebox.showinfo("Success", "Registration Success")
+                        window.destroy()
                     else:
                         messagebox.showerror("Error", "Password and confirm password mismatch")
                 else:
@@ -74,12 +85,12 @@ class FirstPage(tk.Frame):
 
 
 
-            btn_register = tk.Button(window, text="Register", command=check, font=("Arial", 15), bg="green")
-            btn_register.place(x=170, y=150)
+            btn_register = tk.Button(window, text="Register", command=check, font=("Arial", 15), bg="gray", fg="black")
+            btn_register.place(x=190, y=250)
 
-            window.geometry("470x220")
-            window.minsize(470,220)
-            window.maxsize(470,220)
+            window.geometry("470x300")
+            window.minsize(470,300)
+            window.maxsize(470,300)
             window.resizable(0,0)
             window.mainloop()
 
@@ -177,11 +188,8 @@ class Application(tk.Tk):
             my_menu.add_cascade(label="View", menu=view_menu)
             view_menu.add_command(label="All Employee")
             view_menu.add_command(label="All Security")
-
-
         frame.tkraise()
 
 
 app = Application()
-# app.minsize(700, 500)
 app.mainloop()
