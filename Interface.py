@@ -14,8 +14,14 @@ class FirstPage(tk.Frame):
 
         tk.Frame.__init__(self, parent)
 
+        load = Image.open("images/meterial/bg.jpg")
+        photo = ImageTk.PhotoImage(load)
+        bg = tk.Label(self, image=photo)
+        bg.image = photo
+        bg.place(x=0,y=0)
+
         border = tk.LabelFrame(self, text="login", bg="ivory", bd=10, font=("Arial", 20))
-        border.pack(fill="both", expand="yes", padx=100, pady=100)
+        border.pack(fill="both", expand="yes", padx=150, pady=140)
 
         l1 = tk.Label(border,  bg="ivory", text="Username")
         l1.place(x=50, y=20)
@@ -24,7 +30,7 @@ class FirstPage(tk.Frame):
 
         l2 = tk.Label(border, bg="ivory", text="password")
         l2.place(x=50, y=80)
-        t2 = tk.Entry(border, width=30, bd=5)
+        t2 = tk.Entry(border, show="*", width=30, bd=5)
         t2.place(x=180, y=80)
 
         def verify():
@@ -37,18 +43,50 @@ class FirstPage(tk.Frame):
                 else:
                     messagebox.showerror("Login Failed","Username or Password mismatch.")
 
+        def register():
+            window = tk.Tk()
+            window.title("Register")
+            window.config(bg="deep sky blue")
+            l1= tk.Label(window, text="Username", font=("Arial", 15), bg="deep sky blue")
+            l1.place(x=10, y=10)
+            t1 = tk.Entry(window, width=30)
+            t1.place(x=200, y=10)
+
+            l2 = tk.Label(window, text="Password", font=("Arial", 15), bg="deep sky blue")
+            l2.place(x=10, y=60)
+            t2 = tk.Entry(window, width=30)
+            t2.place(x=200, y=60)
+
+            l3 = tk.Label(window, text="Confirm Password", font=("Arial", 15), bg="deep sky blue")
+            l3.place(x=10, y=110)
+            t3 = tk.Entry(window, width=30)
+            t3.place(x=200, y=110)
+
+            def check():
+                if t1.get() != "" or t2.get() != "" or t3.get() !="":
+                    if t2.get() == t3.get():
+                        messagebox.showinfo("Success", "Registration Success")
+                    else:
+                        messagebox.showerror("Error", "Password and confirm password mismatch")
+                else:
+                    messagebox.showwarning("Error", "All fields required")
+
+
+
+            btn_register = tk.Button(window, text="Register", command=check, font=("Arial", 15), bg="green")
+            btn_register.place(x=170, y=150)
+
+            window.geometry("470x220")
+            window.minsize(470,220)
+            window.maxsize(470,220)
+            window.resizable(0,0)
+            window.mainloop()
+
         btn_submit = tk.Button(border, text="Submit", font=("Arial", 15), command=verify)
         btn_submit.place(x=320, y=130)
 
-    # def login(self):
-    #     if self.username.get() == "" or self.ent_password.get() == "":
-    #         messagebox.showerror("Error", "All field required.")
-    #     else:
-    #         record = self.emp_db_helper.login(self.username.get(), self.username.get())
-    #         if record:
-    #             self.controller.show_frame(SecondPage)
-    #         else:
-    #             messagebox.showerror("Login Failed.", "Invalid username or password.")
+        btn_register = tk.Button(self, text="Register", bg ="dark orange",  font=("Arial", 15), command=register)
+        btn_register.place(x=650, y=20)
 
 
 class SecondPage(tk.Frame):
