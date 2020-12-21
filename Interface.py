@@ -1,19 +1,54 @@
 import tkinter as tk
-from tkinter import ttk
 from tkinter import messagebox
+from tkinter import ttk
 from PIL import Image, ImageTk
+from dbh_emp import EmployeeDBHelper
 
 
 class FirstPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        Label = tk.Label(self, text="FirstPage")
-        Label.place(x=230, y=230)
-        Button = tk.Button(self, text="Next", command=lambda: controller.show_frame(SecondPage))
-        Button.place(x=650, y=450)
+        self.username = tk.StringVar()
+        self.password = tk.StringVar()
 
-        Button_back = tk.Button(self, text="Back", command=lambda: controller.show_frame(ThirdPage))
-        Button_back.place(x=100, y=450)
+        self.emp_db_helper = EmployeeDBHelper()
+
+        tk.Frame.__init__(self, parent)
+
+        border = tk.LabelFrame(self, text="login", bg="ivory", bd=10, font=("Arial", 20))
+        border.pack(fill="both", expand="yes", padx=100, pady=100)
+
+        l1 = tk.Label(border,  bg="ivory", text="Username")
+        l1.place(x=50, y=20)
+        t1 = tk.Entry(border, width=30, bd=5)
+        t1.place(x=180, y=20)
+
+        l2 = tk.Label(border, bg="ivory", text="password")
+        l2.place(x=50, y=80)
+        t2 = tk.Entry(border, width=30, bd=5)
+        t2.place(x=180, y=80)
+
+        def verify():
+            if t1.get() == "" or t2.get =="":
+                messagebox.showwarning("Warning", "Username and password required")
+            else:
+                record = self.emp_db_helper.login(t1.get(), t2.get())
+                if record:
+                    controller.show_frame(SecondPage)
+                else:
+                    messagebox.showerror("Login Failed","Username or Password mismatch.")
+
+        btn_submit = tk.Button(border, text="Submit", font=("Arial", 15), command=verify)
+        btn_submit.place(x=320, y=130)
+
+    # def login(self):
+    #     if self.username.get() == "" or self.ent_password.get() == "":
+    #         messagebox.showerror("Error", "All field required.")
+    #     else:
+    #         record = self.emp_db_helper.login(self.username.get(), self.username.get())
+    #         if record:
+    #             self.controller.show_frame(SecondPage)
+    #         else:
+    #             messagebox.showerror("Login Failed.", "Invalid username or password.")
 
 
 class SecondPage(tk.Frame):
@@ -40,6 +75,7 @@ class ThirdPage(tk.Frame):
         Button_back = tk.Button(self, text="Back", command=lambda: controller.show_frame(SecondPage))
         Button_back.place(x=100, y=450)
 
+
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -50,7 +86,7 @@ class Application(tk.Tk):
 
         window.grid_rowconfigure(0, minsize=500)
         window.grid_columnconfigure(0, minsize=800)
-        self.frames={}
+        self.frames = {}
 
         for F in (FirstPage, SecondPage, ThirdPage):
             frame = F(window, self)
@@ -64,4 +100,5 @@ class Application(tk.Tk):
 
 
 app = Application()
+app.minsize(700, 500)
 app.mainloop()
