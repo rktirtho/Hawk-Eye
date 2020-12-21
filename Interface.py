@@ -155,8 +155,29 @@ class Application(tk.Tk):
             self.config(menu=my_menu)
             file_menu = tk.Menu(my_menu)
             my_menu.add_cascade(label="File", menu=file_menu)
-            file_menu.add_command(label="New...")
-            file_menu.add_command(label="Exit...")
+            file_menu.add_command(label="New Employee")
+            file_menu.add_command(label="New Security")
+            file_menu.add_command(label="Settings")
+            file_menu.add_command(label="Exit")
+
+            edit_menu = tk.Menu(my_menu)
+            my_menu.add_cascade(label="Edit", menu=edit_menu)
+            edit_menu.add_command(label="Update Security")
+            edit_menu.add_command(label="Update Employee")
+
+            statistic_menu = tk.Menu(my_menu)
+            my_menu.add_cascade(label="Statistic", menu=statistic_menu)
+            statistic_menu.add_command(label="Today")
+            statistic_menu.add_command(label="Yesterday")
+            statistic_menu.add_command(label="Unknown Person")
+            statistic_menu.add_command(label="Authorized Access")
+            statistic_menu.add_command(label="Unauthorized Access")
+
+            view_menu = tk.Menu(my_menu)
+            my_menu.add_cascade(label="View", menu=view_menu)
+            view_menu.add_command(label="All Employee")
+            view_menu.add_command(label="All Security")
+
 
         frame.tkraise()
 
