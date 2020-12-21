@@ -142,8 +142,14 @@ class Application(tk.Tk):
     def show_frame(self, page):
         frame = self.frames[page]
 
+        if page == FirstPage:
+            self.title("Login")
+            self.maxsize(800, 500)
+            self.minsize(800, 500)
+
         if page == SecondPage:
             self.title("Dashboard")
+            self.maxsize(1350,720)
 
             my_menu = tk.Menu(self)
             self.config(menu=my_menu)
@@ -156,5 +162,5 @@ class Application(tk.Tk):
 
 
 app = Application()
-app.minsize(700, 500)
+# app.minsize(700, 500)
 app.mainloop()
