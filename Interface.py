@@ -105,18 +105,111 @@ class SecondPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        def our_command():
-            pass
+        def add_title(text):
+            Title = tk.Label(frame_content, text=text, font=("Arial", 15), pady=15)
+            Title.pack()
+            controller.title(text)
+
+        def hide_all_frame():
+            for widget in frame_content.winfo_children():
+                widget.destroy()
+
+        def settings():
+            messagebox.showinfo("Service Not Available", "Settings will be added in commercial release")
+
+        def add_person_menu():
+
+            hide_all_frame()
+            add_title("Register Person")
+            lb_emp_id = tk.Label(frame_content, text="Employee ID")
+            lb_emp_id.pack()
+            ent_em_id = tk.Entry(frame_content, )
+            ent_em_id.pack()
+
+            lb_name = tk.Label(frame_content, text="Employee Name*")
+            lb_name.pack()
+            ent_name = tk.Entry(frame_content, )
+            ent_name.pack()
+
+            lb_org = tk.Label(frame_content, text="Organization ID*")
+            lb_org.pack()
+            ent_org_id = tk.Entry(frame_content, )
+            ent_org_id.pack()
+
+            tk.Button(frame_content, text="Load Image*").pack(pady=10)
+            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+            # content_panel.add(frame_content)
+
+        def add_employee_menu():
+            hide_all_frame()
+            add_title("Register Employee")
+
+            lb_emp_id = tk.Label(frame_content, text="Employee ID")
+            lb_emp_id.pack()
+            ent_em_id = tk.Entry(frame_content, )
+            ent_em_id.pack()
+
+            lb_name = tk.Label(frame_content, text="Employee Name*")
+            lb_name.pack()
+            ent_name = tk.Entry(frame_content, )
+            ent_name.pack()
+
+            lb_org = tk.Label(frame_content, text="Organization ID*")
+            lb_org.pack()
+            ent_org_id = tk.Entry(frame_content, )
+            ent_org_id.pack()
+
+            tk.Button(frame_content, text="Load Image*").pack(pady=10)
+            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
 
 
 
-        Label = tk.Label(self, text="Second Page")
-        Label.place(x=230, y=230)
-        Button = tk.Button(self, text="Next", command=lambda: controller.show_frame(ThirdPage))
-        Button.place(x=650, y=450)
+        my_menu = tk.Menu(self)
+        controller.config(menu=my_menu)
+        file_menu = tk.Menu(my_menu)
+        my_menu.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="New Employee", command=add_person_menu)
+        file_menu.add_command(label="New Security", command=add_employee_menu)
+        file_menu.add_separator()
+        file_menu.add_command(label="Settings", command=settings)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.quit)
 
-        Button_back = tk.Button(self, text="Back", command=lambda: controller.show_frame(FirstPage))
-        Button_back.place(x=100, y=450)
+        edit_menu = tk.Menu(my_menu)
+        my_menu.add_cascade(label="Edit", menu=edit_menu)
+        edit_menu.add_command(label="Update Security")
+        edit_menu.add_command(label="Update Employee")
+
+        statistic_menu = tk.Menu(my_menu)
+        my_menu.add_cascade(label="Statistic", menu=statistic_menu)
+        statistic_menu.add_command(label="Today")
+        statistic_menu.add_command(label="Yesterday")
+        statistic_menu.add_separator()
+        statistic_menu.add_command(label="Unknown Person")
+        statistic_menu.add_separator()
+        statistic_menu.add_command(label="Authorized Access")
+        statistic_menu.add_command(label="Unauthorized Access")
+
+        view_menu = tk.Menu(my_menu)
+        my_menu.add_cascade(label="View", menu=view_menu)
+        view_menu.add_command(label="All Employee")
+        view_menu.add_command(label="All Security")
+
+
+
+        # Label = tk.Label(self, text="Dashboard" , font=("Ariel", 15))
+        # Label.place(x=350, y=20)
+        # Button = tk.Button(self, text="Next", command=lambda: controller.show_frame(ThirdPage))
+        # Button.place(x=650, y=450)
+        #
+        # Button_back = tk.Button(self, text="Back", command=lambda: controller.show_frame(FirstPage))
+        # Button_back.place(x=100, y=450)
+
+        frame_content = tk.Frame(self)
+        frame_content.pack(fill="both", expand=1, pady=50)
+        #
+        # new_person = tk.Frame(frame_content, width=500, height=500, bg="blue")
+        # frame_new_employee = tk.Frame(frame_content, width=500, height=500, bg="green")
 
 
 class ThirdPage(tk.Frame):
@@ -148,48 +241,26 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(FirstPage)
+        self.show_frame(SecondPage)
 
     def show_frame(self, page):
         frame = self.frames[page]
 
         if page == FirstPage:
             self.title("Login")
-            self.maxsize(800, 500)
             self.minsize(800, 500)
 
         if page == SecondPage:
             self.title("Dashboard")
-            self.maxsize(1350,720)
+            self.minsize(1200,600)
+            self.maxsize(1300, 700)
 
-            my_menu = tk.Menu(self)
-            self.config(menu=my_menu)
-            file_menu = tk.Menu(my_menu)
-            my_menu.add_cascade(label="File", menu=file_menu)
-            file_menu.add_command(label="New Employee")
-            file_menu.add_command(label="New Security")
-            file_menu.add_command(label="Settings")
-            file_menu.add_command(label="Exit")
+        if page == ThirdPage:
+            print('test')
 
-            edit_menu = tk.Menu(my_menu)
-            my_menu.add_cascade(label="Edit", menu=edit_menu)
-            edit_menu.add_command(label="Update Security")
-            edit_menu.add_command(label="Update Employee")
-
-            statistic_menu = tk.Menu(my_menu)
-            my_menu.add_cascade(label="Statistic", menu=statistic_menu)
-            statistic_menu.add_command(label="Today")
-            statistic_menu.add_command(label="Yesterday")
-            statistic_menu.add_command(label="Unknown Person")
-            statistic_menu.add_command(label="Authorized Access")
-            statistic_menu.add_command(label="Unauthorized Access")
-
-            view_menu = tk.Menu(my_menu)
-            my_menu.add_cascade(label="View", menu=view_menu)
-            view_menu.add_command(label="All Employee")
-            view_menu.add_command(label="All Security")
         frame.tkraise()
 
 
 app = Application()
+app.geometry("0x0")
 app.mainloop()

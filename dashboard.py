@@ -25,36 +25,8 @@ def show_all():
     click("All Person")
 
     contend.pack_forget()
-def clearAll():
-    for widget in contend.winfo_children():
-        widget.destroy()
 
-def add_emp_frame():
-    # content_panel.remove(contend)
-    clearAll()
 
-    click("Add Employee")
-    title = Label(contend, text="Add Person", font=MEDIAMFONT)
-    title.pack(pady=20)
-
-    lb_emp_id = Label(contend, text="Employee ID")
-    lb_emp_id.pack()
-    ent_em_id = Entry(contend, )
-    ent_em_id.pack()
-
-    lb_name = Label(contend, text="Employee Name*")
-    lb_name.pack()
-    ent_name = Entry(contend, )
-    ent_name.pack()
-
-    lb_org = Label(contend, text="Organization ID*")
-    lb_org.pack()
-    ent_org_id = Entry(contend, )
-    ent_org_id.pack()
-
-    Button(contend, text="Load Image*").pack(pady=10)
-    Button(contend, text="Save").pack()
-    # content_panel.add(contend)
 
 
 def unauth_acc_wid():

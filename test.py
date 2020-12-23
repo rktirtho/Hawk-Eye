@@ -14,7 +14,7 @@ btn_File = Button(buttons_frame, text='File')
 btn_File.grid(row=0, column=1, padx=(10), pady=10)
 
 btn_Folder = Button(buttons_frame, text='Folder')
-btn_Folder.grid(row=0, column=2, padx=(10), pady=10)
+btn_Folder.grid(row=0, column=2, padx=10, pady=10)
 
 # Group1 Frame ----------------------------------------------------
 group1 = LabelFrame(master_window, text="Text Box", padx=5, pady=5)
