@@ -163,6 +163,26 @@ class SecondPage(tk.Frame):
 
             tk.Button(frame_content, text="Load Image*").pack(pady=10)
             tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+        def add_org_menu():
+            hide_all_frame()
+            add_title("New Organization")
+
+            lb_name = tk.Label(frame_content, text="Organization Name*")
+            lb_name.pack()
+            ent_name = tk.Entry(frame_content, )
+            ent_name.pack()
+
+            lb_org = tk.Label(frame_content, text="Owner Name")
+            lb_org.pack()
+            ent_org_id = tk.Entry(frame_content, )
+            ent_org_id.pack()
+
+            lb_emp_id = tk.Label(frame_content, text="Address")
+            lb_emp_id.pack()
+            ent_em_id = tk.Entry(frame_content, )
+            ent_em_id.pack()
+
+            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
 
         # ============================= Edit Menu  ============================
 
@@ -353,9 +373,10 @@ class SecondPage(tk.Frame):
         my_menu = tk.Menu(self)
         controller.config(menu=my_menu)
         file_menu = tk.Menu(my_menu)
-        my_menu.add_cascade(label="File", menu=file_menu)
-        file_menu.add_command(label="New Employee", command=add_person_menu)
-        file_menu.add_command(label="New Security", command=add_employee_menu)
+        my_menu.add_cascade(label="New", menu=file_menu)
+        file_menu.add_command(label="Employee", command=add_person_menu)
+        file_menu.add_command(label="Security", command=add_employee_menu)
+        file_menu.add_command(label="Organization", command=add_org_menu)
         file_menu.add_separator()
         file_menu.add_command(label="Settings", command=settings)
         file_menu.add_separator()
