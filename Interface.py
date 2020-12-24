@@ -168,6 +168,7 @@ class SecondPage(tk.Frame):
 
         def edit_person():
             hide_all_frame()
+            add_title("Edit Person")
             lb_emp_id = tk.Label(frame_content, text="Person Id")
             lb_emp_id.pack()
             ent_em_id = tk.Entry(frame_content, )
@@ -201,7 +202,45 @@ class SecondPage(tk.Frame):
                 else:
                     messagebox.showerror("Not Found", "Employee not found")
 
-            src = tk.Button(frame_content, text="Search", command=search_person,  bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20,pady=20)
+            src = tk.Button(frame_content, text="Search", command=search_person,  bg="green", fg="#AFB5BB", width=20).pack(padx=20,pady=20)
+
+        def edit_employee():
+            hide_all_frame()
+            add_title("Edit Employee")
+            lb_emp_id = tk.Label(frame_content, text="Person Id")
+            lb_emp_id.pack()
+            ent_em_id = tk.Entry(frame_content, )
+            ent_em_id.pack()
+
+            def search_person():
+
+                person_id = ent_em_id.get()
+                person_db = AuthorizedDbHelper()
+                person = person_db.find_one(person_id)
+                print(person_id)
+                print(person)
+
+                if(person != None):
+
+                    lb_name = tk.Label(frame_content, text="Employee Name*")
+                    lb_name.pack()
+                    ent_name = tk.Entry(frame_content, textvariable="person.get_name()")
+                    ent_name.pack(pady=10)
+                    ent_name.insert(0, person.get_name())
+
+                    lb_org = tk.Label(frame_content,  text="Organization ID*")
+                    lb_org.pack()
+                    ent_org_id = tk.Entry(frame_content, text=person.get_organization())
+                    ent_org_id.pack(pady=10)
+                    ent_org_id.insert(0, person.get_organization())
+
+                    tk.Button(frame_content, text="Change Image*").pack(pady=10)
+                    tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+
+                else:
+                    messagebox.showerror("Not Found", "Employee not found")
+
+            src = tk.Button(frame_content, text="Search", command=search_person,  bg="green", fg="#AFB5BB", width=20).pack(padx=20,pady=20)
 
 
 
@@ -209,7 +248,7 @@ class SecondPage(tk.Frame):
         # ============================== View Menu =============================
         def view_all_employee():
             hide_all_frame()
-            # add_title("All Security Person")
+            add_title("All Security Person")
             per = AuthorizedDbHelper()
             persons = per.find_all_details()
 
@@ -324,7 +363,7 @@ class SecondPage(tk.Frame):
 
         edit_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="Edit", menu=edit_menu)
-        edit_menu.add_command(label="Update Security")
+        edit_menu.add_command(label="Update Security" , command=edit_employee)
         edit_menu.add_command(label="Update Employee", command=edit_person)
 
         statistic_menu = tk.Menu(my_menu)
