@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
+import os
 
 
 class FirstPage(tk.Frame):
@@ -371,7 +372,7 @@ class SecondPage(tk.Frame):
             orgs = org.find_all()
             i = 2
             c = 0
-            print(orgs[1])
+
             tk.Label(frame_content, text="#Id", padx=20).grid(row=1, column=0, pady=10)
             tk.Label(frame_content, text="Name", padx=20).grid(row=1, column=1, pady=10)
             tk.Label(frame_content, text='Woner', padx=20).grid(row=1, column=2)
@@ -488,6 +489,9 @@ class Application(tk.Tk):
         frame.tkraise()
 
 
-app = Application()
+app = Application(className="Hawk Eye")
+ico = Image.open('images/meterial/logo.png')
+photo = ImageTk.PhotoImage(ico)
+app.wm_iconphoto(False, photo)
 app.geometry("0x0")
 app.mainloop()
