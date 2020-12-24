@@ -164,7 +164,48 @@ class SecondPage(tk.Frame):
             tk.Button(frame_content, text="Load Image*").pack(pady=10)
             tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
 
-        # ==================== Statistic Menu Function========================
+        # ============================= Edit Menu  ============================
+
+        def edit_person():
+            hide_all_frame()
+            lb_emp_id = tk.Label(frame_content, text="Person Id")
+            lb_emp_id.pack()
+            ent_em_id = tk.Entry(frame_content, )
+            ent_em_id.pack()
+
+            def search_person():
+
+                person_id = ent_em_id.get()
+                person_db = AuthorizedDbHelper()
+                person = person_db.find_one(person_id)
+                print(person_id)
+                print(person)
+
+                if(person != None):
+
+                    lb_name = tk.Label(frame_content, text="Employee Name*")
+                    lb_name.pack()
+                    ent_name = tk.Entry(frame_content, textvariable="person.get_name()")
+                    ent_name.pack(pady=10)
+                    ent_name.insert(0, person.get_name())
+
+                    lb_org = tk.Label(frame_content,  text="Organization ID*")
+                    lb_org.pack()
+                    ent_org_id = tk.Entry(frame_content, text=person.get_organization())
+                    ent_org_id.pack(pady=10)
+                    ent_org_id.insert(0, person.get_organization())
+
+                    tk.Button(frame_content, text="Change Image*").pack(pady=10)
+                    tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+
+                else:
+                    messagebox.showerror("Not Found", "Employee not found")
+
+            src = tk.Button(frame_content, text="Search", command=search_person,  bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20,pady=20)
+
+
+
+        # ==================== Statistic Menu Function=========================
         # ============================== View Menu =============================
         def view_all_employee():
             hide_all_frame()
@@ -206,7 +247,6 @@ class SecondPage(tk.Frame):
 
             f1.pack(fill="both")
 
-
         def view_all_security():
             hide_all_frame()
             # add_title("All Security Person")
@@ -222,10 +262,11 @@ class SecondPage(tk.Frame):
                 l1.config(highlightbackground = "black", highlightcolor= "black")
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
-                load = Image.open("images/meterial/placeholder.png")
-                photo = ImageTk.PhotoImage(load)
-                bg = tk.Label(l1, image=photo, height=100, width=100)
-                bg.image = photo
+                file = 'images/meterial/placeholder.png'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
                 bg.pack()
 
                 name = tk.Label(l1, text=em.get_name())
@@ -284,7 +325,7 @@ class SecondPage(tk.Frame):
         edit_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="Edit", menu=edit_menu)
         edit_menu.add_command(label="Update Security")
-        edit_menu.add_command(label="Update Employee")
+        edit_menu.add_command(label="Update Employee", command=edit_person)
 
         statistic_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="Statistic", menu=statistic_menu)

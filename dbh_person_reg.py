@@ -26,11 +26,14 @@ class AuthorizedDbHelper:
         return auths
 
     def find_one(self, id):
-        self.cur.execute("select * from permitted")
-        query = "select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id and permitted.id = 1 "
-
-        for data in self.cur:
-            print(data)
+        self.cur.execute("select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id and permitted.id=%s", (id,))
+        data = self.cur.fetchone()
+        per =None
+        try:
+            per = Permitted(data[1], data[3], data[4], data[2],data[0])
+        except:
+            print("Error")
+        return per
 
     def find_all_details(self):
 
@@ -42,11 +45,21 @@ class AuthorizedDbHelper:
             auths.append(per)
         return auths
 
+    # def find_one_details(self, id):
+    #     query = "select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id where permitted.id=%s",(id,)
+    #     self.cur.execute(query)
+    #     data = self.cur.fetchone()
+    #     per = Permitted(data[1], data[3], data[4], data[2],data[0])
+    #     print(query)
+    #
+    #     return query
 
-# dbh= AuthorizedDbHelper()
+
+dbh= AuthorizedDbHelper()
 # per = Permitted("Zisan Khan", 'jisan', "", 4, 346)
 # dbh.save(per)
-# li = dbh.find_all_details()
+li = dbh.find_one(1)
+print(li)
 # # print(li)
 # # dbh.find_one(2)
 #
