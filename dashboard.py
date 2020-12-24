@@ -51,7 +51,7 @@ def auth_acc_wid():
         print("Loading Failed...")
 
 def all_auth_person_wid():
-    clearAll()
+
     click("Authorized Access")
     title = Label(contend, text="Authorized Person", font=MEDIAMFONT)
     title.grid(row=0, column=0, columnspan=4, pady=20)
@@ -76,7 +76,6 @@ def all_auth_person_wid():
 
 
 def org_wid():
-    clearAll()
     click("Organizations")
     title = Label(contend, text="All Organization", font=MEDIAMFONT)
     title.grid(row=0, column=0, columnspan=4, pady=20)

@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
 from dbh_emp import EmployeeDBHelper
+from dbh_organization import OrganizationDbHelper
 
 
 class FirstPage(tk.Frame):
@@ -162,6 +163,56 @@ class SecondPage(tk.Frame):
             tk.Button(frame_content, text="Load Image*").pack(pady=10)
             tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
 
+        # ==================== Statistic Menu Function========================
+        # ============================== View Menu =============================
+        def view_all_employee():
+            hide_all_frame()
+            add_title("All Registered Person")
+
+
+        def view_all_security():
+            hide_all_frame()
+            add_title("All Security Person")
+            emp = EmployeeDBHelper()
+            emps = emp.find_all()
+
+            x = 50
+            y=50
+
+            for em in emps:
+
+                box = tk.LabelFrame(frame_content, )
+
+                name = tk.Label(frame_content, text=em.get_name())
+                name.pack()
+                email = tk.Label(frame_content, text=em.get_email())
+                email.pack()
+
+        def view_all_org():
+            hide_all_frame()
+            # add_title("All Organization")
+
+            title = tk.Label(frame_content, text="All Organizations", font=("Arial", 20)).grid(row=0, column=2, columnspan=2, pady=10)
+
+            org = OrganizationDbHelper()
+            orgs = org.find_all()
+            i = 2
+            c = 0
+            print(orgs[1])
+            tk.Label(frame_content, text="#Id", padx=20).grid(row=1, column=0, pady=10)
+            tk.Label(frame_content, text="Name", padx=20).grid(row=1, column=1, pady=10)
+            tk.Label(frame_content, text='Woner', padx=20).grid(row=1, column=2)
+            tk.Label(frame_content, text='Address', padx=20).grid(row=1, column=3)
+            tk.Label(frame_content, text='Registration', padx=20).grid(row=1, column=4)
+
+            for org in orgs:
+                tk.Label(frame_content, text=org.get_id(), padx=20).grid(row=i, column=0, pady=10)
+                tk.Label(frame_content, text=org.get_name(), padx=20).grid(row=i, column=1, pady=10)
+                tk.Label(frame_content, text=org.get_woner(), padx=20).grid(row=i, column=2)
+                tk.Label(frame_content, text=org.get_address(), padx=20).grid(row=i, column=3)
+                tk.Label(frame_content, text=org.get_reg_time(), padx=20).grid(row=i, column=4)
+                i += 1
+
 
 
         my_menu = tk.Menu(self)
@@ -192,8 +243,9 @@ class SecondPage(tk.Frame):
 
         view_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="View", menu=view_menu)
-        view_menu.add_command(label="All Employee")
-        view_menu.add_command(label="All Security")
+        view_menu.add_command(label="All Employee", command=view_all_employee)
+        view_menu.add_command(label="All Security", command=view_all_security)
+        view_menu.add_command(label="All Organization", command=view_all_org)
 
 
 
@@ -210,6 +262,7 @@ class SecondPage(tk.Frame):
         #
         # new_person = tk.Frame(frame_content, width=500, height=500, bg="blue")
         # frame_new_employee = tk.Frame(frame_content, width=500, height=500, bg="green")
+
 
 
 class ThirdPage(tk.Frame):
