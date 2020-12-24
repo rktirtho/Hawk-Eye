@@ -12,6 +12,12 @@ class OrganizationDbHelper:
         )
         self.cur = self.conn.cursor()
 
+    def save(self, name, owner, address):
+        state = self.cur.execute("Insert into organizations(name, woner, address) values (%s,%s,%s)",(name,owner,address))
+        comstate = self.conn.commit()
+        print(state)
+        print(comstate)
+
     def find_all(self):
         my_list = list()
         self.cur.execute("select * from organizations")
@@ -28,6 +34,7 @@ class OrganizationDbHelper:
 
 
 # test = OrganizationDbHelper()
+# test.save("Walton", 5675, "8 Floor")
 # call = test.find_all()
 # for c in call:
 #     print(c)

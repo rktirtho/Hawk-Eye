@@ -174,15 +174,33 @@ class SecondPage(tk.Frame):
 
             lb_org = tk.Label(frame_content, text="Owner Name")
             lb_org.pack()
-            ent_org_id = tk.Entry(frame_content, )
-            ent_org_id.pack()
+            ent_owner = tk.Entry(frame_content, )
+            ent_owner.pack()
 
             lb_emp_id = tk.Label(frame_content, text="Address")
             lb_emp_id.pack()
-            ent_em_id = tk.Entry(frame_content, )
-            ent_em_id.pack()
+            ent_address = tk.Entry(frame_content, )
+            ent_address.pack()
 
-            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+            def save():
+                name= ent_name.get()
+                owner = ent_owner.get()
+                address = ent_address.get()
+                s="dfd"
+
+                if name == "" or owner == "" or address=="":
+                    messagebox.showerror("Required", "All Field required.")
+                else:
+                    org_db_helper = OrganizationDbHelper()
+                    org_db_helper.save(name, owner, address)
+                    ent_name.delete(0, "end")
+                    ent_address.delete(0, "end")
+                    ent_owner.delete(0, "end")
+                    messagebox.showinfo("Saved!!", "Information added")
+
+
+
+            tk.Button(frame_content, text="Save", command=save, bg="#0D1117", fg="#AFB5BB", width=20).pack(pady=20)
 
         # ============================= Edit Menu  ============================
 
