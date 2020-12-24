@@ -169,7 +169,40 @@ class SecondPage(tk.Frame):
         def view_all_employee():
             hide_all_frame()
             # add_title("All Security Person")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
 
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="black", highlightcolor="black")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                load = Image.open("images/meterial/bg.jpg")
+                photo = ImageTk.PhotoImage(load)
+                bg = tk.Label(l1, image=photo, height=100, width=100)
+                bg.image = photo
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_id())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y>5:
+                    x+=1
+                    y=0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
 
 
         def view_all_security():
