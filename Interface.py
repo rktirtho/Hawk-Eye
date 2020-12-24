@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
 from dbh_emp import EmployeeDBHelper
+from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 
 
@@ -167,26 +168,45 @@ class SecondPage(tk.Frame):
         # ============================== View Menu =============================
         def view_all_employee():
             hide_all_frame()
-            add_title("All Registered Person")
+            # add_title("All Security Person")
+
 
 
         def view_all_security():
             hide_all_frame()
-            add_title("All Security Person")
+            # add_title("All Security Person")
             emp = EmployeeDBHelper()
             emps = emp.find_all()
 
-            x = 50
-            y=50
+            x=1
+            y=0
 
+            f1 = tk.Frame(frame_content)
             for em in emps:
+                l1 = tk.Frame(f1, bg="ivory",highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground = "black", highlightcolor= "black")
+                l1.grid(row=x, column=y, padx=10, pady=20)
 
-                box = tk.LabelFrame(frame_content, )
+                load = Image.open("images/meterial/bg.jpg")
+                photo = ImageTk.PhotoImage(load)
+                bg = tk.Label(l1, image=photo, height=100, width=100)
+                bg.image = photo
+                bg.pack()
 
-                name = tk.Label(frame_content, text=em.get_name())
+                name = tk.Label(l1, text=em.get_name())
                 name.pack()
-                email = tk.Label(frame_content, text=em.get_email())
+                email = tk.Label(l1, text=em.get_email())
                 email.pack()
+                org = tk.Label(l1, text=em.get_org_id())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y+=1
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
 
         def view_all_org():
             hide_all_frame()
