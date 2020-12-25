@@ -1,11 +1,16 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
+from tkinter import filedialog
 from PIL import Image, ImageTk
 from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 import os
+from shutil import copyfile
+
+
+
 
 
 class FirstPage(tk.Frame):
@@ -105,6 +110,7 @@ class FirstPage(tk.Frame):
 
 
 class SecondPage(tk.Frame):
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
@@ -162,8 +168,19 @@ class SecondPage(tk.Frame):
             ent_org_id = tk.Entry(frame_content, )
             ent_org_id.pack()
 
-            tk.Button(frame_content, text="Load Image*").pack(pady=10)
-            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+
+
+            def brows_image():
+                img_loc = filedialog.askopenfilename(initialdir=os.getcwd(), title="Select Image", filetypes=(("JPG Files", "*.jpg"), ("PNG Files", "*.png")))
+                global image
+                image = img_loc
+
+            def save():
+                print("Global vari")
+                print(image)
+
+            tk.Button(frame_content, text="Browse Image*", command=brows_image).pack(pady=10)
+            tk.Button(frame_content, text="Save", command=save, bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
         def add_org_menu():
             hide_all_frame()
             add_title("New Organization")
@@ -424,13 +441,6 @@ class SecondPage(tk.Frame):
 
 
 
-        # Label = tk.Label(self, text="Dashboard" , font=("Ariel", 15))
-        # Label.place(x=350, y=20)
-        # Button = tk.Button(self, text="Next", command=lambda: controller.show_frame(ThirdPage))
-        # Button.place(x=650, y=450)
-        #
-        # Button_back = tk.Button(self, text="Back", command=lambda: controller.show_frame(FirstPage))
-        # Button_back.place(x=100, y=450)
 
         frame_content = tk.Frame(self)
         frame_content.pack(fill="both", expand=1, pady=50)
