@@ -3,6 +3,9 @@ from tkinter import messagebox
 from tkinter import ttk
 from tkinter import filedialog
 from PIL import Image, ImageTk
+
+from cl_permitted import Permitted
+
 from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
@@ -163,21 +166,46 @@ class SecondPage(tk.Frame):
             ent_name = tk.Entry(frame_content, )
             ent_name.pack()
 
-            lb_org = tk.Label(frame_content, text="Organization ID*")
+            lb_org = tk.Label(frame_content, text="Email*")
             lb_org.pack()
-            ent_org_id = tk.Entry(frame_content, )
-            ent_org_id.pack()
+            ent_email = tk.Entry(frame_content, )
+            ent_email.pack()
 
 
 
             def brows_image():
-                img_loc = filedialog.askopenfilename(initialdir=os.getcwd(), title="Select Image", filetypes=(("JPG Files", "*.jpg"), ("PNG Files", "*.png")))
-                global image
-                image = img_loc
+                img_loc = filedialog.askopenfilename(initialdir="/home/rktirtho/", title="Select Image", filetypes=(("JPG Files", "*.jpg"), ("PNG Files", "*.png")))
+
+                global image_file
+                image_file = img_loc
 
             def save():
-                print("Global vari")
-                print(image)
+                img = image_file
+
+                id = ent_em_id.get()
+                name = ent_name.get()
+                email = ent_email.get()
+
+                if id.strip() == "" or name.strip() == "" or email.strip() == "":
+                    messagebox.showwarning("All Field Required", "* Marked Field Required")
+                else:
+
+                    names = name.strip(" ")
+                    file_name = names[0]
+                    emp_db = EmployeeDBHelper()
+                    auth_db = AuthorizedDbHelper()
+                    emp_db.save(id, name, email)
+                    permitted = Permitted(name, str(id)+str(1)+file_name, "Hawk Eye", 1,id)
+                    auth_db.save(permitted)
+
+                    copyfile(img, os.path.join("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(id)+str(1)+file_name+".jpg"))
+                    copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(id)+str(1)+file_name+".jpg"))
+
+
+
+
+                # except:
+                #     messagebox.showwarning("All Field Required", "Image Required")
 
             tk.Button(frame_content, text="Browse Image*", command=brows_image).pack(pady=10)
             tk.Button(frame_content, text="Save", command=save, bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)

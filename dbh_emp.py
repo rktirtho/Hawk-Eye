@@ -20,11 +20,11 @@ class EmployeeDBHelper:
     #     return conn
     #
 
-    def save(self, employee):
+    def save(self, id, name, email):
         """ This function is for insert a security officer into database. parameter is employee type."""
         cur = self.conn.cursor()
-        query = "insert into security_officer (id, name, username, email, password, org_id) values (%s, %s, %s, %s, %s, %s)"
-        cur.execute(query, (employee.get_id(), employee.get_name(), employee.get_username(), employee.get_email(), employee.get_password(), employee.get_org_id()))
+        query = "insert into security_officer (id, name,  email,  org_id) values (%s, %s, %s, %s)"
+        cur.execute(query, (id, name,  email, 1))
         self.conn.commit()
 
     def update_account(self, id, username, password):
