@@ -27,7 +27,7 @@ class EmployeeDBHelper:
         cur.execute(query, (id, name,  email, 1))
         self.conn.commit()
 
-    def update_account(self, id, username, password):
+    def register(self, id, username, password):
         cur = self.conn.cursor()
         cur.execute("update security_officer set username=%s, password=%s where id = %s",(username,password,id))
         self.conn.commit()
