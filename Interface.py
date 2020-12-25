@@ -85,10 +85,20 @@ class FirstPage(tk.Frame):
             t5.place(x=200, y=210)
 
             def check():
+                id = t1.get()
+                email = t2.get()
+                username = t3.get()
+                password = t4.get()
                 if t1.get() != "" or t2.get() != "" or t3.get() != "" or t4.get() != "" or t5.get() !="":
                     if t4.get() == t5.get():
-                        messagebox.showinfo("Success", "Registration Success")
-                        window.destroy()
+                        emp_db = EmployeeDBHelper()
+                        is_found_emp=emp_db.find_by_email_and_pass(id,email)
+                        if len(is_found_emp)>0:
+                            emp_db.register(id, username, password)
+                            messagebox.showinfo("Success", "Registration Success")
+                            window.destroy()
+                        else:
+                            messagebox.showerror("User Not Found", "Email or User id does not exist")
                     else:
                         messagebox.showerror("Error", "Password and confirm password mismatch")
                 else:
@@ -507,7 +517,7 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(SecondPage)
+        self.show_frame(FirstPage)
 
     def show_frame(self, page):
         frame = self.frames[page]
