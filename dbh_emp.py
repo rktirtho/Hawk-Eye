@@ -29,9 +29,8 @@ class EmployeeDBHelper:
 
     def update_account(self, id, username, password):
         cur = self.conn.cursor()
-        cur.execute("show tables")
-        for tab in cur:
-            print(tab)
+        cur.execute("update security_officer set username=%s, password=%s where id = %s",(username,password,id))
+        self.conn.commit()
 
     def find_all(self):
         my_list = list()
@@ -44,7 +43,7 @@ class EmployeeDBHelper:
         return my_list
 
     def login(self, username, password):
-        self.cur.execute("select username from security_officer where username=%s and binary password=%s",(username,password))
+        self.cur.execute("select username from security_officer where username=%s and binary password=%s",(username,password,id))
 
         if self.cur.fetchone() is not None:
             return True
@@ -55,5 +54,5 @@ class EmployeeDBHelper:
 
 
 test = EmployeeDBHelper()
-em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
-print(test.login("shrahaMan", 'Qwert'))
+# em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
+test.update_account(1234,"lina","3455")
