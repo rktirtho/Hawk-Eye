@@ -142,8 +142,17 @@ class SecondPage(tk.Frame):
         def add_person_menu():
             permitted_location = []
 
+
             # def on_select(cb):
             #
+            org_db = OrganizationDbHelper()
+            orgs = org_db.find_all()
+            orgs_name = []
+            for ors in orgs:
+                orgs_name.append(str(ors.get_id())+" "+ors.get_name())
+
+            selected_org = tk.StringVar()
+            selected_org.set(orgs_name[0])
 
             hide_all_frame()
             add_title("Register Person")
@@ -159,7 +168,8 @@ class SecondPage(tk.Frame):
 
             lb_org = tk.Label(frame_content, text="Organization ID*")
             lb_org.pack()
-            ent_org_id = tk.Entry(frame_content, )
+            ent_org_id = tk.OptionMenu(frame_content, selected_org, *orgs_name)
+            ent_org_id.config(width=15, font=('Helvetica', 12))
             ent_org_id.pack()
 
             tk.Label(frame_content, text="Select Permitted Area", font=("Arial", 20)).pack(pady=20)
@@ -188,6 +198,12 @@ class SecondPage(tk.Frame):
                 if value != "":
                     permitted_location.append(value)
 
+            def brows_image():
+                img_loc = filedialog.askopenfilename(initialdir="/home/rktirtho/", title="Select Image", filetypes=(("JPG Files", "*.jpg"), ("PNG Files", "*.png")))
+
+                global image_file
+                image_file = img_loc
+
 
             def save():
                 check_permitted(floor1.get())
@@ -200,13 +216,34 @@ class SecondPage(tk.Frame):
                 check_permitted(floor8.get())
                 check_permitted(floor9.get())
                 print(permitted_location)
+                prossesing_org_id = selected_org.get().split(" ")
+
+                emp_id = ent_em_id.get()
+                emp_name = ent_name.get()
+                org_id = prossesing_org_id[0]
+                img = image_file
+
+                if emp_id.strip() == "" or emp_name.strip() == "" or org_id.strip() == "":
+                    messagebox.showwarning("All Field Required", "* Marked Field Required")
+                else:
+
+                    names = emp_name.strip(" ")
+                    file_name = names[0]
+                    auth_db = AuthorizedDbHelper()
+                    permitted = Permitted(emp_name, str(id)+str(1)+file_name, "Hawk Eye", int(org_id),emp_idid)
+                    auth_db.save(permitted)
+
+                    copyfile(img, os.path.join("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(id)+str(1)+file_name+".jpg"))
+                    copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(id)+str(1)+file_name+".jpg"))
+
+
 
                 permitted_location.clear()
 
 
 
 
-            tk.Button(frame_content, text="Load Image*").pack(pady=10)
+            tk.Button(frame_content, text="Load Image*", command=brows_image).pack(pady=10)
             tk.Button(frame_content, text="Save", command=save, bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
             # content_panel.add(frame_content)
 

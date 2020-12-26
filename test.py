@@ -1,13 +1,21 @@
 import tkinter as tk
 
+OptionList = [
+"Aries",
+"Taurus",
+"Gemini",
+"Cancer"
+]
+
 app = tk.Tk()
-app.geometry('150x100')
 
-chkValue = tk.BooleanVar()
-chkValue.set(True)
-print(chkValue.get())
+app.geometry('100x200')
 
-chkExample = tk.Checkbutton(app, text='Check Box', var=chkValue)
-chkExample.grid(column=0, row=0)
+variable = tk.StringVar(app)
+variable.set(OptionList[0])
+
+opt = tk.OptionMenu(app, variable, *OptionList)
+opt.config(width=90, font=('Helvetica', 12))
+opt.pack()
 
 app.mainloop()
