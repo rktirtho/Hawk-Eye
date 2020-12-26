@@ -63,11 +63,11 @@ class EmployeeDBHelper:
 
 
 
-test = EmployeeDBHelper()
-# em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
-t =test.find_by_email_and_pass(1234, "sima@gmail.com")
-if len(t)>0:
-    print("Do")
-    # print(t)
-else:
-    print("No")
+# test = EmployeeDBHelper()
+# # em = Employee("Shuvo Rahaman", "shrahaman", "shuvo@hawkeye.com", "qwert", 3, id=2456)
+# t =test.find_by_email_and_pass(1234, "sima@gmail.com")
+# if len(t)>0:
+#     print("Do")
+#     # print(t)
+# else:
+#     print("No")

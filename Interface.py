@@ -140,6 +140,7 @@ class SecondPage(tk.Frame):
             messagebox.showinfo("Service Not Available", "Settings will be added in commercial release")
 
         def add_person_menu():
+            permitted_location = []
 
             hide_all_frame()
             add_title("Register Person")
@@ -157,6 +158,20 @@ class SecondPage(tk.Frame):
             lb_org.pack()
             ent_org_id = tk.Entry(frame_content, )
             ent_org_id.pack()
+
+            tk.Label(frame_content, text="Select Permitted Area", font=("Arial", 20)).pack(pady=20)
+
+            tk.Checkbutton(frame_content, text="1st Floor").place(x=0, y=250)
+            tk.Checkbutton(frame_content, text="2nd Floor").place(x=100, y=250)
+            tk.Checkbutton(frame_content, text="3rd Floor").place(x=200, y=250)
+            tk.Checkbutton(frame_content, text="4th Floor").place(x=300, y=250)
+            tk.Checkbutton(frame_content, text="5th Floor").place(x=400, y=250)
+            tk.Checkbutton(frame_content, text="6th Floor").place(x=500, y=250)
+            tk.Checkbutton(frame_content, text="7th Floor").place(x=600, y=250)
+            tk.Checkbutton(frame_content, text="8th Floor").place(x=700, y=250)
+            tk.Checkbutton(frame_content, text="9th Floor").pack(pady=20)
+
+
 
             tk.Button(frame_content, text="Load Image*").pack(pady=10)
             tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
@@ -442,8 +457,7 @@ class SecondPage(tk.Frame):
                 tk.Label(frame_content, text=org.get_reg_time(), padx=20).grid(row=i, column=4)
                 i += 1
 
-
-
+        # if parent == SecondPage:
         my_menu = tk.Menu(self)
         controller.config(menu=my_menu)
         file_menu = tk.Menu(my_menu)
@@ -476,8 +490,6 @@ class SecondPage(tk.Frame):
         view_menu.add_command(label="All Employee", command=view_all_employee)
         view_menu.add_command(label="All Security", command=view_all_security)
         view_menu.add_command(label="All Organization", command=view_all_org)
-
-
 
 
         frame_content = tk.Frame(self)
@@ -517,7 +529,7 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(FirstPage)
+        self.show_frame(SecondPage)
 
     def show_frame(self, page):
         frame = self.frames[page]
