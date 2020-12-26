@@ -142,6 +142,9 @@ class SecondPage(tk.Frame):
         def add_person_menu():
             permitted_location = []
 
+            # def on_select(cb):
+            #
+
             hide_all_frame()
             add_title("Register Person")
             lb_emp_id = tk.Label(frame_content, text="Employee ID")
@@ -161,20 +164,50 @@ class SecondPage(tk.Frame):
 
             tk.Label(frame_content, text="Select Permitted Area", font=("Arial", 20)).pack(pady=20)
 
-            tk.Checkbutton(frame_content, text="1st Floor").place(x=0, y=250)
-            tk.Checkbutton(frame_content, text="2nd Floor").place(x=100, y=250)
-            tk.Checkbutton(frame_content, text="3rd Floor").place(x=200, y=250)
-            tk.Checkbutton(frame_content, text="4th Floor").place(x=300, y=250)
-            tk.Checkbutton(frame_content, text="5th Floor").place(x=400, y=250)
-            tk.Checkbutton(frame_content, text="6th Floor").place(x=500, y=250)
-            tk.Checkbutton(frame_content, text="7th Floor").place(x=600, y=250)
-            tk.Checkbutton(frame_content, text="8th Floor").place(x=700, y=250)
-            tk.Checkbutton(frame_content, text="9th Floor").pack(pady=20)
+            floor1 = tk.StringVar()
+            floor2 = tk.StringVar()
+            floor3 = tk.StringVar()
+            floor4 = tk.StringVar()
+            floor5 = tk.StringVar()
+            floor6 = tk.StringVar()
+            floor7 = tk.StringVar()
+            floor8 = tk.StringVar()
+            floor9 = tk.StringVar()
+
+            cb1 = tk.Checkbutton(frame_content, text="1st Floor",variable=floor1, onvalue="1st Floor", offvalue="").place(x=0, y=250)
+            cb2 = tk.Checkbutton(frame_content, text="2nd Floor",variable=floor2, onvalue="2st Floor", offvalue="").place(x=100, y=250)
+            cb3 = tk.Checkbutton(frame_content, text="3rd Floor",variable=floor3, onvalue="3st Floor", offvalue="").place(x=200, y=250)
+            cb4 = tk.Checkbutton(frame_content, text="4th Floor",variable=floor4, onvalue="4st Floor", offvalue="").place(x=300, y=250)
+            cb5 = tk.Checkbutton(frame_content, text="5th Floor",variable=floor5, onvalue="5st Floor", offvalue="").place(x=400, y=250)
+            cb6 = tk.Checkbutton(frame_content, text="6th Floor",variable=floor6, onvalue="6st Floor", offvalue="").place(x=500, y=250)
+            cb7 = tk.Checkbutton(frame_content, text="7th Floor",variable=floor7, onvalue="7st Floor", offvalue="").place(x=600, y=250)
+            cb8 = tk.Checkbutton(frame_content, text="8th Floor",variable=floor8, onvalue="8st Floor", offvalue="").place(x=700, y=250)
+            cb9 = tk.Checkbutton(frame_content, text="9th Floor",variable=floor9, onvalue="9st Floor", offvalue="").pack(pady=20)
+
+            def check_permitted(value):
+                if value != "":
+                    permitted_location.append(value)
+
+
+            def save():
+                check_permitted(floor1.get())
+                check_permitted(floor2.get())
+                check_permitted(floor3.get())
+                check_permitted(floor4.get())
+                check_permitted(floor5.get())
+                check_permitted(floor6.get())
+                check_permitted(floor7.get())
+                check_permitted(floor8.get())
+                check_permitted(floor9.get())
+                print(permitted_location)
+
+                permitted_location.clear()
+
 
 
 
             tk.Button(frame_content, text="Load Image*").pack(pady=10)
-            tk.Button(frame_content, text="Save", bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
+            tk.Button(frame_content, text="Save", command=save, bg="#0D1117", fg="#AFB5BB", width=20).pack(padx=20)
             # content_panel.add(frame_content)
 
         def add_employee_menu():

@@ -1,4 +1,13 @@
+import tkinter as tk
 
-id=1
-file_name ="rejaul"
-print("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(id)+str(1)+file_name,".jpg")
+app = tk.Tk()
+app.geometry('150x100')
+
+chkValue = tk.BooleanVar()
+chkValue.set(True)
+print(chkValue.get())
+
+chkExample = tk.Checkbutton(app, text='Check Box', var=chkValue)
+chkExample.grid(column=0, row=0)
+
+app.mainloop()
