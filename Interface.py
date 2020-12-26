@@ -5,10 +5,13 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 
 from cl_permitted import Permitted
+from cl_permit_area import PermitArea
+
 
 from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
+from dbh_permit_area import PermitAreaDbHelper
 import os
 from shutil import copyfile
 
@@ -230,15 +233,17 @@ class SecondPage(tk.Frame):
                     names = emp_name.strip(" ")
                     file_name = names[0]
                     auth_db = AuthorizedDbHelper()
-                    permitted = Permitted(emp_name, str(id)+str(1)+file_name, "Hawk Eye", int(org_id),emp_idid)
+                    permitted = Permitted(emp_name, str(emp_id)+str(org_id)+file_name, "Hawk Eye", int(org_id),emp_id)
                     auth_db.save(permitted)
 
-                    copyfile(img, os.path.join("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(id)+str(1)+file_name+".jpg"))
-                    copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(id)+str(1)+file_name+".jpg"))
+                    copyfile(img, os.path.join("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(emp_id)+str(org_id)+file_name+".jpg"))
+                    copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(emp_id)+str(org_id)+file_name+".jpg"))
+                    permit_area_dbh = PermitAreaDbHelper()
 
+                    for area in permitted_location:
+                        permit_area_dbh.add(emp_id, area)
 
-
-                permitted_location.clear()
+                    permitted_location.clear()
 
 
 

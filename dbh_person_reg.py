@@ -14,6 +14,11 @@ class AuthorizedDbHelper:
 
     def save(self, permitted):
         cur = self.conn.cursor()
+        print(permitted.get_name())
+        print(permitted.get_id())
+        print(permitted.get_image)
+        print(permitted.get_org_id())
+        # print(permitted.get)
         query = "insert into permitted(id, name, org_id, image_id) values (%s, %s, %s, %s)"
         cur.execute(query, (permitted.get_id(), permitted.get_name(), permitted.get_org_id(), permitted.get_image()))
         self.conn.commit()
