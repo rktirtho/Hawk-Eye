@@ -130,6 +130,8 @@ class SecondPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        org_db = OrganizationDbHelper()
+
         def add_title(text):
             Title = tk.Label(frame_content, text=text, font=("Arial", 15), pady=15)
             Title.pack()
@@ -631,6 +633,7 @@ class SecondPage(tk.Frame):
             f1.pack(fill="both")
 
         def show_statistics():
+
             hide_all_frame()
             f1 = tk.Frame(frame_content)
             x = 1

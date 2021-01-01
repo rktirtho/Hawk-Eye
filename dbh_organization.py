@@ -27,12 +27,15 @@ class OrganizationDbHelper:
         return my_list
 
     def find_one(self, id):
-        self.cur.execute("select * from organizations where id= %s", (id,));
+        self.cur.execute("select * from organizations where id= %s", (id,))
         data = self.cur.fetchone()
         org = Organization(data[1], data[2], data[3], data[0], data[4])
         return org
 
-    # def count_organizaton(self):
+    def count_organizaton(self):
+        self.cur.execute("select count(id) from organizations")
+        data = self.cur.fetchone()
+        return data
 
 
 
