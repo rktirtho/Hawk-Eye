@@ -132,6 +132,8 @@ class SecondPage(tk.Frame):
 
         org_db = OrganizationDbHelper()
         per_db = AuthorizedDbHelper()
+        sec_db = EmployeeDBHelper()
+
 
         def add_title(text):
             Title = tk.Label(frame_content, text=text, font=("Arial", 15), pady=15)
@@ -659,12 +661,13 @@ class SecondPage(tk.Frame):
                     count = per_db.count_registered_employee()
                     name = tk.Label(l1, text="Registered Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="755444", bg="ivory", font=("ariel", 15, "bold"))
+                    email = tk.Label(l1, text=str(count[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 3:
-                    name = tk.Label(l1, text="Person Inside", width=30, bg="ivory", fg="red",
+                    count = sec_db.count_security()
+                    name = tk.Label(l1, text="Security Person", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="7514", bg="ivory", font=("ariel", 15, "bold"))
+                    email = tk.Label(l1, text=str(count[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 4:
                     name = tk.Label(l1, text="Organizations", width=30, bg="ivory", fg="red",

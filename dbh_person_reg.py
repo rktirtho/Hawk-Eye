@@ -65,6 +65,8 @@ class AuthorizedDbHelper:
         return data
 
 
+
+
 dbh= AuthorizedDbHelper()
 # per = Permitted("Zisan Khan", 'jisan', "", 4, 346)
 # dbh.save(per)

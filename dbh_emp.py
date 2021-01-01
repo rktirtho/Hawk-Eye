@@ -60,6 +60,11 @@ class EmployeeDBHelper:
         else:
             return False
 
+    def count_security(self):
+        self.cur.execute("select count(id) from security_officer")
+        data = self.cur.fetchone()
+        return data
+
 
 
 
