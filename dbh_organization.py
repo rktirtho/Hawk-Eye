@@ -32,6 +32,10 @@ class OrganizationDbHelper:
         org = Organization(data[1], data[2], data[3], data[0], data[4])
         return org
 
+    # def count_organizaton(self):
+
+
+
 
 # test = OrganizationDbHelper()
 # test.save("Walton", 5675, "8 Floor")

@@ -429,6 +429,246 @@ class SecondPage(tk.Frame):
 
 
         # ==================== Statistic Menu Function=========================
+
+        def today_info():
+            hide_all_frame()
+            add_title("Today")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def yesterday_info():
+            hide_all_frame()
+            add_title("Yesterday")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def all_info():
+            hide_all_frame()
+            add_title("All Info")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def auth_access():
+            hide_all_frame()
+            add_title("Authorized Access")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def unauth_access():
+            hide_all_frame()
+            add_title("Unauthorized Access")
+            per = AuthorizedDbHelper()
+            persons = per.find_all_details()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def show_statistics():
+            hide_all_frame()
+            f1 = tk.Frame(frame_content)
+            x = 1
+            y = 0
+            for i in range(5):
+
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=800, height=400, relief="raised")
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee", width=800)
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                if i == 0:
+                    name = tk.Label(l1, text="Number of Total visitors", width=30, bg="ivory", fg="red",
+                                    font=("ariel", 10, "bold"))
+                elif i == 1:
+                    name = tk.Label(l1, text="Number of Total Employee", width=30, bg="ivory", fg="red",
+                                    font=("ariel", 10, "bold"))
+                elif i == 2:
+                    name = tk.Label(l1, text="Total Registered Person", width=30, bg="ivory", fg="red",
+                                    font=("ariel", 10, "bold"))
+                elif i == 3:
+                    name = tk.Label(l1, text="Number of Total Person", width=30, bg="ivory", fg="red",
+                                    font=("ariel", 10, "bold"))
+                elif i == 4:
+                    name = tk.Label(l1, text="Number of Total Total Person", width=30, bg="ivory", fg="red",
+                                    font=("ariel", 10, "bold"))
+
+                name.pack()
+                email = tk.Label(l1, text="4153", bg="ivory", font=("ariel", 15, "bold"))
+                email.pack(pady=30)
+                org = tk.Label(l1, text="Option")
+
+                y += 1
+                if y > 2:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
         # ============================== View Menu =============================
         def view_all_employee():
             hide_all_frame()
@@ -550,15 +790,17 @@ class SecondPage(tk.Frame):
         edit_menu.add_command(label="Update Security" , command=edit_employee)
         edit_menu.add_command(label="Update Employee", command=edit_person)
 
+
         statistic_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="Statistic", menu=statistic_menu)
-        statistic_menu.add_command(label="Today")
-        statistic_menu.add_command(label="Yesterday")
+        statistic_menu.add_command(label="Today", command=today_info)
+        statistic_menu.add_command(label="Yesterday",command=yesterday_info)
         statistic_menu.add_separator()
-        statistic_menu.add_command(label="Unknown Person")
+        statistic_menu.add_command(label="Unknown Person", command=all_info)
         statistic_menu.add_separator()
-        statistic_menu.add_command(label="Authorized Access")
-        statistic_menu.add_command(label="Unauthorized Access")
+        statistic_menu.add_command(label="Authorized Access",command=auth_access)
+        statistic_menu.add_command(label="Unauthorized Access", command = unauth_access)
+        statistic_menu.add_command(label="Statistics", command = show_statistics)
 
         view_menu = tk.Menu(my_menu)
         my_menu.add_cascade(label="View", menu=view_menu)
@@ -569,6 +811,10 @@ class SecondPage(tk.Frame):
 
         frame_content = tk.Frame(self)
         frame_content.pack(fill="both", expand=1, pady=50)
+
+        show_statistics()
+
+
         #
         # new_person = tk.Frame(frame_content, width=500, height=500, bg="blue")
         # frame_new_employee = tk.Frame(frame_content, width=500, height=500, bg="green")
