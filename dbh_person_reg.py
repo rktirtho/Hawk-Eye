@@ -59,6 +59,11 @@ class AuthorizedDbHelper:
     #
     #     return query
 
+    def count_registered_employee(self):
+        self.cur.execute("select count(id) from permitted")
+        data = self.cur.fetchone()
+        return data
+
 
 dbh= AuthorizedDbHelper()
 # per = Permitted("Zisan Khan", 'jisan', "", 4, 346)

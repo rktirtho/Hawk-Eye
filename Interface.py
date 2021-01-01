@@ -131,6 +131,7 @@ class SecondPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         org_db = OrganizationDbHelper()
+        per_db = AuthorizedDbHelper()
 
         def add_title(text):
             Title = tk.Label(frame_content, text=text, font=("Arial", 15), pady=15)
@@ -645,24 +646,35 @@ class SecondPage(tk.Frame):
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
                 if i == 0:
-                    name = tk.Label(l1, text="Number of Total visitors", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Visitors", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+                    email = tk.Label(l1, text="445", bg="ivory", font=("ariel", 15, "bold"))
+                    email.pack(pady=30)
                 elif i == 1:
-                    name = tk.Label(l1, text="Number of Total Employee", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+                    email = tk.Label(l1, text="744", bg="ivory", font=("ariel", 15, "bold"))
+                    email.pack(pady=30)
                 elif i == 2:
-                    name = tk.Label(l1, text="Total Registered Person", width=30, bg="ivory", fg="red",
+                    count = per_db.count_registered_employee()
+                    name = tk.Label(l1, text="Registered Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+                    email = tk.Label(l1, text="755444", bg="ivory", font=("ariel", 15, "bold"))
+                    email.pack(pady=30)
                 elif i == 3:
-                    name = tk.Label(l1, text="Number of Total Person", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Person Inside", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+                    email = tk.Label(l1, text="7514", bg="ivory", font=("ariel", 15, "bold"))
+                    email.pack(pady=30)
                 elif i == 4:
-                    name = tk.Label(l1, text="Number of Total Total Person", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Organizations", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+                    number_of_org = org_db.count_organizaton()
+                    email = tk.Label(l1, text=str(number_of_org[0]), bg="ivory", font=("ariel", 15, "bold"))
+                    email.pack(pady=30)
 
                 name.pack()
-                email = tk.Label(l1, text="4153", bg="ivory", font=("ariel", 15, "bold"))
-                email.pack(pady=30)
+
                 org = tk.Label(l1, text="Option")
 
                 y += 1
