@@ -57,6 +57,17 @@ class MonitoringDbHelper:
             values.append(per.get_name())
         return values
 
+    def get_unauth_access(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute(
+            "select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=0")
+        for data in cur:
+            per = Access(data[0], data[1], data[2], data[3], data[4])
+            values.append(per.get_name())
+        return values
+
 
 
 
