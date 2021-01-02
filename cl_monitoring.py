@@ -37,4 +37,15 @@ class Monitoring:
     def set_time(self, time):
         self.time = time
 
+class Access:
+    def __init__(self, id, name, org_id, image_id, time):
+        self.id = id
+        self.name = name
+        self.org_id = org_id
+        self.image_id = image_id
+        self.time = time
+
+
+
+
 

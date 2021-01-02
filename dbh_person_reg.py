@@ -50,6 +50,14 @@ class AuthorizedDbHelper:
             auths.append(per)
         return auths
 
+    def get_auth_access(self):
+        values = list()
+        self.cur.execute("select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=1")
+        for data in self.cur.executemany():
+            per = Permitted(data[1], data[3], data[4], data[2],data[0])
+            values.append(per)
+        return values
+
     # def find_one_details(self, id):
     #     query = "select permitted.id, permitted.name, permitted.org_id, permitted.image_id, organizations.name, permitted.regestered_time from permitted join organizations on permitted.org_id = organizations.id where permitted.id=%s",(id,)
     #     self.cur.execute(query)

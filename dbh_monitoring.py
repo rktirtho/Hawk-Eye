@@ -19,7 +19,7 @@ class MonitoringDbHelper:
     def add(self, person_id, area, isPermitted):
         conn = self.get_conn()
         cur = conn.cursor()
-        query = "insert into monitoring ( person_id, area, isPermitted) values (%s, %s, %s)"
+        query = "insert into monitoring ( person_id, area, is_permitted) values (%s, %s, %s)"
         cur.execute(query, (person_id, area, isPermitted))
         conn.commit()
         conn.close()
@@ -50,11 +50,10 @@ class MonitoringDbHelper:
 
 m = MonitoringDbHelper()
 
-all = m.get_all()
+m.add(3001, "1st Floor", 1)
+m.add(3001, "3nd Floor", 1)
+m.add(3001, "7th Floor", 0)
 
-print(all[1].get_id())
-print(all[1].get_person_id())
-print(all[1].get_area())
-print(all[1].is_permit())
-print(all[1].get_time())
+
+
 
