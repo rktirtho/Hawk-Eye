@@ -45,6 +45,36 @@ class Access:
         self.image_id = image_id
         self.time = time
 
+    def get_id(self):
+        return self.id
+
+    def set_id(self, id):
+        self.id = id
+
+    def get_name(self):
+        return self.name
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_org_id(self):
+        return self.org_id
+
+    def set_org_id(self, org_id):
+        self.org_id =org_id
+
+    def get_image_id(self):
+        return self.image_id
+
+    def set_(self, image_id):
+        self.image_id =image_id
+
+    def get_time(self):
+        return self.time
+
+    def set_(self, time):
+        self.time = time
+
 
 
 
