@@ -1,6 +1,7 @@
 import mysql
 from mysql.connector import (connection)
 from cl_monitoring import Monitoring
+from cl_monitoring import Access
 
 class MonitoringDbHelper:
     def __init__(self):
@@ -46,13 +47,25 @@ class MonitoringDbHelper:
         return data
 
 
+    def get_auth_access(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=1")
+        for data in cur:
+            per = Access(data[0], data[1], data[2], data[3],data[4])
+            values.append(per.get_name())
+        return values
+
+
+
 
 
 m = MonitoringDbHelper()
 
-m.add(3001, "1st Floor", 1)
-m.add(3001, "3nd Floor", 1)
-m.add(3001, "7th Floor", 0)
+values = m.get_auth_access()
+for i in values:
+    print(i)
 
 
 
