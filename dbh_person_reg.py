@@ -69,11 +69,11 @@ class AuthorizedDbHelper:
 
 
 
-dbh= AuthorizedDbHelper()
+# dbh= AuthorizedDbHelper()
 # per = Permitted("Zisan Khan", 'jisan', "", 4, 346)
 # dbh.save(per)
-li = dbh.find_one(1)
-print(li)
+# li = dbh.find_one(4001)
+# print(li.get_name())
 # # print(li)
 # # dbh.find_one(2)
 #

@@ -2,6 +2,7 @@ import mysql
 from mysql.connector import (connection)
 from cl_monitoring import Monitoring
 from cl_monitoring import Access
+from dbh_person_reg import AuthorizedDbHelper
 
 class MonitoringDbHelper:
     def __init__(self):
@@ -54,7 +55,7 @@ class MonitoringDbHelper:
         cur.execute("select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=1")
         for data in cur:
             per = Access(data[0], data[1], data[2], data[3],data[4])
-            values.append(per.get_name())
+            values.append(per)
         return values
 
     def get_unauth_access(self):
@@ -65,8 +66,44 @@ class MonitoringDbHelper:
             "select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=0")
         for data in cur:
             per = Access(data[0], data[1], data[2], data[3], data[4])
-            values.append(per.get_name())
+            values.append(per)
         return values
+
+    # def get_today(self):
+    #     values = list()
+    #     conn = self.get_conn()
+    #     cur = conn.cursor()
+    #     cur.execute(
+    #         "select DISTINCT permitted.id, permitted.name, permitted.org_id, permitted.image_id,  permitted.regestered_time ,monitoring.is_permitted from permitted inner join monitoring on permitted.id = monitoring.person_id and monitoring.is_permitted=0  and DATE(`time`) = CURDATE()")
+    #     for data in cur:
+    #         per = Access(data[0], data[1], data[2], data[3], data[4])
+    #         values.append(per)
+    #     return values
+
+    def get_yesterday(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT distinct person_id FROM monitoring where DATE(`time`) = CURDATE()-1")
+        print(cur)
+        for id in cur:
+            auth_db = AuthorizedDbHelper()
+            person = auth_db.find_one(id[0])
+            values.append(person)
+        return values
+
+    def get_today(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT distinct person_id FROM monitoring where DATE(`time`) = CURDATE()")
+        print(cur)
+        for id in cur:
+            auth_db = AuthorizedDbHelper()
+            person = auth_db.find_one(id[0])
+            values.append(person)
+        return values
+
 
 
 
@@ -74,9 +111,9 @@ class MonitoringDbHelper:
 
 m = MonitoringDbHelper()
 
-values = m.get_auth_access()
+values = m.get_yesterday()
 for i in values:
-    print(i)
+    print(i.get_name())
 
 
 

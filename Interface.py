@@ -137,6 +137,7 @@ class SecondPage(tk.Frame):
         org_db = OrganizationDbHelper()
         per_db = AuthorizedDbHelper()
         sec_db = EmployeeDBHelper()
+        monitoring_dbh = MonitoringDbHelper()
 
 
         def add_title(text):
@@ -442,13 +443,16 @@ class SecondPage(tk.Frame):
         def today_info():
             hide_all_frame()
             add_title("Today")
-            per = AuthorizedDbHelper()
-            persons = per.find_all_details()
+            persons = monitoring_dbh.get_today()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
+            if len(persons) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
+
             for person in persons:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
@@ -482,8 +486,7 @@ class SecondPage(tk.Frame):
         def yesterday_info():
             hide_all_frame()
             add_title("Yesterday")
-            per = AuthorizedDbHelper()
-            persons = per.find_all_details()
+            persons = monitoring_dbh.get_yesterday()
 
             x = 1
             y = 0
@@ -522,32 +525,32 @@ class SecondPage(tk.Frame):
         def all_info():
             hide_all_frame()
             add_title("All Info")
-            per = AuthorizedDbHelper()
-            access = per.find_all_details()
+            access = monitoring_dbh.get_unauth_access()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
-            for person in persons:
+            for acc in access:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
-                file = 'images/auth/' + person.get_image() + '.jpg'
+                file = 'images/auth/' + acc.get_image_id() + '.jpg'
                 image = Image.open(file)
                 img = ImageTk.PhotoImage(image.resize((100, 100)))
 
                 bg = tk.Label(l1, image=img, height=100, width=100)
                 bg.image = img
                 bg.pack()
+                org = org_db.find_one(acc.get_org_id())
 
-                name = tk.Label(l1, text=person.get_name())
+                name = tk.Label(l1, text=acc.get_name())
                 name.pack()
-                email = tk.Label(l1, text=person.get_image())
+                email = tk.Label(l1, text=org.get_name())
                 email.pack()
-                org = tk.Label(l1, text=person.get_organization())
-                org.pack()
+                # org = tk.Label(l1, text=person.get_organization())
+                # org.pack()
                 btn = tk.Button(l1, text="View", bg="green")
                 btn.pack()
 
