@@ -5,13 +5,17 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 
 from cl_permitted import Permitted
+from cl_monitoring import Monitoring, Access
 from cl_permit_area import PermitArea
+
+
 
 
 from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper
+from dbh_monitoring import MonitoringDbHelper
 import os
 from shutil import copyfile
 
@@ -519,7 +523,7 @@ class SecondPage(tk.Frame):
             hide_all_frame()
             add_title("All Info")
             per = AuthorizedDbHelper()
-            persons = per.find_all_details()
+            access = per.find_all_details()
 
             x = 1
             y = 0
