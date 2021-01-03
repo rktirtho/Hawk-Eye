@@ -58,6 +58,8 @@ class MonitoringDbHelper:
             values.append(per)
         return values
 
+
+
     def get_unauth_access(self):
         values = list()
         conn = self.get_conn()
@@ -97,6 +99,18 @@ class MonitoringDbHelper:
         conn = self.get_conn()
         cur = conn.cursor()
         cur.execute("SELECT distinct person_id FROM monitoring where DATE(`time`) = CURDATE()")
+        print(cur)
+        for id in cur:
+            auth_db = AuthorizedDbHelper()
+            person = auth_db.find_one(id[0])
+            values.append(person)
+        return values
+
+    def get_all(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT distinct person_id FROM monitoring")
         print(cur)
         for id in cur:
             auth_db = AuthorizedDbHelper()

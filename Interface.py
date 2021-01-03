@@ -525,7 +525,48 @@ class SecondPage(tk.Frame):
         def all_info():
             hide_all_frame()
             add_title("All Info")
-            access = monitoring_dbh.get_unauth_access()
+            persons = monitoring_dbh.get_all()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for person in persons:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + person.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=person.get_name())
+                name.pack()
+                email = tk.Label(l1, text=person.get_image())
+                email.pack()
+                org = tk.Label(l1, text=person.get_organization())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green")
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
+        def auth_access():
+            hide_all_frame()
+            add_title("Authorized Access")
+            hide_all_frame()
+            add_title("All Info")
+            access = monitoring_dbh.get_auth_access()
 
             x = 1
             y = 0
@@ -562,75 +603,37 @@ class SecondPage(tk.Frame):
 
             f1.pack(fill="both")
 
-        def auth_access():
-            hide_all_frame()
-            add_title("Authorized Access")
-            per = AuthorizedDbHelper()
-            persons = per.find_all_details()
-
-            x = 1
-            y = 0
-
-            f1 = tk.Frame(frame_content)
-            for person in persons:
-                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
-                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
-                l1.grid(row=x, column=y, padx=10, pady=20)
-
-                file = 'images/auth/' + person.get_image() + '.jpg'
-                image = Image.open(file)
-                img = ImageTk.PhotoImage(image.resize((100, 100)))
-
-                bg = tk.Label(l1, image=img, height=100, width=100)
-                bg.image = img
-                bg.pack()
-
-                name = tk.Label(l1, text=person.get_name())
-                name.pack()
-                email = tk.Label(l1, text=person.get_image())
-                email.pack()
-                org = tk.Label(l1, text=person.get_organization())
-                org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
-                btn.pack()
-
-                y += 1
-                if y > 5:
-                    x += 1
-                    y = 0
-                f1.grid_columnconfigure(y, weight=1)
-
-            f1.pack(fill="both")
-
         def unauth_access():
             hide_all_frame()
             add_title("Unauthorized Access")
-            per = AuthorizedDbHelper()
-            persons = per.find_all_details()
+            hide_all_frame()
+            add_title("All Info")
+            access = monitoring_dbh.get_unauth_access()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
-            for person in persons:
+            for acc in access:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
-                file = 'images/auth/' + person.get_image() + '.jpg'
+                file = 'images/auth/' + acc.get_image_id() + '.jpg'
                 image = Image.open(file)
                 img = ImageTk.PhotoImage(image.resize((100, 100)))
 
                 bg = tk.Label(l1, image=img, height=100, width=100)
                 bg.image = img
                 bg.pack()
+                org = org_db.find_one(acc.get_org_id())
 
-                name = tk.Label(l1, text=person.get_name())
+                name = tk.Label(l1, text=acc.get_name())
                 name.pack()
-                email = tk.Label(l1, text=person.get_image())
+                email = tk.Label(l1, text=org.get_name())
                 email.pack()
-                org = tk.Label(l1, text=person.get_organization())
-                org.pack()
+                # org = tk.Label(l1, text=person.get_organization())
+                # org.pack()
                 btn = tk.Button(l1, text="View", bg="green")
                 btn.pack()
 
