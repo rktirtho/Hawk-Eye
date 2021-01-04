@@ -118,16 +118,25 @@ class MonitoringDbHelper:
             values.append(person)
         return values
 
+    def get_access_by_id(self, id):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from monitoring where person_id=%s order by time desc;", (id,))
+        print(cur)
+        for id in cur:
+            mon = Monitoring(id[0],id[1],id[3],id[4], id[2])
+            values.append(mon)
+        return values
 
 
 
 
-
-m = MonitoringDbHelper()
-
-values = m.get_yesterday()
-for i in values:
-    print(i.get_name())
+# m = MonitoringDbHelper()
+#
+# values = m.get_access_by_id(4001)
+# for i in values:
+#     print(i.get_time())
 
 
 
