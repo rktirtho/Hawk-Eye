@@ -540,14 +540,74 @@ class SecondPage(tk.Frame):
                     tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
                 else:
                     tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
-
-
-                count+=1
+                count += 1
 
             root.minsize(500,400)
-
-
             root.mainloop()
+
+        def show_auth_info(name, id):
+            root = tk.Tk(className="Hawk Eye")
+            root.title(name)
+
+            moves = monitoring_dbh.get_unauth_access_by_id(id)
+            tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
+            tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
+            tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
+            count =3
+            for move in moves:
+                name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
+                name1 = tk.Label(root, text=move.get_time(), font=("Ariel", 12)).grid(row=count, column=1, pady=5)
+                if move.is_permit() ==1:
+                    tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                else:
+                    tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                count += 1
+
+            root.minsize(500,400)
+            root.mainloop()
+
+        def show_unauth_info(name, id):
+            root = tk.Tk(className="Hawk Eye")
+            root.title(name)
+
+            moves = monitoring_dbh.get_unauth_access_by_id(id)
+            tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
+            tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
+            tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
+            count =3
+            for move in moves:
+                name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
+                name1 = tk.Label(root, text=move.get_time(), font=("Ariel", 12)).grid(row=count, column=1, pady=5)
+                if move.is_permit() ==1:
+                    tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                else:
+                    tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                count += 1
+
+            root.minsize(500,400)
+            root.mainloop()
+
+        def show_info(name, id):
+            root = tk.Tk(className="Hawk Eye")
+            root.title(name)
+
+            moves = monitoring_dbh.get_access_by_id(id)
+            tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
+            tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
+            tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
+            count =3
+            for move in moves:
+                name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
+                name1 = tk.Label(root, text=move.get_time(), font=("Ariel", 12)).grid(row=count, column=1, pady=5)
+                if move.is_permit() ==1:
+                    tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                else:
+                    tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                count += 1
+
+            root.minsize(500,400)
+            root.mainloop()
+
 
         def all_info():
             hide_all_frame()
@@ -617,7 +677,7 @@ class SecondPage(tk.Frame):
                 email.pack()
                 # org = tk.Label(l1, text=person.get_organization())
                 # org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
+                btn = tk.Button(l1, text="View", bg="green", command=partial(show_auth_info, acc.get_name(), acc.get_id()))
                 btn.pack()
 
                 y += 1
@@ -659,7 +719,7 @@ class SecondPage(tk.Frame):
                 email.pack()
                 # org = tk.Label(l1, text=person.get_organization())
                 # org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
+                btn = tk.Button(l1, text="View", bg="green",command=partial(show_unauth_info, acc.get_name(), acc.get_id()))
                 btn.pack()
 
                 y += 1
@@ -746,13 +806,13 @@ class SecondPage(tk.Frame):
                 bg.image = img
                 bg.pack()
 
-                name = tk.Label(l1, text=person.get_name())
+                name = tk.Label(l1, text=person.get_name(),bg="ivory")
                 name.pack()
-                email = tk.Label(l1, text=person.get_image())
-                email.pack()
-                org = tk.Label(l1, text=person.get_organization())
+                # email = tk.Label(l1, text=person.get_image(),bg="ivory")
+                # email.pack()
+                org = tk.Label(l1, text=person.get_organization(),bg="ivory")
                 org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
+                btn = tk.Button(l1, text="View", bg="green", fg="white", command=partial(show_info,person.get_name(), person.get_id()))
                 btn.pack()
 
                 y += 1
