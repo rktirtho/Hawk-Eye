@@ -8,6 +8,7 @@ import numpy as np
 import pyttsx3
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
+from dbh_permit_area import PermitAreaDbHelper, PermitArea
 
 from threading import Thread
 
@@ -70,6 +71,7 @@ encodeListKnown = findEncodings(images)
 print('Encoding complete. Number of Register face:', len(encodeListKnown))
 
 cap = cv2.VideoCapture(0)
+dbh_per = PermitAreaDbHelper()
 
 while True:
     success, img = cap.read()
@@ -95,6 +97,9 @@ while True:
 
             for data in auth_users:
                 if name in data.get_image():
+
+                    area = dbh_per.get_conn()
+
                     # info = org_db_helper.find_one(data[0])
                     # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), (0, 255, 0), cv2.FILLED)
                     # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), cv2.FILLED)
@@ -120,12 +125,12 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
             cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-            try:
-                th = Thread(target=speak("Unknown Person Detected"))
-                th.start()
-
-            except:
-                print("Error")
+            # try:
+            #     th = Thread(target=speak("Unknown Person Detected"))
+            #     th.start()
+            #
+            # except:
+            #     print("Error")
 
     cv2.imshow('Webcam', img)
     cv2.waitKey(1)

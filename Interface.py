@@ -549,7 +549,7 @@ class SecondPage(tk.Frame):
             root = tk.Tk(className="Hawk Eye")
             root.title(name)
 
-            moves = monitoring_dbh.get_unauth_access_by_id(id)
+            moves = monitoring_dbh.get_auth_access_by_id(id)
             tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
             tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
             tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
@@ -731,7 +731,6 @@ class SecondPage(tk.Frame):
             f1.pack(fill="both")
 
         def show_statistics():
-
             hide_all_frame()
             f1 = tk.Frame(frame_content)
             x = 1
@@ -743,18 +742,18 @@ class SecondPage(tk.Frame):
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
                 if i == 0:
-                    name = tk.Label(l1, text="Visitors", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Today's Visitors", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="445", bg="ivory", font=("ariel", 15, "bold"))
+                    email = tk.Label(l1, text="45", bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 1:
-                    name = tk.Label(l1, text="Employee", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Today's Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="744", bg="ivory", font=("ariel", 15, "bold"))
+                    email = tk.Label(l1, text="4", bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 2:
                     count = per_db.count_registered_employee()
-                    name = tk.Label(l1, text="Registered Employee", width=30, bg="ivory", fg="red",
+                    name = tk.Label(l1, text="Total Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
                     email = tk.Label(l1, text=str(count[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
@@ -963,7 +962,7 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(SecondPage)
+        self.show_frame(FirstPage)
 
     def show_frame(self, page):
         frame = self.frames[page]

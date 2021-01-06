@@ -24,5 +24,18 @@ class PermitAreaDbHelper:
         conn.commit()
         conn.close()
 
+    def getAreaById(self, id):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        floors = list()
+        cur.execute("select area from permit_area where person_id=%s",(id,))
+        for i in cur.fetchall():
+            floors.append(i[0])
+        return floors
 
 
+
+# test = PermitAreaDbHelper()
+# data = test.getAreaById(4001)
+# for i in data:
+#     print(i)
