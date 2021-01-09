@@ -1,21 +1,18 @@
-import tkinter as tk
+import cv2
 
-OptionList = [
-"Aries",
-"Taurus",
-"Gemini",
-"Cancer"
-]
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FPS, int(15))
+fps = int(cap.get(5))
+print("fps:", fps)
 
-app = tk.Tk()
+while(cap.isOpened()):
 
-app.geometry('100x200')
+    ret,frame = cap.read()
+    if not ret:
+        break
 
-variable = tk.StringVar(app)
-variable.set(OptionList[0])
+    cv2.imshow('frame', frame)
 
-opt = tk.OptionMenu(app, variable, *OptionList)
-opt.config(width=90, font=('Helvetica', 12))
-opt.pack()
-
-app.mainloop()
+    k = cv2.waitKey(1)
+    if k == 27:
+        break

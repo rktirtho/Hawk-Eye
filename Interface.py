@@ -200,14 +200,14 @@ class SecondPage(tk.Frame):
             floor9 = tk.StringVar()
 
             cb1 = tk.Checkbutton(frame_content, text="1st Floor",variable=floor1, onvalue="1st Floor", offvalue="").place(x=0, y=250)
-            cb2 = tk.Checkbutton(frame_content, text="2nd Floor",variable=floor2, onvalue="2st Floor", offvalue="").place(x=100, y=250)
-            cb3 = tk.Checkbutton(frame_content, text="3rd Floor",variable=floor3, onvalue="3st Floor", offvalue="").place(x=200, y=250)
-            cb4 = tk.Checkbutton(frame_content, text="4th Floor",variable=floor4, onvalue="4st Floor", offvalue="").place(x=300, y=250)
-            cb5 = tk.Checkbutton(frame_content, text="5th Floor",variable=floor5, onvalue="5st Floor", offvalue="").place(x=400, y=250)
-            cb6 = tk.Checkbutton(frame_content, text="6th Floor",variable=floor6, onvalue="6st Floor", offvalue="").place(x=500, y=250)
-            cb7 = tk.Checkbutton(frame_content, text="7th Floor",variable=floor7, onvalue="7st Floor", offvalue="").place(x=600, y=250)
-            cb8 = tk.Checkbutton(frame_content, text="8th Floor",variable=floor8, onvalue="8st Floor", offvalue="").place(x=700, y=250)
-            cb9 = tk.Checkbutton(frame_content, text="9th Floor",variable=floor9, onvalue="9st Floor", offvalue="").pack(pady=20)
+            cb2 = tk.Checkbutton(frame_content, text="2nd Floor",variable=floor2, onvalue="2nd Floor", offvalue="").place(x=100, y=250)
+            cb3 = tk.Checkbutton(frame_content, text="3rd Floor",variable=floor3, onvalue="3th Floor", offvalue="").place(x=200, y=250)
+            cb4 = tk.Checkbutton(frame_content, text="4th Floor",variable=floor4, onvalue="4th Floor", offvalue="").place(x=300, y=250)
+            cb5 = tk.Checkbutton(frame_content, text="5th Floor",variable=floor5, onvalue="5th Floor", offvalue="").place(x=400, y=250)
+            cb6 = tk.Checkbutton(frame_content, text="6th Floor",variable=floor6, onvalue="6th Floor", offvalue="").place(x=500, y=250)
+            cb7 = tk.Checkbutton(frame_content, text="7th Floor",variable=floor7, onvalue="7th Floor", offvalue="").place(x=600, y=250)
+            cb8 = tk.Checkbutton(frame_content, text="8th Floor",variable=floor8, onvalue="8th Floor", offvalue="").place(x=700, y=250)
+            cb9 = tk.Checkbutton(frame_content, text="9th Floor",variable=floor9, onvalue="9th Floor", offvalue="").pack(pady=20)
 
             def check_permitted(value):
                 if value != "":
@@ -908,7 +908,7 @@ class SecondPage(tk.Frame):
         statistic_menu.add_command(label="Today", command=today_info)
         statistic_menu.add_command(label="Yesterday",command=yesterday_info)
         statistic_menu.add_separator()
-        statistic_menu.add_command(label="Unknown Person", command=all_info)
+        statistic_menu.add_command(label="All Access", command=all_info)
         statistic_menu.add_separator()
         statistic_menu.add_command(label="Authorized Access",command=auth_access)
         statistic_menu.add_command(label="Unauthorized Access", command = unauth_access)

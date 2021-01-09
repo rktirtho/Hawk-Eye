@@ -35,7 +35,7 @@ class PermitAreaDbHelper:
 
 
 
-# test = PermitAreaDbHelper()
-# data = test.getAreaById(4001)
-# for i in data:
-#     print(i)
+test = PermitAreaDbHelper()
+data = test.getAreaById(3001)
+for i in data:
+    print(i)

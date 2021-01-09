@@ -9,9 +9,11 @@ import pyttsx3
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper, PermitArea
+from dbh_monitoring import MonitoringDbHelper
+
 
 from threading import Thread
-
+import time
 # import json
 # import requests
 
@@ -27,15 +29,17 @@ from threading import Thread
 
 org_db_helper = OrganizationDbHelper()
 # ============================== Face Recognition Part ==============================
-
+cam_name = "5th Floor"
 path = "images/auth"
 images = []
+faceList = list()
 classNames = []
 myList = os.listdir(path)
 
 print(myList)
 auth_db_helper = AuthorizedDbHelper()
 auth_users = auth_db_helper.find_all_details()
+dbh_monitoring = MonitoringDbHelper()
 
 for cl in myList:
     curImg = cv2.imread(f'{path}/{cl}')
@@ -63,15 +67,22 @@ def speak(text):
     engine.runAndWait()
 
 
-def monitor():
-    print("monitoring functon call")
+def monitor(person_id,loc):
+    if name not in faceList:
+        faceList.append(name)
+        print("Authorized access detected of " + data.get_name())
 
 
 encodeListKnown = findEncodings(images)
-print('Encoding complete. Number of Register face:', len(encodeListKnown))
+#print('Encoding complete. Number of Register face:', len(encodeListKnown))
 
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FPS, 10)
+
 dbh_per = PermitAreaDbHelper()
+
+# this list contain all people those entered in this camera covered area
+
 
 while True:
     success, img = cap.read()
@@ -80,6 +91,11 @@ while True:
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
     facesCurFrame = face_recognition.face_locations(imgS)
     encodingOfCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
+
+    # this is for testing mode
+
+
+
 
     for encodeFace, faceLoc in zip(encodingOfCurFrame, facesCurFrame):
         maches = face_recognition.compare_faces(encodeListKnown, encodeFace)
@@ -90,25 +106,38 @@ while True:
 
         if maches[matchIndex]:
             name = classNames[matchIndex]
-            print(name)
+            # print(name)
             y1, x2, y2, x1 = faceLoc
             y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
             for data in auth_users:
+
                 if name in data.get_image():
+                    area = dbh_per.getAreaById(data.get_id())
 
-                    area = dbh_per.get_conn()
+                    if cam_name in area:
+                        # info = org_db_helper.find_one(data[0])
+                        # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), (0, 255, 0), cv2.FILLED)
+                        # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), cv2.FILLED)
+                        cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 255, 0), 1)
 
-                    # info = org_db_helper.find_one(data[0])
-                    # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), (0, 255, 0), cv2.FILLED)
-                    # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), cv2.FILLED)
-                    cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255),
-                                1)
+                        cv2.putText(img, data.get_organization(), (x1 + 6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5,
+                                    (0, 255, 0), 1)
+                        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
-                    # cv2.rectangle(img, (x1, y2 + 25), (x2, y2),  cv2.FILLED)
-                    cv2.putText(img, data.get_organization(), (x1 + 6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5,
-                                (0, 0, 255), 1)
+                    else:
+                        cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5,
+                                    (0, 255, 255),
+                                    1)
+
+                        # cv2.rectangle(img, (x1, y2 + 25), (x2, y2),  cv2.FILLED)
+                        cv2.putText(img, data.get_organization(), (x1 + 6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5,
+                                    (0, 255, 255), 1)
+                        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 255), 2)
+                        if name not in faceList:
+                            faceList.append(name)
+                            print("Unauthorized access detected of "+data.get_name())
+
 
             # for au in auth_users:
             #
@@ -124,15 +153,16 @@ while True:
             y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
-            cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             # try:
             #     th = Thread(target=speak("Unknown Person Detected"))
             #     th.start()
             #
             # except:
             #     print("Error")
-
-    cv2.imshow('Webcam', img)
+    # time.sleep(5)
+    print(faceList)
+    cv2.imshow('1st Floor', img)
     cv2.waitKey(1)
 
 # login()
