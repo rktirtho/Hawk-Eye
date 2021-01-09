@@ -67,10 +67,10 @@ def speak(text):
     engine.runAndWait()
 
 
-def monitor(person_id,loc):
+def monitor(person_id, loc, type):
     if name not in faceList:
         faceList.append(name)
-        print("Authorized access detected of " + data.get_name())
+        dbh_monitoring.add(person_id, area, type)
 
 
 encodeListKnown = findEncodings(images)
@@ -124,6 +124,10 @@ while True:
                         cv2.putText(img, data.get_organization(), (x1 + 6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5,
                                     (0, 255, 0), 1)
                         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                        # if person added before then it will avoid it
+                        if name not in faceList:
+                            faceList.append(name)
+                            dbh_monitoring.add(data.get_id(), cam_name, 1)
 
                     else:
                         cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5,
@@ -136,7 +140,7 @@ while True:
                         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 255), 2)
                         if name not in faceList:
                             faceList.append(name)
-                            print("Unauthorized access detected of "+data.get_name())
+                            dbh_monitoring.add(data.get_id(), cam_name, 0)
 
 
             # for au in auth_users:
@@ -162,7 +166,7 @@ while True:
             #     print("Error")
     # time.sleep(5)
     print(faceList)
-    cv2.imshow('1st Floor', img)
+    cv2.imshow(cam_name, img)
     cv2.waitKey(1)
 
 # login()
