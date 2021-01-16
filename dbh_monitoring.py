@@ -140,6 +140,17 @@ class MonitoringDbHelper:
             values.append(mon)
         return values
 
+    def get_yesterday_access_by_id(self, id):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from monitoring where person_id=%s and DATE(`time`) = CURDATE()-1 order by time desc;", (id,))
+        print(cur)
+        for id in cur:
+            mon = Monitoring(id[0],id[1],id[3],id[4], id[2])
+            values.append(mon)
+        return values
+
     def get_auth_access_by_id(self, id):
         values = list()
         conn = self.get_conn()
