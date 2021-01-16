@@ -29,7 +29,7 @@ import time
 
 org_db_helper = OrganizationDbHelper()
 # ============================== Face Recognition Part ==============================
-cam_name = "5th Floor"
+cam_name = "1st Floor"
 path = "images/auth"
 images = []
 faceList = list()
@@ -47,7 +47,6 @@ for cl in myList:
     classNames.append(os.path.splitext(cl)[0])
 
 print(classNames)
-
 
 def findEncodings(images):
     encodeList = []
@@ -94,9 +93,6 @@ while True:
 
     # this is for testing mode
 
-
-
-
     for encodeFace, faceLoc in zip(encodingOfCurFrame, facesCurFrame):
         maches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
@@ -116,19 +112,14 @@ while True:
                     area = dbh_per.getAreaById(data.get_id())
 
                     if cam_name in area:
-                        # info = org_db_helper.find_one(data[0])
-                        # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), (0, 255, 0), cv2.FILLED)
-                        # cv2.rectangle(img, (x1, y2 - 25), (x2, y2), cv2.FILLED)
                         cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 255, 0), 1)
 
                         cv2.putText(img, data.get_organization(), (x1 + 6, y2 + 10), cv2.FONT_HERSHEY_COMPLEX, 0.5,
                                     (0, 255, 0), 1)
                         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                        # if person added before then it will avoid it
                         if name not in faceList:
                             faceList.append(name)
                             dbh_monitoring.add(data.get_id(), cam_name, 1)
-
                     else:
                         cv2.putText(img, data.get_name(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.5,
                                     (0, 255, 255),
@@ -141,6 +132,7 @@ while True:
                         if name not in faceList:
                             faceList.append(name)
                             dbh_monitoring.add(data.get_id(), cam_name, 0)
+                            print(a)
 
 
             # for au in auth_users:
@@ -174,3 +166,5 @@ while True:
 
 # em_dbh.insert()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+

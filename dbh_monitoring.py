@@ -154,8 +154,8 @@ class MonitoringDbHelper:
 
 
 
-m = MonitoringDbHelper()
-m.add(3001, "5th Floor", 1)
+# m = MonitoringDbHelper()
+# m.add(3001, "5th Floor", 1)
 # values = m.get_auth_access_by_id(4001)
 # for i in values:
 #     print(i.get_time())
