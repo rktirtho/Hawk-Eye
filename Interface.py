@@ -474,7 +474,7 @@ class SecondPage(tk.Frame):
                 email.pack()
                 org = tk.Label(l1, text=person.get_organization())
                 org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
+                btn = tk.Button(l1, text="View", bg="green", command=partial(show_today_info, person.get_name(), person.get_id()))
                 btn.pack()
 
                 y += 1
@@ -513,7 +513,7 @@ class SecondPage(tk.Frame):
                 email.pack()
                 org = tk.Label(l1, text=person.get_organization())
                 org.pack()
-                btn = tk.Button(l1, text="View", bg="green")
+                btn = tk.Button(l1, text="View", bg="green", command=partial(show_yesterday_info, person.get_name(), person.get_id()))
                 btn.pack()
 
                 y += 1
