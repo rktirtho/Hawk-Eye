@@ -6,6 +6,7 @@ import cv2
 import face_recognition
 import numpy as np
 import pyttsx3
+from PIL import Image
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper, PermitArea
@@ -29,7 +30,7 @@ import time
 
 org_db_helper = OrganizationDbHelper()
 # ============================== Face Recognition Part ==============================
-cam_name = "1st Floor"
+cam_name = "5st Floor"
 path = "images/auth"
 images = []
 faceList = list()
@@ -132,31 +133,22 @@ while True:
                         if name not in faceList:
                             faceList.append(name)
                             dbh_monitoring.add(data.get_id(), cam_name, 0)
-                            print(a)
-
-
-            # for au in auth_users:
-            #
-            #     if name in au['name'].upper():
-            #         if au['Auth'] == "Authorized":
-            #             cv2.rectangle(img, (x1, y1 ), (x2, y1-35), (0, 255, 0), cv2.FILLED)
-            #             cv2.putText(img, au['Auth'], (x1 + 6, y1-6 ), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-            #         else:
-            #             cv2.rectangle(img, (x1, y1), (x2, y1 - 35), (0, 0, 255), cv2.FILLED)
-            #             cv2.putText(img, au['Auth'], (x1 + 6, y1 - 6), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255, 255, 255), 2)
         else:
             y1, x2, y2, x1 = faceLoc
             y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+            crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
+            print(x1,x2,y1,y2)
+            im = Image.fromarray(crop_img)
+            # im = im.crop(faceLoc)
+            # print()
+            im.save('images/strangers/tesr'+".jpg")
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
             cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
-            # try:
-            #     th = Thread(target=speak("Unknown Person Detected"))
-            #     th.start()
-            #
-            # except:
-            #     print("Error")
-    # time.sleep(5)
+            print(type(faceLoc))
+
+
+
     print(faceList)
     cv2.imshow(cam_name, img)
     cv2.waitKey(1)
