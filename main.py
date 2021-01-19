@@ -147,8 +147,6 @@ while True:
             cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             print(type(faceLoc))
 
-
-
     print(faceList)
     cv2.imshow(cam_name, img)
     cv2.waitKey(1)
