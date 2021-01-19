@@ -1,6 +1,6 @@
 
 class Stranger:
-    def __init__(self, id, image, time, visited):
+    def __init__(self, id, image, time, visited = None):
         self.id = id
         self.image = image
         self.time = time
