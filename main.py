@@ -11,6 +11,7 @@ from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper, PermitArea
 from dbh_monitoring import MonitoringDbHelper
+from dbh_stranger import StrangerDbHelper
 
 
 from threading import Thread
@@ -37,15 +38,35 @@ faceList = list()
 classNames = []
 myList = os.listdir(path)
 
-print(myList)
-auth_db_helper = AuthorizedDbHelper()
-auth_users = auth_db_helper.find_all_details()
-dbh_monitoring = MonitoringDbHelper()
-
 for cl in myList:
     curImg = cv2.imread(f'{path}/{cl}')
     images.append(curImg)
     classNames.append(os.path.splitext(cl)[0])
+
+
+# ================================ Load Stranger Image from directory=====================
+
+image_path = "images/strangers"
+stranger_images = []
+stranger_faceList = list()
+stranger_classNames = []
+stranger_myList = os.listdir(image_path)
+
+for s_cl in stranger_myList:
+    curImg = cv2.imread(f'{image_path}/{s_cl}')
+    stranger_images.append(curImg)
+    print(s_cl)
+    stranger_classNames.append(os.path.splitext(s_cl)[0])
+
+
+auth_db_helper = AuthorizedDbHelper()
+auth_users = auth_db_helper.find_all_details()
+dbh_monitoring = MonitoringDbHelper()
+dbh_stranger = StrangerDbHelper()
+
+stranger_current_id=3
+
+
 
 print(classNames)
 
@@ -74,11 +95,11 @@ def monitor(person_id, loc, type):
 
 
 encodeListKnown = findEncodings(images)
-#print('Encoding complete. Number of Register face:', len(encodeListKnown))
+encodeListUnknown = findEncodings(stranger_images)
+
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FPS, 10)
-
 dbh_per = PermitAreaDbHelper()
 
 # this list contain all people those entered in this camera covered area
@@ -97,10 +118,11 @@ while True:
     for encodeFace, faceLoc in zip(encodingOfCurFrame, facesCurFrame):
         maches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
-        print(faceDis)
+        # print(faceDis)
         matchIndex = np.argmin(faceDis)
         # bfeee99df268942206391ade4160ed2f2804fd06
 
+        # this condition would be true when the face is a face of registered person
         if maches[matchIndex]:
             name = classNames[matchIndex]
             # print(name)
@@ -134,18 +156,37 @@ while True:
                             faceList.append(name)
                             dbh_monitoring.add(data.get_id(), cam_name, 0)
         else:
-            y1, x2, y2, x1 = faceLoc
-            y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
-            crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
-            print(x1,x2,y1,y2)
-            im = Image.fromarray(crop_img)
-            # im = im.crop(faceLoc)
-            # print()
-            im.save('images/strangers/tesr'+".jpg")
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-            cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
-            cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
-            print(type(faceLoc))
+            # when the face is not registered
+            maches = face_recognition.compare_faces(encodeListUnknown, encodeFace)
+            faceDis = face_recognition.face_distance(encodeListUnknown, encodeFace)
+            matchIndex = np.argmin(faceDis)
+
+            if maches[matchIndex]:
+                # if the person visited previous in this system
+                name = stranger_classNames[matchIndex]
+                y1, x2, y2, x1 = faceLoc
+                y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 165, 255), 2)
+                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 165, 255), cv2.FILLED)
+                cv2.putText(img, "visited".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
+            else:
+                # if the person visited previous in this system
+                y1, x2, y2, x1 = faceLoc
+                y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+
+                # crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
+                # print(x1,x2,y1,y2)
+                # im = Image.fromarray(crop_img)
+                # # im = im.crop(faceLoc)
+                # image_id = 'st' + str(stranger_current_id)
+                # im.save('images/strangers/'+image_id+'.jpg')
+                # dbh_stranger.add(stranger_current_id,image_id)
+                # stranger_current_id += 1
+
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
+                cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
+
 
     print(faceList)
     cv2.imshow(cam_name, img)
