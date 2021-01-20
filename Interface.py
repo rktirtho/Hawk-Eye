@@ -534,7 +534,7 @@ class SecondPage(tk.Frame):
             root = tk.Tk(className="Hawk Eye")
             root.title(name)
 
-            moves = monitoring_dbh.get_access_by_id(id)
+            moves = str_mon_dbh.get_access_by_id(id)
             tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
             tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
             tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
@@ -542,10 +542,10 @@ class SecondPage(tk.Frame):
             for move in moves:
                 name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
                 name1 = tk.Label(root, text=move.get_time(), font=("Ariel", 12)).grid(row=count, column=1, pady=5)
-                if move.is_permit() ==1:
-                    tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
-                else:
-                    tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                # if move.is_permit() ==1:
+                #     tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                # else:
+                #     tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
                 count += 1
 
             root.minsize(500,400)
@@ -955,7 +955,7 @@ class SecondPage(tk.Frame):
                 org = tk.Label(l1, text="Visited : 41 Times", bg="ivory")
                 org.pack()
                 btn = tk.Button(l1, text="View", bg="green", fg="white",
-                                command=partial(show_info, stn.get_image(), stn.get_id()))
+                                command=partial(show_stranger_info, stn.get_image(), stn.get_id()))
                 btn.pack()
 
                 y += 1
