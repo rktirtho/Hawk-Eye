@@ -18,6 +18,7 @@ class StrangerDbHelper:
         cur = conn.cursor()
         quary = "insert into stranger(id, image) value (%s,%s)"
         cur.execute(quary,(id, image_id))
+        print("add function execute")
         conn.commit()
         conn.close()
 

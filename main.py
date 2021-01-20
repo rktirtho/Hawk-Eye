@@ -10,7 +10,7 @@ from PIL import Image
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper, PermitArea
-from dbh_monitoring import MonitoringDbHelper
+from dbh_monitoring import MonitoringDbHelper, StrangerMonitoringDatabaseHelper
 from dbh_stranger import StrangerDbHelper
 
 
@@ -64,11 +64,11 @@ auth_db_helper = AuthorizedDbHelper()
 auth_users = auth_db_helper.find_all_details()
 dbh_monitoring = MonitoringDbHelper()
 dbh_stranger = StrangerDbHelper()
+dbh_strangerMonitoring = StrangerMonitoringDatabaseHelper()
 
-stranger_current_id=12
+stranger_current_id=16
 
-
-
+print("========== Class name ===========")
 print(classNames)
 
 def findEncodings(images):
@@ -119,6 +119,10 @@ while True:
     for encodeFace, faceLoc in zip(encodingOfCurFrame, facesCurFrame):
         maches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
+
+        stranger_maches = face_recognition.compare_faces(encodeListUnknown, encodeFace)
+        stranger_faceDis = face_recognition.face_distance(encodeListUnknown, encodeFace)
+
         # print(faceDis)
         matchIndex = np.argmin(faceDis)
         # bfeee99df268942206391ade4160ed2f2804fd06
@@ -158,17 +162,16 @@ while True:
                             dbh_monitoring.add(data.get_id(), cam_name, 0)
         else:
             # when the face is not registered
-            maches = face_recognition.compare_faces(encodeListUnknown, encodeFace)
-            faceDis = face_recognition.face_distance(encodeListUnknown, encodeFace)
-            matchIndex = np.argmin(faceDis)
 
-            if maches[matchIndex]:
+            stranger_matchIndex = np.argmin(stranger_faceDis)
+
+            if stranger_maches[stranger_matchIndex]:
                 # if the person visited previous in this system
-                name = stranger_classNames[matchIndex]
+                name = stranger_classNames[stranger_matchIndex]
                 person = dbh_stranger.get_stranger_by_image_id(name)
 
                 if name not in stranger_faceList:
-                    dbh_monitoring.add(person.get_id(), cam_name, -1)
+                    dbh_strangerMonitoring.add(person.get_id(), cam_name)
                     stranger_faceList.append(name)
 
                 y1, x2, y2, x1 = faceLoc
@@ -178,17 +181,25 @@ while True:
                 cv2.putText(img, "visited".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             else:
                 # if the person visited previous in this system
+                stngFaceList = list()
                 y1, x2, y2, x1 = faceLoc
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+                current_stranger_images = list()
+                current_stranger_images.append(img)
+
+                current_stranger_image_encoded = findEncodings(current_stranger_images)
+                encodeListUnknown.append(current_stranger_image_encoded[0])
 
                 crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
                 print(x1,x2,y1,y2)
                 im = Image.fromarray(crop_img)
-                # im = im.crop(faceLoc)
+
                 image_id = 'st' + str(stranger_current_id)
                 im.save('images/strangers/'+image_id+'.jpg')
                 dbh_stranger.add(stranger_current_id,image_id)
                 stranger_current_id += 1
+
+                stranger_classNames.append(image_id)
 
 
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
