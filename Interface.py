@@ -537,7 +537,7 @@ class SecondPage(tk.Frame):
             moves = str_mon_dbh.get_access_by_id(id)
             tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
             tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
-            tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
+            # tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
             count =3
             for move in moves:
                 name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
@@ -761,7 +761,7 @@ class SecondPage(tk.Frame):
             add_title("Strangers Access")
             hide_all_frame()
             add_title("Strangers Access")
-            access = monitoring_dbh.get_auth_access()
+            access = str_mon_dbh.get_all()
 
             x = 1
             y = 0
@@ -772,22 +772,19 @@ class SecondPage(tk.Frame):
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
                 l1.grid(row=x, column=y, padx=10, pady=20)
 
-                file = 'images/auth/' + acc.get_image_id() + '.jpg'
+                file = 'images/strangers/' + acc.get_image() + '.jpg'
                 image = Image.open(file)
                 img = ImageTk.PhotoImage(image.resize((100, 100)))
 
                 bg = tk.Label(l1, image=img, height=100, width=100)
                 bg.image = img
                 bg.pack()
-                org = org_db.find_one(acc.get_org_id())
 
-                name = tk.Label(l1, text=acc.get_name())
+                name = tk.Label(l1, text=acc.get_image())
                 name.pack()
-                email = tk.Label(l1, text=org.get_name())
-                email.pack()
-                # org = tk.Label(l1, text=person.get_organization())
-                # org.pack()
-                btn = tk.Button(l1, text="View", bg="green", command=partial(show_auth_info, acc.get_name(), acc.get_id()))
+                org = tk.Label(l1, text=acc.get_visited())
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green", command=partial(show_stranger_info, acc.get_image(), acc.get_id()))
                 btn.pack()
 
                 y += 1
