@@ -1,6 +1,6 @@
 import mysql
 from mysql.connector import (connection)
-from cl_monitoring import Monitoring
+from cl_monitoring import Monitoring, StrangerMonitoring
 from cl_monitoring import Access
 from cl_stranger import Stranger
 from dbh_person_reg import AuthorizedDbHelper
@@ -223,8 +223,25 @@ class StrangerMonitoringDatabaseHelper:
     #     conn.close()
     #     return data
 
+    def get_access_by_id(self, id):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from stranger_monitor where st_id=%s order by time desc;", (id,))
+        print(cur)
+        for id in cur:
+            mon = StrangerMonitoring(id[0],id[1],id[2], id[3])
+            print(id)
+            values.append(mon)
+        return values
 
 
-
+m =StrangerMonitoringDatabaseHelper()
+# m.add(3001, "5th Floor", 1)
+values = m.get_access_by_id(16)
+for i in values:
+    print(i.get_id())
+    print(i.get_st_id())
+    print(i.get_area())
 
 

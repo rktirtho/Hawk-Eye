@@ -9,6 +9,10 @@ from PIL import Image, ImageTk
 from cl_permitted import Permitted
 from cl_monitoring import Monitoring, Access
 from cl_permit_area import PermitArea
+from cl_stranger import Stranger
+from dbh_stranger import StrangerDbHelper
+
+
 
 
 
@@ -17,7 +21,7 @@ from dbh_emp import EmployeeDBHelper
 from dbh_person_reg import AuthorizedDbHelper
 from dbh_organization import OrganizationDbHelper
 from dbh_permit_area import PermitAreaDbHelper
-from dbh_monitoring import MonitoringDbHelper
+from dbh_monitoring import MonitoringDbHelper, StrangerMonitoringDatabaseHelper
 import os
 from shutil import copyfile
 
@@ -140,6 +144,8 @@ class SecondPage(tk.Frame):
         per_db = AuthorizedDbHelper()
         sec_db = EmployeeDBHelper()
         monitoring_dbh = MonitoringDbHelper()
+        str_mon_dbh = StrangerMonitoringDatabaseHelper()
+        stranger_dbh = StrangerDbHelper()
 
 
         def add_title(text):
@@ -524,6 +530,27 @@ class SecondPage(tk.Frame):
 
             f1.pack(fill="both")
 
+        def show_stranger_info(name, id):
+            root = tk.Tk(className="Hawk Eye")
+            root.title(name)
+
+            moves = monitoring_dbh.get_access_by_id(id)
+            tk.Label(root, text="Area", font=("Ariel", 15, "bold"), padx=30).grid(row=2, column=0, padx=30)
+            tk.Label(root, text="Time", font=("Ariel", 15,"bold")).grid(row=2, column=1, padx=30)
+            tk.Label(root, text="Access", font=("Ariel", 15,"bold")).grid(row=2, column=2, padx=30)
+            count =3
+            for move in moves:
+                name = tk.Label(root, text=move.get_area(), font=("Ariel", 12)).grid(row=count, column=0)
+                name1 = tk.Label(root, text=move.get_time(), font=("Ariel", 12)).grid(row=count, column=1, pady=5)
+                if move.is_permit() ==1:
+                    tk.Label(root, text="Permitted", width=20,bg="green", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                else:
+                    tk.Label(root, text="Illegal",width=20, bg="red", fg="white", font=("Ariel", 12)).grid(row=count, column=2)
+                count += 1
+
+            root.minsize(500,400)
+            root.mainloop()
+
         def show_info(name, id):
             root = tk.Tk(className="Hawk Eye")
             root.title(name)
@@ -899,6 +926,46 @@ class SecondPage(tk.Frame):
 
             f1.pack(fill="both")
 
+        def view_all_stranger():
+            hide_all_frame()
+            add_title("All Security Person")
+            strangers = stranger_dbh.get_all_strangers()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for stn in strangers:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/strangers/' + stn.get_image() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+
+                name = tk.Label(l1, text=stn.get_image(), bg="ivory")
+                name.pack()
+                # email = tk.Label(l1, text=person.get_image(),bg="ivory")
+                # email.pack()
+                org = tk.Label(l1, text="Visited : 41 Times", bg="ivory")
+                org.pack()
+                btn = tk.Button(l1, text="View", bg="green", fg="white",
+                                command=partial(show_info, stn.get_image(), stn.get_id()))
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
 
         def view_all_org():
             hide_all_frame()
@@ -959,6 +1026,7 @@ class SecondPage(tk.Frame):
         my_menu.add_cascade(label="View", menu=view_menu)
         view_menu.add_command(label="All Employee", command=view_all_employee)
         view_menu.add_command(label="All Security", command=view_all_security)
+        view_menu.add_command(label="All Strangers", command=view_all_stranger)
         view_menu.add_command(label="All Organization", command=view_all_org)
 
 

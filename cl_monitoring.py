@@ -37,6 +37,39 @@ class Monitoring:
     def set_time(self, time):
         self.time = time
 
+class StrangerMonitoring:
+    def __init__(self, id, st_id, area,  time):
+        self.id = id
+        self.st_id = st_id
+        self.area = area
+        self.time = time
+
+    def get_id(self):
+        return self.id
+
+    def set_id(self, id):
+        self.id = id
+
+    def get_st_id(self):
+        return self.st_id
+
+    def set_st_id(self, st_id):
+        self.st_id = st_id
+
+    def get_area(self):
+        return self.area
+
+    def set_area(self, area):
+        self.area = area
+
+
+
+    def get_time(self):
+        return self.time
+
+    def set_time(self, time):
+        self.time = time
+
 class Access:
     def __init__(self, id, name, org_id, image_id, time):
         self.id = id

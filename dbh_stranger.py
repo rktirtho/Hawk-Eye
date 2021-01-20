@@ -30,7 +30,7 @@ class StrangerDbHelper:
         strangers = list()
         for item in data:
             stn = Stranger(item[0], item[1],item[3])
-            strangers.append(item)
+            strangers.append(stn)
         return strangers
 
     def get_stranger_by_image_id(self, id):
@@ -44,7 +44,10 @@ class StrangerDbHelper:
         return snanger
 
 
-# test = StrangerDbHelper()
+test = StrangerDbHelper()
+stngs =test.get_all_strangers()
+for s in stngs:
+    print(s)
 # test.add(2, "test")
 # data = test.get_all_stranger_by_image_id("st3")
 # print(data.get_image())
