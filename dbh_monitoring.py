@@ -183,7 +183,7 @@ class MonitoringDbHelper:
 # for i in values:
 #     print(i.get_time())
 
-class StrangerDatabaseHelper:
+class StrangerMonitoringDatabaseHelper:
     def get_conn(self):
 
         self.conn = mysql.connector.connect(
