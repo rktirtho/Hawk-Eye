@@ -48,16 +48,16 @@ class StrangerDbHelper:
         cur = conn.cursor()
         cur.execute("select * from stranger where id=%s", (id,))
         data = cur.fetchone()
-        snanger = Stranger(data[0], data[1],data[3])
-        print(data)
-
+        snanger = Stranger(data[0], data[1],data[2])
         return snanger
 
 
 test = StrangerDbHelper()
-stngs =test.get_all_strangers()
-for s in stngs:
-    print(s)
+# stngs =test.get_all_strangers()
+# for s in stngs:
+#     print(s)
+print(test.get_stranger_by_id(16))
+
 # test.add(2, "test")
 # data = test.get_all_stranger_by_image_id("st3")
 # print(data.get_image())

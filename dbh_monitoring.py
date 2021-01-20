@@ -3,6 +3,7 @@ from mysql.connector import (connection)
 from cl_monitoring import Monitoring, StrangerMonitoring
 from cl_monitoring import Access
 from cl_stranger import Stranger
+from dbh_stranger import StrangerDbHelper
 from dbh_person_reg import AuthorizedDbHelper
 
 class MonitoringDbHelper:
@@ -206,11 +207,11 @@ class StrangerMonitoringDatabaseHelper:
         values = list()
         conn = self.get_conn()
         cur = conn.cursor()
-        cur.execute("SELECT distinct person_id FROM stranger_monitor order by time desc")
+        st_db_helper = StrangerDbHelper()
+        cur.execute("SELECT distinct st_id FROM stranger_monitor")
         print(cur)
         for id in cur:
-            auth_db = AuthorizedDbHelper()
-            person = auth_db.find_one(id[0])
+            person = st_db_helper.get_stranger_by_id(id[0])
             values.append(person)
         return values
 
@@ -248,12 +249,10 @@ class StrangerMonitoringDatabaseHelper:
         return values
 
 
-m =StrangerMonitoringDatabaseHelper()
+# m =StrangerMonitoringDatabaseHelper()
 # m.add(3001, "5th Floor", 1)
-values = m.get_access_by_id(16)
-for i in values:
-    print(i.get_id())
-    print(i.get_st_id())
-    print(i.get_area())
+# values = m.get_all()
+# for i in values:
+#     print(i.get_image())
 
 
