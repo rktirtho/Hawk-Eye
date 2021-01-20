@@ -202,6 +202,18 @@ class StrangerMonitoringDatabaseHelper:
         conn.commit()
         conn.close()
 
+    def get_all(self):
+        values = list()
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT distinct person_id FROM stranger_monitor order by time desc")
+        print(cur)
+        for id in cur:
+            auth_db = AuthorizedDbHelper()
+            person = auth_db.find_one(id[0])
+            values.append(person)
+        return values
+
     # def get_all(self):
     #     monitors = list()
     #     conn = self.get_conn()

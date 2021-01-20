@@ -756,6 +756,48 @@ class SecondPage(tk.Frame):
 
             f1.pack(fill="both")
 
+        def strangers_access():
+            hide_all_frame()
+            add_title("Strangers Access")
+            hide_all_frame()
+            add_title("Strangers Access")
+            access = monitoring_dbh.get_auth_access()
+
+            x = 1
+            y = 0
+
+            f1 = tk.Frame(frame_content)
+            for acc in access:
+                l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
+                l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
+                l1.grid(row=x, column=y, padx=10, pady=20)
+
+                file = 'images/auth/' + acc.get_image_id() + '.jpg'
+                image = Image.open(file)
+                img = ImageTk.PhotoImage(image.resize((100, 100)))
+
+                bg = tk.Label(l1, image=img, height=100, width=100)
+                bg.image = img
+                bg.pack()
+                org = org_db.find_one(acc.get_org_id())
+
+                name = tk.Label(l1, text=acc.get_name())
+                name.pack()
+                email = tk.Label(l1, text=org.get_name())
+                email.pack()
+                # org = tk.Label(l1, text=person.get_organization())
+                # org.pack()
+                btn = tk.Button(l1, text="View", bg="green", command=partial(show_auth_info, acc.get_name(), acc.get_id()))
+                btn.pack()
+
+                y += 1
+                if y > 5:
+                    x += 1
+                    y = 0
+                f1.grid_columnconfigure(y, weight=1)
+
+            f1.pack(fill="both")
+
         def unauth_access():
             hide_all_frame()
             add_title("Unauthorized Access")
@@ -1020,6 +1062,9 @@ class SecondPage(tk.Frame):
         statistic_menu.add_separator()
         statistic_menu.add_command(label="Authorized Access",command=auth_access)
         statistic_menu.add_command(label="Unauthorized Access", command = unauth_access)
+        statistic_menu.add_separator()
+        statistic_menu.add_command(label="Strangers", command = strangers_access)
+        statistic_menu.add_separator()
         statistic_menu.add_command(label="Statistics", command = show_statistics)
 
         view_menu = tk.Menu(my_menu)
