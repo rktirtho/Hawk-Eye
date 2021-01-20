@@ -32,10 +32,21 @@ class StrangerDbHelper:
             strangers.append(item)
         return strangers
 
+    def get_stranger_by_image_id(self, id):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from stranger where image=%s", (id,))
+        data = cur.fetchone()
+        snanger = Stranger(data[0], data[1],data[3])
+        print(data)
+
+        return snanger
+
 
 # test = StrangerDbHelper()
 # test.add(2, "test")
-# data = test.get_all_strangers()
+# data = test.get_all_stranger_by_image_id("st3")
+# print(data.get_image())
 #
 # for i in data:
 #     print(i)

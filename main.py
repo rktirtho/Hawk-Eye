@@ -164,6 +164,7 @@ while True:
             if maches[matchIndex]:
                 # if the person visited previous in this system
                 name = stranger_classNames[matchIndex]
+
                 y1, x2, y2, x1 = faceLoc
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 165, 255), 2)
