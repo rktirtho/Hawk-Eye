@@ -43,6 +43,16 @@ class StrangerDbHelper:
 
         return snanger
 
+    def get_stranger_by_id(self, id):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select * from stranger where id=%s", (id,))
+        data = cur.fetchone()
+        snanger = Stranger(data[0], data[1],data[3])
+        print(data)
+
+        return snanger
+
 
 test = StrangerDbHelper()
 stngs =test.get_all_strangers()
