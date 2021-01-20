@@ -2,6 +2,7 @@ import mysql
 from mysql.connector import (connection)
 from cl_monitoring import Monitoring
 from cl_monitoring import Access
+from cl_stranger import Stranger
 from dbh_person_reg import AuthorizedDbHelper
 
 class MonitoringDbHelper:
@@ -181,6 +182,48 @@ class MonitoringDbHelper:
 # values = m.get_auth_access_by_id(4001)
 # for i in values:
 #     print(i.get_time())
+
+class StrangerDatabaseHelper:
+    def get_conn(self):
+
+        self.conn = mysql.connector.connect(
+            user='root',
+            password='12345678',
+            host='127.0.0.1',
+            database='hawk_eye'
+        )
+        return self.conn
+
+    def add(self, st_id, area):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        query = "insert into stranger_monitor ( st_id, area) values (%s, %s)"
+        cur.execute(query, (st_id, area))
+        conn.commit()
+        conn.close()
+
+    # def get_all(self):
+    #     monitors = list()
+    #     conn = self.get_conn()
+    #     cur = conn.cursor()
+    #     cur.execute("select * from StrangerDatabaseHelper")
+    #     data = cur.fetchall()
+    #     print(data)
+    #     for i in data:
+    #         mon = Stranger(i[0], i[1],i[3],i[4],i[2])
+    #         monitors.append(mon)
+    #     conn.close()
+    #     return monitors
+    #
+    # def get_one(self, id):
+    #     conn = self.get_conn()
+    #     cur = conn.cursor()
+    #     cur.execute("select * from monitoring where id=%s", (id,))
+    #     data = cur.fetchone()
+    #     conn.close()
+    #     return data
+
+
 
 
 

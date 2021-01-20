@@ -35,6 +35,7 @@ cam_name = "5st Floor"
 path = "images/auth"
 images = []
 faceList = list()
+stranger_faceList = list()
 classNames = []
 myList = os.listdir(path)
 
@@ -64,7 +65,7 @@ auth_users = auth_db_helper.find_all_details()
 dbh_monitoring = MonitoringDbHelper()
 dbh_stranger = StrangerDbHelper()
 
-stranger_current_id=3
+stranger_current_id=12
 
 
 
@@ -164,6 +165,11 @@ while True:
             if maches[matchIndex]:
                 # if the person visited previous in this system
                 name = stranger_classNames[matchIndex]
+                person = dbh_stranger.get_stranger_by_image_id(name)
+
+                if name not in stranger_faceList:
+                    dbh_monitoring.add(person.get_id(), cam_name, -1)
+                    stranger_faceList.append(name)
 
                 y1, x2, y2, x1 = faceLoc
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
@@ -175,14 +181,15 @@ while True:
                 y1, x2, y2, x1 = faceLoc
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
 
-                # crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
-                # print(x1,x2,y1,y2)
-                # im = Image.fromarray(crop_img)
-                # # im = im.crop(faceLoc)
-                # image_id = 'st' + str(stranger_current_id)
-                # im.save('images/strangers/'+image_id+'.jpg')
-                # dbh_stranger.add(stranger_current_id,image_id)
-                # stranger_current_id += 1
+                crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
+                print(x1,x2,y1,y2)
+                im = Image.fromarray(crop_img)
+                # im = im.crop(faceLoc)
+                image_id = 'st' + str(stranger_current_id)
+                im.save('images/strangers/'+image_id+'.jpg')
+                dbh_stranger.add(stranger_current_id,image_id)
+                stranger_current_id += 1
+
 
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
                 cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
