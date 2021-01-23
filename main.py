@@ -66,7 +66,7 @@ dbh_monitoring = MonitoringDbHelper()
 dbh_stranger = StrangerDbHelper()
 dbh_strangerMonitoring = StrangerMonitoringDatabaseHelper()
 
-stranger_current_id=16
+stranger_current_id=22
 
 print("========== Class name ===========")
 print(classNames)
@@ -178,7 +178,7 @@ while True:
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 165, 255), 2)
                 cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 165, 255), cv2.FILLED)
-                cv2.putText(img, "visited".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
+                cv2.putText(img, "visitor".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             else:
                 # if the person visited previous in this system
                 stngFaceList = list()
@@ -196,6 +196,9 @@ while True:
 
                 image_id = 'st' + str(stranger_current_id)
                 im.save('images/strangers/'+image_id+'.jpg')
+                im.save('/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/'+image_id+'.jpg')
+
+
                 dbh_stranger.add(stranger_current_id,image_id)
                 stranger_current_id += 1
 
