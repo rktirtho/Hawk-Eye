@@ -851,17 +851,22 @@ class SecondPage(tk.Frame):
                 if i == 0:
                     name = tk.Label(l1, text="Today's Visitors", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="45", bg="ivory", font=("ariel", 15, "bold"))
+                    today_visitors = str_mon_dbh.count_today_strangers()
+
+                    email = tk.Label(l1, text=str(today_visitors[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 1:
                     name = tk.Label(l1, text="Today's Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
-                    email = tk.Label(l1, text="4", bg="ivory", font=("ariel", 15, "bold"))
+                    today_employee = monitoring_dbh.count_today_employee()
+
+                    email = tk.Label(l1, text=str(today_employee[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 2:
                     count = per_db.count_registered_employee()
                     name = tk.Label(l1, text="Total Employee", width=30, bg="ivory", fg="red",
                                     font=("ariel", 10, "bold"))
+
                     email = tk.Label(l1, text=str(count[0]), bg="ivory", font=("ariel", 15, "bold"))
                     email.pack(pady=30)
                 elif i == 3:
@@ -1113,7 +1118,7 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(FirstPage)
+        self.show_frame(SecondPage)
 
     def show_frame(self, page):
         frame = self.frames[page]

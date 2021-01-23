@@ -52,6 +52,7 @@ class StrangerDbHelper:
         return snanger
 
 
+
 test = StrangerDbHelper()
 # stngs =test.get_all_strangers()
 # for s in stngs:

@@ -175,6 +175,12 @@ class MonitoringDbHelper:
             values.append(mon)
         return values
 
+    def count_today_employee(self):
+        con = self.get_conn()
+        cur = con.cursor()
+        cur.execute("SELECT count(distinct person_id) FROM monitoring where area= '1st Floor' and  DATE(`time`) = CURDATE()")
+        return cur.fetchone()
+
 
 
 
@@ -214,6 +220,13 @@ class StrangerMonitoringDatabaseHelper:
             person = st_db_helper.get_stranger_by_id(id[0])
             values.append(person)
         return values
+
+    def count_today_strangers(self):
+        con = self.get_conn()
+        cur = con.cursor()
+        cur.execute("SELECT count(distinct st_id) FROM stranger_monitor where area= '1st Floor' and  DATE(`time`) = CURDATE()")
+        data = cur.fetchone()
+        return data
 
     # def get_all(self):
     #     monitors = list()
