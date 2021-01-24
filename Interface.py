@@ -236,7 +236,6 @@ class SecondPage(tk.Frame):
                 check_permitted(floor7.get())
                 check_permitted(floor8.get())
                 check_permitted(floor9.get())
-                print(permitted_location)
                 prossesing_org_id = selected_org.get().split(" ")
 
                 emp_id = ent_em_id.get()
@@ -314,13 +313,15 @@ class SecondPage(tk.Frame):
                     auth_db = AuthorizedDbHelper()
                     emp_db.save(id, name, email)
                     permitted = Permitted(name, str(id)+str(1)+file_name, "Hawk Eye", 1,id)
+                    permitted_area_dbh =PermitAreaDbHelper()
+                    permitted_area_dbh.add(id, "1st Floor")
+                    permitted_area_dbh.add(id, "2nd Floor")
+                    permitted_area_dbh.add(id, "3rd Floor")
+                    permitted_area_dbh.add(id, "4th Floor")
                     auth_db.save(permitted)
 
                     copyfile(img, os.path.join("/home/rktirtho/PycharmProjects/Hawk-Eye/images/auth/"+str(id)+str(1)+file_name+".jpg"))
                     copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(id)+str(1)+file_name+".jpg"))
-
-
-
 
                 # except:
                 #     messagebox.showwarning("All Field Required", "Image Required")
@@ -500,6 +501,9 @@ class SecondPage(tk.Frame):
             y = 0
 
             f1 = tk.Frame(frame_content)
+            if len(persons) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
             for person in persons:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
@@ -679,11 +683,14 @@ class SecondPage(tk.Frame):
 
         def all_info():
             hide_all_frame()
-            add_title("All Info")
+            add_title("All History")
             persons = monitoring_dbh.get_all()
             x = 1
             y = 0
             f1 = tk.Frame(frame_content)
+            if len(persons) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
             for person in persons:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
@@ -718,13 +725,16 @@ class SecondPage(tk.Frame):
             hide_all_frame()
             add_title("Authorized Access")
             hide_all_frame()
-            add_title("All Info")
+            add_title("Authorized Access")
             access = monitoring_dbh.get_auth_access()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
+            if len(access) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
             for acc in access:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
@@ -758,15 +768,18 @@ class SecondPage(tk.Frame):
 
         def strangers_access():
             hide_all_frame()
-            add_title("Strangers Access")
+            add_title("Visitor Access")
             hide_all_frame()
-            add_title("Strangers Access")
+            add_title("Visitor Access")
             access = str_mon_dbh.get_all()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
+            if len(access) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
             for acc in access:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")
@@ -799,13 +812,16 @@ class SecondPage(tk.Frame):
             hide_all_frame()
             add_title("Unauthorized Access")
             hide_all_frame()
-            add_title("All Info")
+            add_title("Unauthorized Access")
             access = monitoring_dbh.get_unauth_access()
 
             x = 1
             y = 0
 
             f1 = tk.Frame(frame_content)
+            if len(access) == 0:
+                name = tk.Label(f1, text="No data found", fg="red", font=("Arial", 18))
+                name.pack(pady=30)
             for acc in access:
                 l1 = tk.Frame(f1, bg="ivory", highlightthickness=2, bd=10, width=200, height=200)
                 l1.config(highlightbackground="#eeeeee", highlightcolor="#eeeeee")

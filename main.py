@@ -31,7 +31,7 @@ import time
 
 org_db_helper = OrganizationDbHelper()
 # ============================== Face Recognition Part ==============================
-cam_name = "5st Floor"
+cam_name = "1st Floor"
 path = "images/auth"
 images = []
 faceList = list()
