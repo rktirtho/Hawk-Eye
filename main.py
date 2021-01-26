@@ -66,7 +66,7 @@ dbh_monitoring = MonitoringDbHelper()
 dbh_stranger = StrangerDbHelper()
 dbh_strangerMonitoring = StrangerMonitoringDatabaseHelper()
 
-stranger_current_id=22
+stranger_current_id=23
 
 print("========== Class name ===========")
 print(classNames)
@@ -99,8 +99,8 @@ encodeListKnown = findEncodings(images)
 encodeListUnknown = findEncodings(stranger_images)
 
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FPS, 10)
+cap = cv2.VideoCapture("images/videoplayback.mp4")
+cap.set(cv2.CAP_PROP_FPS, 30)
 dbh_per = PermitAreaDbHelper()
 
 # this list contain all people those entered in this camera covered area

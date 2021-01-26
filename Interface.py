@@ -912,7 +912,7 @@ class SecondPage(tk.Frame):
         # ============================== View Menu =============================
         def view_all_employee():
             hide_all_frame()
-            add_title("All Security Person")
+            add_title("All Employee")
             per = AuthorizedDbHelper()
             persons = per.find_all_details()
 
@@ -952,7 +952,7 @@ class SecondPage(tk.Frame):
 
         def view_all_security():
             hide_all_frame()
-            # add_title("All Security Person")
+            add_title("All Security Person")
             emp = EmployeeDBHelper()
             emps = emp.find_all()
 
@@ -1134,7 +1134,7 @@ class Application(tk.Tk):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="NSEW")
-        self.show_frame(SecondPage)
+        self.show_frame(FirstPage)
 
     def show_frame(self, page):
         frame = self.frames[page]
