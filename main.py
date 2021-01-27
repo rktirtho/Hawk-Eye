@@ -66,7 +66,7 @@ dbh_monitoring = MonitoringDbHelper()
 dbh_stranger = StrangerDbHelper()
 dbh_strangerMonitoring = StrangerMonitoringDatabaseHelper()
 
-stranger_current_id=23
+stranger_current_id=dbh_stranger.get_stranger_max_id()
 
 print("========== Class name ===========")
 print(classNames)
@@ -177,7 +177,7 @@ while True:
                 y1, x2, y2, x1 = faceLoc
                 y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 165, 255), 2)
-                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 165, 255), cv2.FILLED)
+                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
                 cv2.putText(img, "visitor".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             else:
                 # if the person visited previous in this system
@@ -188,31 +188,29 @@ while True:
                 current_stranger_images.append(img)
 
                 current_stranger_image_encoded = findEncodings(current_stranger_images)
-                encodeListUnknown.append(current_stranger_image_encoded[0])
+                for i in current_stranger_image_encoded:
+                    encodeListUnknown.append(i)
+                    crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
+                    print(x1,x2,y1,y2)
+                    im = Image.fromarray(crop_img)
 
-                crop_img = img[y1:y1 + (y2-y1), x1:x1 + (x2-x1)]
-                print(x1,x2,y1,y2)
-                im = Image.fromarray(crop_img)
-
-                image_id = 'st' + str(stranger_current_id)
-                im.save('images/strangers/'+image_id+'.jpg')
-                im.save('/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/'+image_id+'.jpg')
-
-
-                dbh_stranger.add(stranger_current_id,image_id)
-                stranger_current_id += 1
-
-                stranger_classNames.append(image_id)
+                    image_id = 'st' + str(stranger_current_id)
+                    im.save('images/strangers/'+image_id+'.jpg')
+                    im.save('/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/'+image_id+'.jpg')
 
 
-                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-                cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
-                cv2.putText(img, "unknown".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
+                    dbh_stranger.add(stranger_current_id,image_id)
+                    stranger_current_id += 1
+
+                    stranger_classNames.append(image_id)
+                    cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                    cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
+                    cv2.putText(img, "Visitor".upper(), (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
 
 
     print(faceList)
     cv2.imshow(cam_name, img)
-    cv2.waitKey(1)
+    cv2.waitKey(5)
 
 # login()
 

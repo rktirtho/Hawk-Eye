@@ -54,13 +54,24 @@ class StrangerDbHelper:
         else:
             return 0
 
+    def get_stranger_max_id(self):
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("select (max(id)+1) from stranger")
+        data = cur.fetchone()
+        if data is None:
+            return 1
+        else:
+            return data[0]
 
 
-# test = StrangerDbHelper()
+
+
+test = StrangerDbHelper()
 # stngs =test.get_all_strangers()
 # for s in stngs:
 #     print(s)
-# print(test.get_stranger_by_id(16))
+print(test.get_stranger_max_id())
 
 # test.add(2, "test")
 # data = test.get_all_stranger_by_image_id("st3")
