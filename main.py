@@ -98,9 +98,9 @@ def monitor(person_id, loc, type):
 encodeListKnown = findEncodings(images)
 encodeListUnknown = findEncodings(stranger_images)
 
-
-cap = cv2.VideoCapture("images/videoplayback.mp4")
+cap = cv2.VideoCapture("images/demo.mp4")
 cap.set(cv2.CAP_PROP_FPS, 30)
+
 dbh_per = PermitAreaDbHelper()
 
 # this list contain all people those entered in this camera covered area

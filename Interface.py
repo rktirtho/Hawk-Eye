@@ -257,6 +257,10 @@ class SecondPage(tk.Frame):
                     copyfile(img, os.path.join("/home/rktirtho/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/hawk-eye-serversite/src/main/resources/static/images/"+str(emp_id)+str(org_id)+file_name+".jpg"))
                     permit_area_dbh = PermitAreaDbHelper()
 
+                    ent_em_id.delete(0,"end")
+                    ent_name.delete(0,"end")
+                    messagebox.showinfo("Employee Added", "Successfully Employee Added.")
+
                     for area in permitted_location:
                         permit_area_dbh.add(emp_id, area)
 
@@ -1030,7 +1034,7 @@ class SecondPage(tk.Frame):
         def view_all_org():
             hide_all_frame()
             # add_title("All Organization")
-
+            controller.title("All Organizations")
             title = tk.Label(frame_content, text="All Organizations", font=("Arial", 20)).grid(row=0, column=2, columnspan=2, pady=10)
 
             org = OrganizationDbHelper()
