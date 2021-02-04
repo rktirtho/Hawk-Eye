@@ -23,6 +23,7 @@ Monitoring a big area is not easy task. CCTV management system are able to store
 * Spring Boot
 * Hibernate
 * Android Native Library
+* Angular 10
 * Jersy
 * Retrofit 2
 * Numpy
