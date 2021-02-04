@@ -16,6 +16,7 @@ Monitoring a big area is not easy task. CCTV management system are able to store
 2. Java (Server Side and Mobile App)
 3. MySQL
 4. Extensive Markup Language (XML)
+5. typescript
 
 
 ## Library and Framework
