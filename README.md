@@ -32,6 +32,6 @@ Monitoring a big area is not easy task. CCTV management system are able to store
 * tkinter
 
 ## Project Overview
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/9gjAdWzKl0Q)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/ahUdNNHj0Ks)
 
 ## Related Research Papers
